@@ -9,15 +9,15 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="48"
-   height="48"
+   width="128"
+   height="128"
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
    inkscape:export-filename="D:\Dropbox\Work\Git Sync\HUSOT\assets\icon\hide\icon-hide-48_3.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="icon-hide-48.svg">
+   sodipodi:docname="icon-hide-normal.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -27,11 +27,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="10.24"
-     inkscape:cx="19.390755"
-     inkscape:cy="36.693858"
+     inkscape:zoom="2.56"
+     inkscape:cx="76.075841"
+     inkscape:cy="62.12667"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="true"
      showborder="false"
      inkscape:snap-grids="false"
@@ -57,7 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -65,24 +65,24 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Background"
-     transform="translate(0,32)">
+     transform="translate(0,112)">
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#6441a5;stroke-width:31.05882263;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#6441a5;stroke-width:82.82352448;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3000"
-       width="16.941179"
-       height="16.941177"
-       x="15.52941"
-       y="-16.470589" />
+       width="45.176476"
+       height="45.176472"
+       x="41.411762"
+       y="-70.588234" />
   </g>
   <g
      inkscape:label="Text"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1004.3622)"
+     transform="translate(0,-924.3622)"
      style="display:inline">
     <g
        id="g3069"
-       transform="translate(6.0535967e-7,-3.9802489e-5)">
+       transform="matrix(2.6666666,0,0,2.6666666,6.8146973e-6,-1753.937)">
       <g
          id="g3065">
         <text

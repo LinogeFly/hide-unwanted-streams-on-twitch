@@ -17,7 +17,7 @@
    inkscape:export-filename="D:\Dropbox\Work\Git Sync\HUSOT\assets\icon\hide\icon-hide-48_3.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
-   sodipodi:docname="icon-hide-128.svg">
+   sodipodi:docname="icon-hide-normal-b.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -27,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.12"
-     inkscape:cx="40.253997"
-     inkscape:cy="60.740033"
+     inkscape:zoom="2.56"
+     inkscape:cx="43.438865"
+     inkscape:cy="76.287558"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -57,7 +57,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -73,15 +73,15 @@
      transform="translate(0,-924.3622)"
      style="display:inline">
     <rect
-       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#6441a5;stroke-width:82.82352448;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#6441a5;stroke-width:62.11764526;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect3000"
-       width="45.176476"
-       height="45.176472"
-       x="41.411762"
-       y="965.77393" />
+       width="33.882355"
+       height="33.882355"
+       x="47.058823"
+       y="971.42102" />
     <g
        id="g3069"
-       transform="matrix(2.6666666,0,0,2.6666666,3.2142924e-6,-1753.937)">
+       transform="matrix(2,0,0,2,16.000002,-1068.3621)">
       <g
          id="g3065">
         <text
