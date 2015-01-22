@@ -25,10 +25,10 @@ There will be a menu added on [Twitch TV](http://www.twitch.tv/) web site for us
 ![Overlay menu](https://cdn.rawgit.com/LinogeFly/Scripts/84e501d61872f562bdcfad2fee5bebd53344c6cc/hideUnwantedStreamsOnTwitch/images/screenshot1_tuckfrump.png)
 
 ## Blocking a channel
-In order to block a channel use `Block` button in the [overlay menu](#overlay-menu). The channel will be added to the "Blocked channels" list and content of that channel will not be visible anymore unless unblocked back.
+In order to block a channel use `Block` button in the [overlay menu](#overlay-menu). The channel will be added to the "Blocked Channels" list and content of that channel will not be visible anymore unless unblocked back.
 
 ## Unblocking a channel
-To unblock a channel that was blocked previously find `Blocked Channels` tab in Settings window that can be accessed by clicking `Settings` button in the [overlay menu](#overlay-menu). List of blocked channels will be displayed on the tab with `Unblock` button next to their names. Use `Unblock` button for the corresponding channel in order to unblock it, like on the following picture:
+To unblock a channel that was blocked previously find "Blocked Channels" tab in Settings window that can be accessed by clicking `Settings` button in the [overlay menu](#overlay-menu). List of blocked channels will be displayed on the tab with `Unblock` button next to their names. Use `Unblock` button for the corresponding channel in order to unblock it, like on the following picture:
 
 ![Blocked channels](https://cdn.rawgit.com/LinogeFly/Scripts/master/hideUnwantedStreamsOnTwitch/images/screenshot1_blockedChannels.png)
 
