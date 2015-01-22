@@ -5,6 +5,9 @@ A standalone extension for Google Chrome is now available [here](). No need to u
 Allows to block channels you don't normally watch on [Twitch TV](http://www.twitch.tv/). As a result streams and videos for blocked channels will not be visible on Directory pages, such as Games, Channels, Videos etc.
 
 # Version history
+- 1.2.0 First release in Google Web Store. Added Google Chrome Extension platform.
+- 1.1.0 Added support for hiding videos in addition to live streams.
+- 1.0.0 First release.
 
 # Installation and System Requirements
 This is not a standalone application or web browser extension but a so-called userscript. It is designed to work with userscript manager extension installed in your browser.
@@ -15,7 +18,7 @@ The userscript works with the following configurations:
 
 **Important:** Userscript manager extension must be installed in your web browser BEFORE installing this userscript.
 
-# Usage
+# How to use
 ## Overlay menu
 There will be a menu added on [Twitch TV](http://www.twitch.tv/) web site for using and configuring the userscript. The menu can be accessed by hovering mouse over a stream/video thumbnail image on supported pages (see [Supported pages](#supported-pages) section further in this document), like on the following screenshot:
 
@@ -30,7 +33,7 @@ To unblock a channel that was blocked previously find `Blocked Channels` tab in 
 ![Blocked channels](https://cdn.rawgit.com/LinogeFly/Scripts/master/hideUnwantedStreamsOnTwitch/images/screenshot1_blockedChannels.png)
 
 ## Supported pages
-Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by the userscript, for example streams/videos on Home page will not be hidden for blocked channels. Here is the list of supported pages:
+Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by the userscript. For example, streams/videos on Home page will not be hidden for blocked channels. Here is the list of supported pages:
 - Games
 - Channels
 - Videos

@@ -24,7 +24,10 @@ gulp
 ```
 For target specific builds use `gulp build-chrome` and `gulp build-userscript` commands.
 
-# Change log
+# Version history
+- 1.2.0 First release in Google Web Store. Added Google Chrome Extension platform.
+- 1.1.0 Added support for hiding videos in addition to live streams.
+- 1.0.0 First release. Only Userscript platfom is supported.
 
 # Known issues
 
