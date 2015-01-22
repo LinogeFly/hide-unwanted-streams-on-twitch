@@ -1,5 +1,5 @@
 # About
-This solution is for hiding unwanted content on [Twitch TV](http://www.twitch.tv/) web site, such as streams, videos etc. Currently, the following build targets are supported:
+This solution is for hiding unwanted content on [Twitch TV](http://www.twitch.tv/) web site, such as streams, videos etc. Currently, the following platforms are supported:
 - Extension for Google Chrome
 - Userscript, to be used with userscript managers such as [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/)
 
@@ -22,7 +22,7 @@ To build this solution, use:
 ```
 gulp
 ```
-For target specific builds use `gulp build-chrome` and `gulp build-userscript` commands.
+For platform specific builds use `gulp build-chrome` and `gulp build-userscript` commands.
 
 # Version history
 - 1.2.0 First release in Google Web Store. Added Google Chrome Extension platform.
