@@ -4,7 +4,7 @@
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
 // @version      {{APP_VERSION}}
 // @author       LinogeFly
-// @supportURL   https://github.com/LinogeFly/Scripts/issues
+// @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://www.twitch.tv/*
 // @grant        GM_getValue
 // @grant        GM_setValue
