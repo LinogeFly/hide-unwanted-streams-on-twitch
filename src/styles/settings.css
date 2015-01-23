@@ -1,0 +1,81 @@
+﻿.husot-settings {
+    font: 12px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: #32323e;
+    width: 360px;
+    background: #FFF;
+    padding: 20px;
+}
+
+.husot-settings-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    margin-bottom: 5px;
+}
+
+.husot-settings-nav-item {
+}
+
+.husot-settings-nav-item-name {
+    font-size: 14px;
+    line-height: 24px;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #19191f;
+    color: #19191f;
+    display: inline-block;
+}
+
+.husot-settings-blockedList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    min-height: 240px;
+    max-height: 400px;
+    margin-bottom: 5px;
+}
+
+.husot-settings-blockedList-item {
+    margin: 5px 0;
+    clear: both;
+    overflow: auto;
+}
+
+.husot-settings-blockedList-item-name {
+    font-size: 14px;
+    display: inline-block;
+    width: 220px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+}
+
+.husot-settings-blockedList-item-empty {
+    text-align: center;
+    font-size: 16px;
+    color: #bbb;
+    font-style: italic;
+    padding: 20px 0;
+}
+
+.husot-settings-blockedList-item-unblockBtn {
+    float: right;
+    max-width: 100px;
+    overflow: hidden;
+}
+
+.husot-settings-footer {
+    text-align: center;
+    width: 100%;
+    margin: 0 0 5px 0;
+    padding: 20px 0 0;
+    border-top: 1px solid #dedede;
+}
+
+.husot-settings-footer .husot-button {
+    min-width: 70px;
+}

@@ -1,0 +1,39 @@
+{
+    "manifest_version": 2,
+    "name": "{{APP_NAME}}",
+    "description": "{{APP_DESCRIPTION}}",
+    "version": "{{APP_VERSION}}",
+    "minimum_chrome_version": "18",
+    "icons": {
+        "16": "images/icon-hide-16.png",
+        "19": "images/icon-hide-19.png",
+        "48": "images/icon-hide-48.png",
+        "128": "images/icon-hide-128b.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": [
+                "http://www.twitch.tv/*"
+            ],
+            "js": [
+                "vendor/jquery-1.11.2.min.js",
+                "content.js"
+            ],
+            "css": [
+                "content.css"
+            ],
+            "run_at": "document_end"
+        }
+    ],
+
+    "permissions": [
+        "tabs",
+        "storage",
+        "http://www.twitch.tv/*"
+    ],
+
+    "web_accessible_resources": [ 
+        "injects.js"
+    ]
+}

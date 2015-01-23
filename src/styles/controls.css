@@ -1,0 +1,16 @@
+﻿.husot-button {
+    background: #6441a5;
+    color: #fff;
+    padding: 0 10px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    height: 30px;
+    display: inline-block;
+    line-height: 30px;
+}
+
+.husot-button:hover {
+    background: #7550ba;
+    text-decoration: none;
+}

@@ -1,0 +1,14 @@
+// ==UserScript==
+// @name         {{APP_NAME}}
+// @description  {{APP_DESCRIPTION}}
+// @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
+// @version      {{APP_VERSION}}
+// @author       LinogeFly
+// @supportURL   https://github.com/LinogeFly/Scripts/issues
+// @include      http://www.twitch.tv/*
+// @grant        GM_getValue
+// @grant        GM_setValue
+// @grant        GM_deleteValue
+// @run-at       document-end
+// @require      https://code.jquery.com/jquery-1.11.2.min.js
+// ==/UserScript==
