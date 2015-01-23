@@ -1,6 +1,6 @@
 # About
 This solution is for hiding unwanted content on [Twitch TV](http://www.twitch.tv/) web site, such as streams, videos etc. Currently, the following platforms are supported:
-- Extension for Google Chrome. Available on Google Web Store [here](https://chrome.google.com/webstore/detail/hide-unwanted-streams-on/kpgfplcjhleaadnmjmkjddcmekdhdiia).
+- Extension for Google Chrome. Available on Chrome Web Store [here](https://chrome.google.com/webstore/detail/hide-unwanted-streams-on/kpgfplcjhleaadnmjmkjddcmekdhdiia).
 - Userscript, to be used with userscript managers such as [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/). Can be installed from [here](https://openuserjs.org/scripts/LinogeFly/Hide_unwanted_streams_on_Twitch).
 
 # How to build
@@ -25,7 +25,7 @@ gulp
 For platform specific builds use `gulp build-chrome` and `gulp build-userscript` commands.
 
 # Version history
-- 1.2.0 First release in Google Web Store. Added Google Chrome Extension platform.
+- 1.2.0 Added Google Chrome Extension platform.
 - 1.1.0 Added support for hiding videos in addition to live streams.
 - 1.0.0 First release. Only Userscript platfom is supported.
 
