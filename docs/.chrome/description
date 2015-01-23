@@ -1,9 +1,11 @@
+This extension adds additional menu on Twitch TV web site for blocking channels. Use the menu to block channels that you don't normally watch on Twitch TV and their streams/videos will not be visible for you anymore.
+
 Key Features:
   • Block channels
 
 How to use:
   • Install this extension.
-  • Find an overlay menu by hovering your mouse over video thumbnails on Twitch TV web site.
+  • Find the overlay menu by hovering your mouse over video thumbnails on Twitch TV web site.
   • To block a channel use "Block" button in the overlay menu.
   • To unblock a channel find "Blocked Channels" tab in Settings window that can be accessed by clicking "Settings" button in the overlay menu. Then use "Unblock" button for the corresponding channel.
   
@@ -15,7 +17,3 @@ Not all pages on Twitch TV web site are affected by this extension. For example,
   
 Version history
   • 1.2.0 First release in Chrome Web Store.
-
-Source Code: https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
- 
-Please, send bugs reports and your suggestions to GitHub: https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
