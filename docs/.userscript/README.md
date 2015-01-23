@@ -4,11 +4,6 @@ A standalone extension for Google Chrome is now available on Google Web Store [h
 # Description
 Allows to block channels you don't normally watch on [Twitch TV](http://www.twitch.tv/). As a result streams and videos for blocked channels will not be visible on Directory pages, such as Games, Channels, Videos etc.
 
-# Version history
-- 1.2.0 First release in Google Web Store. Added Google Chrome Extension platform.
-- 1.1.0 Added support for hiding videos in addition to live streams.
-- 1.0.0 First release.
-
 # Installation and System Requirements
 This is not a standalone application or web browser extension but a so-called userscript. It is designed to work with userscript manager extension installed in your browser.
 
@@ -37,6 +32,11 @@ Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by the
 - Games
 - Channels
 - Videos
+
+# Version history
+- 1.2.0 First release in Google Web Store. Added Google Chrome Extension platform.
+- 1.1.0 Added support for hiding videos in addition to live streams.
+- 1.0.0 First release.
 
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
