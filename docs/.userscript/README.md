@@ -1,5 +1,5 @@
 # Important!
-A standalone extension for Google Chrome is now available [here](). No need to use [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) anymore if you are a Google Chrome user.
+A standalone extension for Google Chrome is now available on Google Web Store [here](https://chrome.google.com/webstore/detail/hide-unwanted-streams-on/kpgfplcjhleaadnmjmkjddcmekdhdiia). No need to use [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) anymore if you are a Google Chrome user.
 
 # Description
 Allows to block channels you don't normally watch on [Twitch TV](http://www.twitch.tv/). As a result streams and videos for blocked channels will not be visible on Directory pages, such as Games, Channels, Videos etc.
