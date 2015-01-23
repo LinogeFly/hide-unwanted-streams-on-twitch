@@ -17,7 +17,7 @@ The userscript works with the following configurations:
 ## Overlay menu
 There will be a menu added on [Twitch TV](http://www.twitch.tv/) web site for using and configuring the userscript. The menu can be accessed by hovering mouse over a stream/video thumbnail image on supported pages (see [Supported pages](#supported-pages) section further in this document), like on the following screenshot:
 
-![Overlay menu](https://cdn.rawgit.com/LinogeFly/Scripts/84e501d61872f562bdcfad2fee5bebd53344c6cc/hideUnwantedStreamsOnTwitch/images/screenshot1_tuckfrump.png)
+![Overlay menu](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/master/docs/screenshots/screenshot-1-640x400.png)
 
 ## Blocking a channel
 In order to block a channel use `Block` button in the [overlay menu](#overlay-menu). The channel will be added to the "Blocked Channels" list and content of that channel will not be visible anymore unless unblocked back.
@@ -25,7 +25,7 @@ In order to block a channel use `Block` button in the [overlay menu](#overlay-me
 ## Unblocking a channel
 To unblock a channel that was blocked previously find "Blocked Channels" tab in Settings window that can be accessed by clicking `Settings` button in the [overlay menu](#overlay-menu). List of blocked channels will be displayed on the tab with `Unblock` button next to their names. Use `Unblock` button for the corresponding channel in order to unblock it, like on the following picture:
 
-![Blocked channels](https://cdn.rawgit.com/LinogeFly/Scripts/master/hideUnwantedStreamsOnTwitch/images/screenshot1_blockedChannels.png)
+![Blocked channels](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/master/docs/screenshots/screenshot-2-640x400.png)
 
 ## Supported pages
 Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by the userscript. For example, streams/videos on Home page will not be hidden for blocked channels. Here is the list of supported pages:
