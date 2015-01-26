@@ -28,7 +28,6 @@
     ],
 
     "permissions": [
-        "tabs",
         "storage",
         "http://www.twitch.tv/*"
     ],
