@@ -34,6 +34,7 @@ For platform specific builds use `gulp build-chrome` and `gulp build-userscript`
 # TODO
 - Add support for blocking games
 - Add tests for DOM selectors
+- Check why Chrome Extension needs "Access to browser history" permission.
 
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
