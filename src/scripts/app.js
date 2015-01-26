@@ -8,6 +8,8 @@ husot.main = function () {
         return;
     }
 
+    husot.settings.blockedChannels = new husot.settings.BlockedItems(husot.constants.blockedChannelsSettingsKey);
+    husot.settings.blockedGames = new husot.settings.BlockedItems(husot.constants.blockedGamesSettingsKey);
     this.injector.addScripts();
     this.modalDialog.initOverlay();
     this.settingsWindow.create();
