@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Hide unwanted streams on Twitch",
     "description": "Blocks streams that you don't want to watch on Twitch TV",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "minimum_chrome_version": "18",
     "icons": {
         "16": "images/icon-hide-16.png",
@@ -28,7 +28,6 @@
     ],
 
     "permissions": [
-        "tabs",
         "storage",
         "http://www.twitch.tv/*"
     ],

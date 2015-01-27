@@ -128,7 +128,7 @@ husot.htmlLayout.modalDialogOverlay = '<div class="husot-modalOverlay"></div>';
 
 husot.htmlLayout.blockedChannelsListItem = '\
     <li class="husot-settings-blockedList-item">\
-        <a class="husot-settings-blockedList-item-unblockBtn husot-button" href="#">Unblock</a>\
+        <a class="husot-settings-blockedList-item-unblockBtn husot-button" href="javascript:void(0);">Unblock</a>\
         <div class="husot-settings-blockedList-item-name">{0}</div>\
     </li>';
 

@@ -2,9 +2,9 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks streams that you don't want to watch on Twitch TV
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.2.0
+// @version      1.2.1
 // @author       LinogeFly
-// @supportURL   https://github.com/LinogeFly/Scripts/issues
+// @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://www.twitch.tv/*
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -143,7 +143,7 @@ husot.htmlLayout.modalDialogOverlay = '<div class="husot-modalOverlay"></div>';
 
 husot.htmlLayout.blockedChannelsListItem = '\
     <li class="husot-settings-blockedList-item">\
-        <a class="husot-settings-blockedList-item-unblockBtn husot-button" href="#">Unblock</a>\
+        <a class="husot-settings-blockedList-item-unblockBtn husot-button" href="javascript:void(0);">Unblock</a>\
         <div class="husot-settings-blockedList-item-name">{0}</div>\
     </li>';
 
