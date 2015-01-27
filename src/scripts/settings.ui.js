@@ -1,14 +1,15 @@
 // Settings UI
 
 husot.settings = husot.settings || {};
+husot.settings.ui = husot.settings.ui || {};
 
-husot.settings.Tab = function ($blockedList, blockedItemsManager, emptyText) {
+husot.settings.ui.Tab = function ($blockedList, blockedItemsManager, emptyText) {
     this._$blockedList = $blockedList;
     this._blockedItemsManager = blockedItemsManager;
     this._emptyText = emptyText;
 };
 
-husot.settings.Tab.prototype = (function () {
+husot.settings.ui.Tab.prototype = (function () {
     return {
         _unblockBtn_onClick: function (self, sender) {
             var $sender = $(sender);
@@ -41,7 +42,7 @@ husot.settings.Tab.prototype = (function () {
             });
         },
         activate: function () {
-            husot.settings.activateTab(this._$blockedList.attr('id'));
+            husot.settings.ui.activateTab(this._$blockedList.attr('id'));
 
             return;
 
@@ -55,7 +56,7 @@ husot.settings.Tab.prototype = (function () {
     }
 })();
 
-husot.settings.Window = function () {
+husot.settings.ui.Window = function () {
     var create = function () {
         var $settingsWindow = $(husot.htmlLayout.settingsWindow);
         $('.husot-settings-nav-item-name', $settingsWindow).click(navItem_onClick);
@@ -65,7 +66,7 @@ husot.settings.Window = function () {
     // Event handlers for switching content of the tabs
     var navItem_onClick = function () {
         var tabId = $(this).attr('data-husot-contentPanelId');
-        husot.settings.activateTab(tabId);
+        husot.settings.ui.activateTab(tabId);
 
         return;
 
@@ -84,20 +85,20 @@ husot.settings.Window = function () {
 
     create();
 
-    this._blockedChannelsTab = new husot.settings.Tab(
+    this._blockedChannelsTab = new husot.settings.ui.Tab(
         $('#husot-settings-blockedChannelsList'),
         husot.settings.blockedChannels,
         husot.constants.blockedChannelsListEmpty
     );
 
-    this._blockedGamesTab = new husot.settings.Tab(
+    this._blockedGamesTab = new husot.settings.ui.Tab(
         $('#husot-settings-blockedGamesList'),
         husot.settings.blockedGames,
         husot.constants.blockedGamesListEmpty
     );
 }
 
-husot.settings.Window.prototype = {
+husot.settings.ui.Window.prototype = {
     init: function (tabName) {
         this._blockedChannelsTab.loadBlockedItems();
         this._blockedGamesTab.loadBlockedItems();
@@ -106,7 +107,7 @@ husot.settings.Window.prototype = {
     }
 }
 
-husot.settings.activateTab = function (tabId) {
+husot.settings.ui.activateTab = function (tabId) {
     // Hide all tabs
     $('.husot-settings-blockedList').hide();
     $('.husot-settings-nav-item-name').removeClass('husot-settings-nav-item-name-active');

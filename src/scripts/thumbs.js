@@ -44,7 +44,7 @@ husot.thumbsManager = (function () {
     }
 
     function showSettingsBtn_onClick() {
-        husot.settings.window.init();
+        husot.settings.ui.window.init();
         husot.modalDialog.show($('.husot-settings'));
     }
 

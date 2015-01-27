@@ -11,7 +11,7 @@ husot.main = function () {
     husot.settings.blockedChannels = new husot.settings.BlockedItems(husot.constants.blockedChannelsSettingsKey);
     husot.settings.blockedGames = new husot.settings.BlockedItems(husot.constants.blockedGamesSettingsKey);
     husot.modalDialog.initOverlay();
-    husot.settings.window = new husot.settings.Window();
+    husot.settings.ui.window = new husot.settings.ui.Window();
     husot.injector.addScripts();
     husot.domListener.start();
 };
