@@ -30,7 +30,7 @@ husot.domListener = (function () {
 
     function isCurrentUrlAllowed() {
         return husot.constants.allowedUrls.some(function (item) {
-            return document.URL.startsWith(item);
+            return (new RegExp(item)).test(document.URL);
         });
     }
 
