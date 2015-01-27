@@ -4,6 +4,8 @@ husot.constants = husot.constants || {};
 
 husot.constants.blockedChannelsSettingsKey = 'blockedChannels';
 husot.constants.blockedGamesSettingsKey = 'blockedGames';
+husot.constants.blockedChannelsListEmpty = 'No Blocked Channels';
+husot.constants.blockedGamesListEmpty = 'No Blocked Games';
 husot.constants.minimumStreamsCountOnPage = 20; // TODO: Check if there is such constant already exists on Twitch
 husot.constants.modalDialogShowingSpeed = 150;
 husot.constants.allowedUrls = [
