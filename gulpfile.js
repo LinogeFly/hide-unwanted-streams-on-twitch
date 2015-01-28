@@ -139,7 +139,12 @@ gulp.task('watch', function () {
         [
             'src/**/*.js',
             'src/**/*.css',
-            'src/**/manifest.*',
+            'src/.chrome/**/*.js',
+            'src/.chrome/**/*.css',
+            'src/.chrome/**/manifest.*',
+            'src/.userscript/**/*.js',
+            'src/.userscript/**/*.css',
+            'src/.userscript/**/manifest.*',
         ],
         ['build']);
 });
