@@ -3,10 +3,11 @@
 husot.settings = husot.settings || {};
 husot.settings.ui = husot.settings.ui || {};
 
-husot.settings.ui.Tab = function ($blockedList, blockedItemsManager, emptyText) {
+husot.settings.ui.Tab = function ($blockedList, blockedItemsManager, emptyText, thumbsManager) {
     this._$blockedList = $blockedList;
     this._blockedItemsManager = blockedItemsManager;
     this._emptyText = emptyText;
+    this._thumbsManager = thumbsManager;
 };
 
 husot.settings.ui.Tab.prototype = (function () {
@@ -18,7 +19,7 @@ husot.settings.ui.Tab.prototype = (function () {
 
             self._blockedItemsManager.remove(name, function () {
                 self.loadBlockedItems();
-                husot.thumbsManager.showThumb(name);
+                self._thumbsManager.showThumb(name);
             });
         },
         loadBlockedItems: function () {
@@ -88,13 +89,16 @@ husot.settings.ui.Window = function () {
     this._blockedChannelsTab = new husot.settings.ui.Tab(
         $('#husot-settings-blockedChannelsList'),
         husot.settings.blockedChannels,
-        husot.constants.blockedChannelsListEmpty
+        husot.constants.blockedChannelsListEmpty,
+        husot.thumbs.streamThumbsManager
+
     );
 
     this._blockedGamesTab = new husot.settings.ui.Tab(
         $('#husot-settings-blockedGamesList'),
         husot.settings.blockedGames,
-        husot.constants.blockedGamesListEmpty
+        husot.constants.blockedGamesListEmpty,
+        husot.thumbs.gameThumbsManager
     );
 }
 

@@ -11,9 +11,14 @@ husot.domListener = (function () {
             return;
         }
 
-        husot.thumbsManager.hideThumbs();
+        husot.thumbs.streamThumbsManager.hideThumbs();
+        husot.thumbs.gameThumbsManager.hideThumbs();
+
         stop();
-        husot.thumbsManager.addThumbOverlays();
+
+        husot.thumbs.streamThumbsManager.addThumbOverlays();
+        husot.thumbs.gameThumbsManager.addThumbOverlays();
+
         start();
     });
 
