@@ -9,6 +9,6 @@
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
-// @run-at       document-end
+// @run-at       document-start
 // @require      https://code.jquery.com/jquery-1.11.2.min.js
 // ==/UserScript==
