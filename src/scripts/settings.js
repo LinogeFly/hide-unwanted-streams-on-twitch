@@ -20,13 +20,14 @@ husot.settings.BlockedItems.prototype = {
         });
     },
     add: function (name, callback) {
+        var self = this;
+
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             return;
         }
 
-        var self = this;
-        this._get(name, function (item) {
+        self._get(name, function (item) {
             // Don't process if already in the list
             if (typeof item !== 'undefined') {
                 callback();
@@ -46,13 +47,14 @@ husot.settings.BlockedItems.prototype = {
         });
     },
     remove: function (name, callback) {
+        var self = this;
+
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             callback();
             return;
         }
-
-        var self = this;
+        
         this._get(name, function (item) {
             // Don't process if not in the list
             if (typeof item === 'undefined') {
@@ -74,15 +76,17 @@ husot.settings.BlockedItems.prototype = {
         });
     },
     list: function (callback) {
-        if (typeof this._blockedItems === 'undefined') {
-            husot.settings.getValue(this._settingsKey, '[]', function (item) {
-                // Save in cache
-                this._blockedItems = JSON.parse(item);
+        var self = this;
 
-                callback(this._blockedItems);
+        if (typeof self._blockedItems === 'undefined') {
+            husot.settings.getValue(self._settingsKey, '[]', function (item) {
+                // Save in cache
+                self._blockedItems = JSON.parse(item);
+
+                callback(self._blockedItems);
             });
         } else {
-            callback(this._blockedItems);
+            callback(self._blockedItems);
         }
     }
 };
