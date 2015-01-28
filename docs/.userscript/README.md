@@ -34,6 +34,7 @@ Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by the
 - Videos
 
 # Version history
+- 1.2.2 Fixed a bug when new video thumbs were not loading sometimes after blocked channels were hidden.
 - 1.2.0 First release in Chrome Web Store.
 - 1.1.0 Added support for hiding videos in addition to live streams.
 - 1.0.0 First release.

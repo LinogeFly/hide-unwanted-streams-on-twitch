@@ -2,14 +2,14 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks streams that you don't want to watch on Twitch TV
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.2.1
+// @version      1.2.2
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://www.twitch.tv/*
 // @grant        GM_getValue
 // @grant        GM_setValue
 // @grant        GM_deleteValue
-// @run-at       document-end
+// @run-at       document-start
 // @require      https://code.jquery.com/jquery-1.11.2.min.js
 // ==/UserScript==
 
