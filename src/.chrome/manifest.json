@@ -1,6 +1,7 @@
 {
     "manifest_version": 2,
     "name": "{{APP_NAME}}",
+    "short_name": "Hide streams",
     "description": "{{APP_DESCRIPTION}}",
     "version": "{{APP_VERSION}}",
     "minimum_chrome_version": "18",
