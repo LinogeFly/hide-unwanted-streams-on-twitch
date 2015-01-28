@@ -61,7 +61,7 @@
 .husot-settings-blockedList-item-name {
     font-size: 14px;
     display: inline-block;
-    width: 220px;
+    width: 250px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -80,7 +80,7 @@
 
 .husot-settings-blockedList-item-unblockBtn {
     float: right;
-    max-width: 100px;
+    max-width: 80px;
     overflow: hidden;
 }
 
