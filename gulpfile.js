@@ -5,7 +5,8 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
     fs = require('fs'),
-    jsStringEscape = require('js-string-escape');
+    jsStringEscape = require('js-string-escape'),
+    watch = require('gulp-watch');
 
 var pkg = require('./package.json');
 
@@ -129,10 +130,18 @@ gulp.task('release-chrome', ['build-chrome', 'release-clean'], function () {
 
 // Main tasks
 
-gulp.task('default', ['build-userscript', 'build-chrome'], function () {
+gulp.task('build', ['build-userscript', 'build-chrome']);
 
+gulp.task('release', ['release-userscript', 'release-chrome']);
+
+gulp.task('watch', function () {
+    gulp.watch(
+        [
+            'src/**/*.js',
+            'src/**/*.css',
+            'src/**/manifest.*',
+        ],
+        ['build']);
 });
 
-gulp.task('release', ['release-userscript', 'release-chrome'], function () {
-
-});
+gulp.task('default', ['build']);
