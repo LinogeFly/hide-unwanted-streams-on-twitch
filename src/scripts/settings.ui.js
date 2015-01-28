@@ -104,10 +104,20 @@ husot.settings.ui.Window = function () {
 
 husot.settings.ui.Window.prototype = {
     init: function (tabName) {
+        // Load tab content
         this._blockedChannelsTab.loadBlockedItems();
         this._blockedGamesTab.loadBlockedItems();
 
-        this._blockedChannelsTab.activate();
+        // Activate tab
+        if (typeof tabName === 'undefined' || tabName === '') {
+            return;
+        }
+        if (tabName === 'channels') {
+            this._blockedChannelsTab.activate();
+        }
+        if (tabName === 'games') {
+            this._blockedGamesTab.activate();
+        }
     }
 }
 
