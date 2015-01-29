@@ -44,15 +44,6 @@ husot.settings.ui.Tab.prototype = (function () {
         },
         activate: function () {
             husot.settings.ui.activateTab(this._$blockedList.attr('id'));
-
-            return;
-
-            $('.husot-settings-blockedList').hide();
-            $('.husot-settings-nav-item-name').removeClass('husot-settings-nav-item-name-active');
-
-            this._$blockedList.show();
-            $('.husot-settings-nav-item-name[data-husot-contentPanelId=#{0}]'.format(this._$blockedList.attr('id')))
-                .addClass('husot-settings-nav-item-name-active');
         }
     }
 })();
@@ -68,18 +59,6 @@ husot.settings.ui.Window = function () {
     var navItem_onClick = function () {
         var tabId = $(this).attr('data-husot-contentPanelId');
         husot.settings.ui.activateTab(tabId);
-
-        return;
-
-        var $sender = $(this);
-
-        // Hide all tab content panels
-        $('.husot-settings-blockedList').hide();
-        $('.husot-settings-nav-item-name').removeClass('husot-settings-nav-item-name-active');
-        // Show activated tab content panel
-        var panelId = $sender.attr('data-husot-contentPanelId');
-        $(panelId).show();
-        $sender.addClass('husot-settings-nav-item-name-active');
     }
 
     // Class initialization
