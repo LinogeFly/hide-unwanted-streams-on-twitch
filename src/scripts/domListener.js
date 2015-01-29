@@ -41,6 +41,6 @@ husot.domListener = (function () {
 
     return {
         start: start,
-        stor: stop
+        stop: stop
     };
 })();

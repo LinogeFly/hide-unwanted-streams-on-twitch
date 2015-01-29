@@ -25,10 +25,12 @@ husot.settings.ui.Tab.prototype = (function () {
         loadBlockedItems: function () {
             var self = this;
             this._blockedItemsManager.list(function (items) {
+                husot.domListener.stop(); // Don't listen for DOM changes while loading Settings
                 self._$blockedList.empty();
 
                 if (items.length === 0) {
                     self._$blockedList.append(husot.htmlLayout.blockedListItemEmpty.format(self._emptyText));
+                    husot.domListener.start(); // Resume DOM listening
                     return;
                 }
 
@@ -40,6 +42,7 @@ husot.settings.ui.Tab.prototype = (function () {
                     });
                     self._$blockedList.append($blockedListItem);
                 });
+                husot.domListener.start(); // Resume DOM listening
             });
         },
         activate: function () {
