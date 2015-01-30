@@ -11,14 +11,20 @@ husot.domListener = (function () {
             return;
         }
 
-        husot.thumbs.streamThumbsManager.hideThumbs();
-        husot.thumbs.gameThumbsManager.hideThumbs();
+        // Don't run hiding if it's not a stream thumbs adding triggered the DOM change
+        if (isThumbsAdded(mutations, husot.thumbs.streamThumbsManager.getThumbFindSelector())) {
+            husot.thumbs.streamThumbsManager.hideThumbs();
+        }
 
+        // Don't run hiding if it's not a game thumbs adding triggered the DOM change
+        if (isThumbsAdded(mutations, husot.thumbs.gameThumbsManager.getThumbFindSelector())) {
+            husot.thumbs.gameThumbsManager.hideThumbs();
+        }
+
+        // Add overlay menus
         stop();
-
         husot.thumbs.streamThumbsManager.addThumbOverlays();
         husot.thumbs.gameThumbsManager.addThumbOverlays();
-
         start();
     });
 
@@ -39,8 +45,13 @@ husot.domListener = (function () {
         });
     }
 
+    function isThumbsAdded(mutations, selector) {
+        return mutations.some(function (item) {
+            return $(item.addedNodes).find(selector).length !== 0;
+        });
+    }
+
     return {
-        start: start,
-        stop: stop
+        start: start
     };
 })();

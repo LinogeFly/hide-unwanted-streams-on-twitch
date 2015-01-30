@@ -14,9 +14,3 @@ if (!String.startsWith) {
         return this.slice(0, str.length) == str;
     };
 };
-
-if (!jQuery.expr[':'].containsIgnoreCase) {
-    jQuery.expr[':'].containsIgnoreCase = function (a, i, m) {
-        return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-    };
-};
