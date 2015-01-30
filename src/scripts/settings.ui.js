@@ -3,6 +3,8 @@
 husot.settings = husot.settings || {};
 husot.settings.ui = husot.settings.ui || {};
 
+// class Tab
+
 husot.settings.ui.Tab = function ($blockedList, blockedItemsManager, emptyText, thumbsManager) {
     this._$blockedList = $blockedList;
     this._blockedItemsManager = blockedItemsManager;
@@ -47,6 +49,8 @@ husot.settings.ui.Tab.prototype = (function () {
         }
     }
 })();
+
+// class Window
 
 husot.settings.ui.Window = function () {
     var create = function () {
@@ -99,6 +103,8 @@ husot.settings.ui.Window.prototype = {
         }
     }
 }
+
+// Helper static functions
 
 husot.settings.ui.activateTab = function (tabId) {
     // Hide all tabs
