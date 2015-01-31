@@ -16,9 +16,6 @@ husot.thumbs.ThumbsManagerBase.prototype = {
     _getThumbSelector: function () {
         throw Error(husot.constants.exceptions.abstractFunctionCall);
     },
-    _getMinimumThumbsCountOnPage: function () {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
-    },
     _addThumbOverlay: function ($thumb) {
         var self = this;
 
@@ -58,19 +55,12 @@ husot.thumbs.ThumbsManagerBase.prototype = {
     _showSettingsBtn_onClick: function (self, sender) {
         throw Error(husot.constants.exceptions.abstractFunctionCall);
     },
-    // Triggers infinite scroll feature on Twitch to load more stream/video thumbs if some thumbs were hidden,
-    // so list of stream/video thumbnails is not full and should be fulfilled with new thumbs.
+    // Triggers "infinite scroll" feature on Twitch to load more stream/video thumbnails
+    // in order to make sure that page it is filled with new thumbnails in case if some thumbnails were hidden.
     _loadMoreThumbs: function () {
-        var self = this;
-
-        // Initial checks
-        var $thumbs = $(self._getThumbSelector() + ':visible');
-        if ($thumbs.length >= self._getMinimumThumbsCountOnPage()) {
-            return;
-        };
-
-        // Call injected custom event in order to trigger "loadMore()" function of Twitch
         husot.log.debug('Triggering "infinite scroll" to load more thumbs');
+
+        // Raise injected custom event that triggers "infinite scroll" feature on Twitch.
         var event = document.createEvent('Event');
         event.initEvent('husot.loadMoreThumbs', true, true);
         document.dispatchEvent(event);
@@ -114,10 +104,6 @@ husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbSelector = function () {
     return '#directory-list .items .item .thumb';
-}
-
-husot.thumbs.StreamThumbsManager.prototype._getMinimumThumbsCountOnPage = function () {
-    return husot.constants.minimumStreamsCountOnPage;
 }
 
 husot.thumbs.StreamThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
@@ -278,10 +264,6 @@ husot.thumbs.GameThumbsManager.prototype._getContainerSelector = function () {
 
 husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
     return '#directory-list .items .game.item .boxart';
-}
-
-husot.thumbs.GameThumbsManager.prototype._getMinimumThumbsCountOnPage = function () {
-    return husot.constants.minimumGamesCountOnPage;
 }
 
 husot.thumbs.GameThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
