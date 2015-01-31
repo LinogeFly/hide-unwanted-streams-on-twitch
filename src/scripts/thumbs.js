@@ -137,7 +137,12 @@ husot.thumbs.StreamThumbsManager.prototype._hideThumbForChannel = function (name
     if (!$thumbContainer.is(":visible")) { return };
 
     $thumbContainer.hide();
-    husot.log.info('Thumbnail(s) for channel "{0}" was(were) hidden'.format(name));
+
+    husot.log.info('Thumbnail{0} for channel "{1}" wa{2} hidden'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 're' : 's')
+    ));
 }
 
 husot.thumbs.StreamThumbsManager.prototype._hideThumbForGame = function (name) {
@@ -150,7 +155,12 @@ husot.thumbs.StreamThumbsManager.prototype._hideThumbForGame = function (name) {
     if (!$thumbContainer.is(":visible")) { return };
 
     $thumbContainer.hide();
-    husot.log.info('Thumbnail(s) for game "{0}" was(were) hidden'.format(name));
+
+    husot.log.info('Thumbnail{0} for game "{1}" wa{2} hidden'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 're' : 's')
+    ));
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = function (name) {
@@ -232,7 +242,13 @@ husot.thumbs.StreamThumbsManager.prototype.showThumb = function (name) {
     if ($thumbContainer.is(":visible")) { return };
 
     $thumbContainer.show();
-    husot.log.info('Thumbnail(s) for channel "{0}" was(were) shown'.format(name));
+
+    $thumbContainer.show();
+    husot.log.info('Thumbnail{0} for channel "{1}" wa{2} shown'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 're' : 's')
+    ));
 }
 
 // class GameThumbsManager: ThumbsManagerBase
@@ -283,7 +299,12 @@ husot.thumbs.GameThumbsManager.prototype._hideThumb = function (name) {
     if (!$thumbContainer.is(":visible")) { return };
 
     $thumbContainer.hide();
-    husot.log.info('Thumbnail(s) for game "{0}" was(were) hidden'.format(name));
+
+    husot.log.info('Thumbnail{0} for game "{1}" wa{2} hidden'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 're' : 's')
+    ));
 }
 
 husot.thumbs.GameThumbsManager.prototype._getThumbContainer = function (name) {
@@ -336,5 +357,9 @@ husot.thumbs.GameThumbsManager.prototype.showThumb = function (name) {
     if ($thumbContainer.is(":visible")) { return };
 
     $thumbContainer.show();
-    husot.log.info('Thumbnail(s) for game "{0}" was(were) shown'.format(name));
+    husot.log.info('Thumbnail{0} for game "{1}" wa{2} shown'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 're' : 's')
+    ));
 }
