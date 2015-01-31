@@ -73,9 +73,8 @@ husot.thumbs.ThumbsManagerBase.prototype = {
             return;
         };
 
-        console.log('Trigger husot.loadMoreThumbs event');
-
         // Call injected custom event in order to trigger "loadMore()" function of Twitch
+        husot.log.debug('Triggering "infinite scroll" to load more thumbs');
         var event = document.createEvent('Event');
         event.initEvent('husot.loadMoreThumbs', true, true);
         document.dispatchEvent(event);
@@ -232,7 +231,7 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
     if (!$(self._getThumbSelector()).length) { return; }
 
     var start = new Date().getTime();
-    console.log('[StreamThumbsManager.hideThumbs] starts')
+    husot.log.debug('StreamThumbsManager.hideThumbs() starts');
 
     // A little bit of callback hell ahead :)
     husot.settings.blockedChannels.list(function (channels) {
@@ -255,13 +254,12 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
                 }
             });
 
+            husot.log.debug('StreamThumbsManager.hideThumbs() ends after: {0} ms'.format((new Date().getTime()) - start));
+
             // Trigger more thumbs to be loaded
             if (atLeastOneThumbWasHidden) {
                 self._loadMoreThumbs();
             }
-
-            var duration = (new Date().getTime()) - start;
-            console.log('[StreamThumbsManager.hideThumbs] ended after: ' + duration);
         });
     });
 }
@@ -367,7 +365,7 @@ husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {
     };
 
     var start = new Date().getTime();
-    console.log('[GameThumbsManager.hideThumbs] starts')
+    husot.log.debug('GameThumbsManager.hideThumbs() starts');
 
     // Hide thumbs for blocked games
     husot.settings.blockedGames.list(function (items) {
@@ -379,11 +377,11 @@ husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {
             }
         });
 
+        husot.log.debug('GameThumbsManager.hideThumbs() ends after: {0} ms'.format((new Date().getTime()) - start));
+
         if (atLeastOneThumbWasHidden) {
             self._loadMoreThumbs();
         };
-
-        console.log('[GameThumbsManager.hideThumbs] ended after: ' + ((new Date().getTime()) - start));
     });
 };
 
