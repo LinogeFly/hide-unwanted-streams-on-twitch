@@ -8,9 +8,3 @@ if (!String.format) {
         });
     };
 };
-
-if (!String.startsWith) {
-    String.prototype.startsWith = function (str) {
-        return this.slice(0, str.length) == str;
-    };
-};
