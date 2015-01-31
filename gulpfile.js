@@ -10,7 +10,7 @@ var gulp = require('gulp'),
 
 var pkg = require('./package.json');
 
-// Helper functions
+// Common tasks
 
 var insertManifestData = function (stream) {
     return stream
@@ -18,8 +18,6 @@ var insertManifestData = function (stream) {
         .pipe(replace('{{APP_DESCRIPTION}}', pkg.description))
         .pipe(replace('{{APP_VERSION}}', pkg.version));
 }
-
-// Common tasks
 
 gulp.task('build-clean', function () {
     return gulp.src('build', { read: false })
@@ -34,6 +32,29 @@ gulp.task('release-clean', function () {
 gulp.task('clean', ['build-clean', 'release-clean']);
 
 // Userscript tasks
+
+var buildUserScriptJs = function (isRelease) {
+    // Prepare files list
+    var src = [
+        'build/userscript/_temp/manifest.txt',
+        'src/scripts/app.js',
+        'src/scripts/*.js',
+        'src/.userscript/scripts/*.js'
+    ];
+    if (isRelease) {
+        src.push('!src/scripts/debug.js');
+    };
+
+    return gulp.src(src)
+        .pipe(replace('{{APP_EMBEDDED_INJECT_SCRIPTS}}', function () {
+            return jsStringEscape(fs.readFileSync('build/userscript/_temp/injects.js', 'utf8'));
+        }))
+        .pipe(replace('{{APP_EMBEDDED_STYLES}}', function () {
+            return fs.readFileSync('build/userscript/_temp/main.css', 'utf8');
+        }))
+        .pipe(concat('husot.user.js'))
+        .pipe(gulp.dest('build/userscript'));
+}
 
 gulp.task('build-userscript-css', ['build-clean'], function () {
     return gulp.src('src/styles/*.css')
@@ -54,32 +75,40 @@ gulp.task('build-userscript-manifest', ['build-clean'], function () {
         .pipe(gulp.dest('build/userscript/_temp'));
 });
 
-gulp.task('build-userscript', ['build-userscript-manifest', 'build-userscript-css', 'build-userscript-injects'], function () {
-    return gulp.src([
-        'build/userscript/_temp/manifest.txt',
-        'src/scripts/app.js',
-        'src/scripts/*.js',
-        '!src/scripts/debug.js',
-        'src/.userscript/scripts/*.js'
-    ])
-    .pipe(replace('{{APP_EMBEDDED_INJECT_SCRIPTS}}', function () {
-        return jsStringEscape(fs.readFileSync('build/userscript/_temp/injects.js', 'utf8'));
-    }))
-    .pipe(replace('{{APP_EMBEDDED_STYLES}}', function () {
-        return fs.readFileSync('build/userscript/_temp/main.css', 'utf8');
-    }))
-    .pipe(concat('husot.user.js'))
-    .pipe(gulp.dest('build/userscript'))
+gulp.task('build-userscript-js', ['build-userscript-manifest', 'build-userscript-css', 'build-userscript-injects'], function () {
+    return buildUserScriptJs(false);
 });
 
-gulp.task('release-userscript', ['build-userscript', 'release-clean'], function () {
+gulp.task('build-userscript', ['build-userscript-js', 'build-clean']);
+
+gulp.task('release-userscript-js', ['build-userscript-manifest', 'build-userscript-css', 'build-userscript-injects'], function () {
+    return buildUserScriptJs(true);
+});
+
+gulp.task('release-userscript', ['release-userscript-js', 'release-clean'], function () {
     return gulp.src([
-        'build/userscript/husot.user.js'
-    ])
-    .pipe(gulp.dest('dist/userscript'));
+            'build/userscript/husot.user.js'
+        ])
+        .pipe(gulp.dest('dist/userscript'));
 });
 
 // Chrome tasks
+
+var buildChromeJs = function (isRelease) {
+    // Prepare files list
+    var src = [
+        'src/scripts/app.js',
+        'src/scripts/*.js',
+        'src/.chrome/scripts/*.js',
+    ];
+    if (isRelease) {
+        src.push('!src/scripts/debug.js');
+    };
+
+    return gulp.src(src)
+        .pipe(concat('content.js'))
+        .pipe(gulp.dest('build/chrome'));
+};
 
 gulp.task('build-chrome-manifest', ['build-clean'], function () {
     return insertManifestData(gulp.src('src/.chrome/manifest.json'))
@@ -93,14 +122,7 @@ gulp.task('build-chrome-css', ['build-clean'], function () {
 });
 
 gulp.task('build-chrome-js', ['build-clean'], function () {
-    return gulp.src([
-        'src/scripts/app.js',
-        'src/scripts/*.js',
-        '!src/scripts/debug.js',
-        'src/.chrome/scripts/*.js',
-    ])
-    .pipe(concat('content.js'))
-    .pipe(gulp.dest('build/chrome'));
+    return buildChromeJs(false);
 });
 
 gulp.task('build-chrome-injects', ['build-clean'], function () {
@@ -121,11 +143,15 @@ gulp.task('build-chrome-images', ['build-clean'], function () {
 
 gulp.task('build-chrome', ['build-chrome-manifest', 'build-chrome-css', 'build-chrome-js', 'build-chrome-injects', 'build-chrome-vendor', 'build-chrome-images']);
 
-gulp.task('release-chrome', ['build-chrome', 'release-clean'], function () {
+gulp.task('release-chrome-js', ['release-clean'], function () {
+    return buildChromeJs(true);
+});
+
+gulp.task('release-chrome', ['build-chrome-manifest', 'build-chrome-css', 'build-chrome-injects', 'build-chrome-vendor', 'build-chrome-images', 'release-chrome-js', 'release-clean'], function () {
     return gulp.src([
-        'build/chrome/**/*'
-    ])
-    .pipe(gulp.dest('dist/chrome'));
+            'build/chrome/**/*'
+        ])
+        .pipe(gulp.dest('dist/chrome'));
 });
 
 // Main tasks
