@@ -3,10 +3,6 @@
 var husot = husot || {};
 husot.thumbs = husot.thumbs || {};
 
-// TODO: Refactor selectors so they are nicely groupped and not spreaded through the classes
-// TODO: Prformance optimizations
-//   Test performance carefully so there are no unnecessary calls for hiding thumbnails. Add additional initial checks if needed.
-
 // abstract class ThumbsManagerBase
 
 husot.thumbs.ThumbsManagerBase = function () {
@@ -176,14 +172,9 @@ husot.thumbs.StreamThumbsManager.prototype._hideThumbForGame = function (name) {
 husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = function (name) {
     var self = this;
 
-    var start = new Date().getTime();
-    console.log('[StreamThumbsManager.getThumbContainerForChannel] starts')
-
     var $channel = $(self._getContainerSelector()).find('.meta .info a').filter(function () {
         return $(this).text().trim().toLowerCase() === name.toLowerCase();
     });
-
-    console.log('[StreamThumbsManager.getThumbContainerForChannel] ended after: ' + ((new Date().getTime()) - start));
 
     if (!$channel.length) {
         return $();
@@ -194,9 +185,6 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = functi
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForGame = function (name) {
     var self = this;
-
-    var start = new Date().getTime();
-    console.log('[StreamThumbsManager.getThumbContainerForGame] starts')
 
     var $game = $(self._getContainerSelector())
         .find('.boxart[title], .boxart[original-title]')
@@ -210,8 +198,6 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForGame = function 
 
             return false;
         });
-
-    console.log('[StreamThumbsManager.getThumbContainerForGame] ended after: ' + ((new Date().getTime()) - start));
 
     if (!$game.length) {
         return $();
@@ -336,14 +322,9 @@ husot.thumbs.GameThumbsManager.prototype._hideThumb = function (name) {
 husot.thumbs.GameThumbsManager.prototype._getThumbContainer = function (name) {
     var self = this;
 
-    var start = new Date().getTime();
-    console.log('[GameThumbsManager.getThumbContainer] starts')
-
     var $game = $(self._getContainerSelector()).find('.meta .title').filter(function () {
         return $(this).text().trim().toLowerCase() === name.toLowerCase();
     });
-
-    console.log('[GameThumbsManager.getThumbContainer] ended after: ' + ((new Date().getTime()) - start));
 
     if (!$game.length) {
         return $();
