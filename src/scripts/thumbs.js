@@ -1,5 +1,6 @@
 // Video Thumbnails module
 
+var husot = husot || {};
 husot.thumbs = husot.thumbs || {};
 
 // TODO: Refactor selectors so they are nicely groupped and not spreaded through the classes

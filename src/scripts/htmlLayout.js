@@ -1,6 +1,7 @@
 // HTML Templates
 // TODO: Move into separate files
 
+var husot = husot || {};
 husot.htmlLayout = husot.htmlLayout || {};
 
 husot.htmlLayout.streamOverlay = '\

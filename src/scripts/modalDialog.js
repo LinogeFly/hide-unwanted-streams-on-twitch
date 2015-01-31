@@ -1,5 +1,6 @@
 // Modal Dialog module
 
+var husot = husot || {};
 husot.modalDialog = husot.modalDialog || {};
 
 husot.modalDialog = (function () {

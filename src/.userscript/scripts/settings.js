@@ -1,5 +1,6 @@
 ﻿// Application settings (Userscript specific)
 
+var husot = husot || {};
 husot.settings = husot.settings || {};
 
 husot.settings.setValue = function (key, value, callback) {

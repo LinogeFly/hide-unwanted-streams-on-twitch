@@ -1,5 +1,6 @@
 // Application settings
 
+var husot = husot || {};
 husot.settings = husot.settings || {};
 
 husot.settings.BlockedItems = function (settingsKey) {

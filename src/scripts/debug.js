@@ -1,5 +1,6 @@
 ﻿// Debug build specific logic
 
+var husot = husot || {};
 husot.debug = husot.debug || {};
 
 husot.debug.hideRedundantElements = function () {

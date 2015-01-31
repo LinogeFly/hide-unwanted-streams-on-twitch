@@ -1,5 +1,6 @@
 ﻿// Constants
 
+var husot = husot || {};
 husot.constants = husot.constants || {};
 husot.constants.exceptions = husot.constants.exceptions || {};
 

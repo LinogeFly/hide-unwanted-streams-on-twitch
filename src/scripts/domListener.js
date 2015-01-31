@@ -1,5 +1,6 @@
 // DOM Listener module
 
+var husot = husot || {};
 husot.domListener = husot.domListener || {};
 
 husot.domListener = (function () {

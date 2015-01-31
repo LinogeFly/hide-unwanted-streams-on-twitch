@@ -1,5 +1,6 @@
 // Log manager
 
+var husot = husot || {};
 husot.log = husot.log || {};
 
 husot.log.info = function (obj) {

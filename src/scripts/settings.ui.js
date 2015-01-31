@@ -1,5 +1,6 @@
 // Settings UI
 
+var husot = husot || {};
 husot.settings = husot.settings || {};
 husot.settings.ui = husot.settings.ui || {};
 
