@@ -101,12 +101,12 @@ husot.thumbs.ThumbsManagerBase.prototype = {
 
 // class StreamThumbsManager: ThumbsManagerBase
 
-husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
-husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
-
 husot.thumbs.StreamThumbsManager = function () {
     husot.thumbs.ThumbsManagerBase.call(this);
 }
+
+husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
+husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
 
 husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
     return '#directory-list .items .item';
@@ -265,12 +265,12 @@ husot.thumbs.StreamThumbsManager.prototype.showThumb = function (name) {
 
 // class GameThumbsManager: ThumbsManagerBase
 
-husot.thumbs.GameThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
-husot.thumbs.GameThumbsManager.prototype.constructor = husot.thumbs.GameThumbsManager;
-
 husot.thumbs.GameThumbsManager = function () {
     husot.thumbs.ThumbsManagerBase.call(this);
 }
+
+husot.thumbs.GameThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
+husot.thumbs.GameThumbsManager.prototype.constructor = husot.thumbs.GameThumbsManager;
 
 husot.thumbs.GameThumbsManager.prototype._getContainerSelector = function () {
     return '#directory-list .items .game.item';
