@@ -17,7 +17,7 @@
 3. Open Settings window.
 
 ### Expected results
-1. "Blocked games" tab in Settings window should be active.
+1. "Blocked Games" tab in Settings window should be active.
 2. List with blocked games should be shown.
 
 ## Test case 3
@@ -28,12 +28,11 @@
 
 ### Expected results
 1. Tumbnails for blocked games should be hidden.
-2. Infinite scroll should triggered loading more thumbanils on the page.
 
 ## Test case 4
 
 ### Requirements
-1. Some games must be in the "Blocked games" list.
+1. Some games must be in the "Blocked Games" list.
 
 ### Actions
 1. Open [All Games](http://www.twitch.tv/directory) page.
@@ -62,7 +61,7 @@
 3. Open Settings window.
 
 ### Expected results
-1. "Blocked channels" tab in Settings window should be active.
+1. "Blocked Channels" tab in Settings window should be active.
 2. List with blocked channels should be shown.
 
 ## Test case 3
@@ -73,12 +72,11 @@
 
 ### Expected results
 1. Tumbnails for blocked channels should be hidden.
-2. Infinite scroll should triggered loading more thumbanils on the page.
 
 ## Test case 4
 
 ### Requirements
-1. Some channels must be in the "Blocked channels" list.
+1. Some channels must be in the "Blocked Channels" list.
 
 ### Actions
 1. Open [Top Channels](http://www.twitch.tv/directory/all) page.
@@ -97,12 +95,11 @@
 
 ### Expected results
 1. Tumbnails for blocked games should be hidden.
-2. Infinite scroll should triggered loading more thumbanils on the page.
 
 ## Test case 6
 
 ### Requirements
-1. Some top games that are currently being streamed must be in the "Blocked games" list.
+1. Some top games that are currently being streamed must be in the "Blocked Games" list.
 
 ### Actions
 1. Open [Top Channels](http://www.twitch.tv/directory/all) page.
@@ -185,7 +182,7 @@
 1. Open [All Games](http://www.twitch.tv/directory) page.
 2. Choose some top game that is currently being streamed, like "LoL", "Dota 2", "Hearthstone" etc.
 3. Open the game spacific page in new tab in your browser. For example, right click on the game's thumbnail image and then select "Open link in new tab" option.
-4. Being on the first page block the game using overlay menu.
+4. Being on the [All Games](http://www.twitch.tv/directory) page page block the game using overlay menu.
 5. Open the game specific page that you have opened in separate tab previously.
 6. Refresh the page.
 
