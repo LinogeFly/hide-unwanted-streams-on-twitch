@@ -115,4 +115,4 @@ husot.settings.ui.activateTab = function (tabId) {
     var $tab = $('#{0}'.format(tabId));
     $tab.show();
     $tabHeader.addClass('husot-settings-nav-item-name-active');
-}
+};

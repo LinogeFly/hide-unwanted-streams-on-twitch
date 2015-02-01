@@ -17,4 +17,4 @@ husot.log.debug = function (obj) {
     }
 
     console.log('HUSOT DEBUG: ' + obj);
-}
+};

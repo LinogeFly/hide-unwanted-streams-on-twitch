@@ -392,4 +392,4 @@ husot.thumbs.GameThumbsManager.prototype.showThumb = function (name) {
         name,
         ($thumbContainer.length > 1 ? 'were' : 'was')
     ));
-}
+};

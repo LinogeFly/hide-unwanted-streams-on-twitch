@@ -27,4 +27,4 @@ husot.debug.setBlockedGamesList = function () {
 husot.debug.cleanSettings = function () {
     husot.settings.setValue(husot.constants.blockedChannelsSettingsKey, '[]', function () { });
     husot.settings.setValue(husot.constants.blockedGamesSettingsKey, '[]', function () { });
-}
+};
