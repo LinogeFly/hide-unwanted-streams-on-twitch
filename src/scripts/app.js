@@ -8,10 +8,6 @@ husot.main = function () {
         return;
     }
 
-    //husot.debug.cleanSettings();
-    //husot.debug.setBlockedChannelsList();
-    //husot.debug.setBlockedGamesList();
-
     husot.settings.blockedChannels = new husot.settings.BlockedItems(husot.constants.blockedChannelsSettingsKey);
     husot.settings.blockedGames = new husot.settings.BlockedItems(husot.constants.blockedGamesSettingsKey);
     husot.thumbs.streamThumbsManager = new husot.thumbs.StreamThumbsManager();
