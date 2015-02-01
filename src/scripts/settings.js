@@ -1,12 +1,16 @@
 // Application settings
 
+var husot = husot || {};
 husot.settings = husot.settings || {};
 
-husot.settings.blockedChannels = (function () {
-    var blockedChannelsList; // For caching
+husot.settings.BlockedItems = function (settingsKey) {
+    this._settingsKey = settingsKey;
+    this._blockedItems; // For caching
+};
 
-    function get(name, callback) {
-        list(function (items) {
+husot.settings.BlockedItems.prototype = {
+    _get: function (name, callback) {
+        this.list(function (items) {
             var $item = $.grep(items, function (x) { return x.name === name; });
 
             if (!$item.length) {
@@ -15,15 +19,16 @@ husot.settings.blockedChannels = (function () {
                 callback($item[0]);
             }
         });
-    }
+    },
+    add: function (name, callback) {
+        var self = this;
 
-    function add(name, callback) {
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             return;
         }
 
-        get(name, function (item) {
+        self._get(name, function (item) {
             // Don't process if already in the list
             if (typeof item !== 'undefined') {
                 callback();
@@ -31,26 +36,27 @@ husot.settings.blockedChannels = (function () {
             }
 
             // Add to the list
-            list(function (items) {
+            self.list(function (items) {
                 items.push({ 'name': name });
-                husot.settings.setValue(husot.constants.blockedChannelsSettingsKey, JSON.stringify(items), function () {
-                    // Invalidate cached Blocked Channels List
-                    blockedChannelsList = undefined;
+                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
+                    // Invalidate cached list of blocked items
+                    self._blockedItems = undefined;
 
                     callback();
                 });
             });
         });
-    }
+    },
+    remove: function (name, callback) {
+        var self = this;
 
-    function remove(name, callback) {
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             callback();
             return;
         }
-
-        get(name, function (item) {
+        
+        this._get(name, function (item) {
             // Don't process if not in the list
             if (typeof item === 'undefined') {
                 callback();
@@ -58,35 +64,30 @@ husot.settings.blockedChannels = (function () {
             }
 
             // Remove from the list
-            list(function (items) {
+            self.list(function (items) {
                 var index = $.inArray(item, items);
                 items.splice(index, 1);
-                husot.settings.setValue(husot.constants.blockedChannelsSettingsKey, JSON.stringify(items), function () {
-                    // Invalidate cached Blocked Channels List
-                    blockedChannelsList = undefined;
+                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
+                    // Invalidate cached list of blocked items
+                    self._blockedItems = undefined;
 
                     callback();
                 });
             });
         });
-    }
+    },
+    list: function (callback) {
+        var self = this;
 
-    function list(callback) {
-        if (typeof blockedChannelsList === 'undefined') {
-            husot.settings.getValue(husot.constants.blockedChannelsSettingsKey, '[]', function (item) {
+        if (typeof self._blockedItems === 'undefined') {
+            husot.settings.getValue(self._settingsKey, '[]', function (item) {
                 // Save in cache
-                blockedChannelsList = JSON.parse(item);
+                self._blockedItems = JSON.parse(item);
 
-                callback(blockedChannelsList);
+                callback(self._blockedItems);
             });
         } else {
-            callback(blockedChannelsList);
+            callback(self._blockedItems);
         }
     }
-
-    return {
-        add: add,
-        remove: remove,
-        list: list
-    };
-})();
+};

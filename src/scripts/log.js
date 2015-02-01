@@ -1,5 +1,6 @@
 // Log manager
 
+var husot = husot || {};
 husot.log = husot.log || {};
 
 husot.log.info = function (obj) {
@@ -7,5 +8,13 @@ husot.log.info = function (obj) {
 };
 
 husot.log.error = function (obj) {
-    console.log('%cHUSOT: ' + obj, 'color: #ff0000');
+    console.error('HUSOT: ' + obj);
 };
+
+husot.log.debug = function (obj) {
+    if (typeof husot.debug === 'undefined') {
+        return;
+    }
+
+    console.log('HUSOT DEBUG: ' + obj);
+}

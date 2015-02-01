@@ -1,5 +1,5 @@
 var gulp = require('gulp'),
-    concat = require('gulp-concat'),
+    concat = require('gulp-concat-util'),
     clean = require('gulp-clean'),
     replace = require('gulp-replace'),
     minifyCss = require('gulp-minify-css'),
@@ -37,9 +37,9 @@ var buildUserScriptJs = function (isRelease) {
     // Prepare files list
     var src = [
         'build/userscript/_temp/manifest.txt',
-        'src/scripts/app.js',
         'src/scripts/*.js',
-        'src/.userscript/scripts/*.js'
+        '!src/scripts/app.js', // Must go last so it will be added later on
+        'src/.userscript/scripts/*.js',
     ];
     if (isRelease) {
         src.push('!src/scripts/debug.js');
@@ -53,6 +53,7 @@ var buildUserScriptJs = function (isRelease) {
             return fs.readFileSync('build/userscript/_temp/main.css', 'utf8');
         }))
         .pipe(concat('husot.user.js'))
+        .pipe(concat.footer('\n' + fs.readFileSync('src/scripts/app.js', 'utf8')))
         .pipe(gulp.dest('build/userscript'));
 }
 
@@ -97,9 +98,9 @@ gulp.task('release-userscript', ['release-userscript-js', 'release-clean'], func
 var buildChromeJs = function (isRelease) {
     // Prepare files list
     var src = [
-        'src/scripts/app.js',
         'src/scripts/*.js',
-        'src/.chrome/scripts/*.js',
+        '!src/scripts/app.js', // Must go last so it will be added later on
+        'src/.chrome/scripts/*.js'
     ];
     if (isRelease) {
         src.push('!src/scripts/debug.js');
@@ -107,6 +108,7 @@ var buildChromeJs = function (isRelease) {
 
     return gulp.src(src)
         .pipe(concat('content.js'))
+        .pipe(concat.footer('\n' + fs.readFileSync('src/scripts/app.js', 'utf8')))
         .pipe(gulp.dest('build/chrome'));
 };
 

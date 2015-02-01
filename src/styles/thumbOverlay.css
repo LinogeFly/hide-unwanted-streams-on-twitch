@@ -13,12 +13,17 @@
 
 .husot-thumbOverlay a {
     color: #fff;
+    text-decoration: none;
+}
+
+.husot-thumbOverlay a:hover {
+    text-decoration: underline !important;
 }
 
 .husot-thumbOverlay-menu {
     list-style: none;
     padding: 0;
-    margin: 0px;
+    margin: 0;
 }
 
 .husot-thumbOverlay-menu li {
