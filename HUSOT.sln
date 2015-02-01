@@ -26,30 +26,9 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "src", "http://localhost:561
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8615291A-0EDB-4CB9-8B81-30D0DB546A55}"
 	ProjectSection(SolutionItems) = preProject
-		..\gulpfile.js = ..\gulpfile.js
-		..\package.json = ..\package.json
+		gulpfile.js = gulpfile.js
+		package.json = package.json
 		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "test", "http://localhost:50271", "{CF68BEC3-5FB4-4558-A83F-8C315FDFBD85}"
-	ProjectSection(WebsiteProperties) = preProject
-		UseIISExpress = "true"
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_50271"
-		Debug.AspNetCompiler.PhysicalPath = "test\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50271\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_50271"
-		Release.AspNetCompiler.PhysicalPath = "test\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50271\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		SlnRelativePath = "test\"
 	EndProjectSection
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "test", "http://localhost:50271", "{CF68BEC3-5FB4-4558-A83F-8C315FDFBD85}"
