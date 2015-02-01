@@ -163,6 +163,42 @@ husot.thumbs.StreamThumbsManager.prototype._hideThumbForGame = function (name) {
     ));
 }
 
+husot.thumbs.StreamThumbsManager.prototype._showThumbForChannel = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainerForChannel(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if ($thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.show();
+
+    husot.log.info('Thumbnail{0} for channel "{1}" wa{2} shown'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 're' : 's')
+    ));
+}
+
+husot.thumbs.StreamThumbsManager.prototype._showThumbForGame = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainerForGame(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if ($thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.show();
+
+    husot.log.info('Thumbnail{0} for game "{1}" wa{2} shown'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 're' : 's')
+    ));
+}
+
 husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = function (name) {
     var self = this;
 
@@ -182,7 +218,12 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForGame = function 
 
     var $game = $(self._getContainerSelector())
         .find('.boxart[title], .boxart[original-title]')
-        .filter(":visible")
+        .filter(function () {
+            // Check that game thumbnail is hidden explicitly.
+            // jQuery's :visible selector is not used here because it considers element as hidden if an ancestor element is hidden,
+            // and we need to get only explicitly hidden elements with Twitch's ".no-boxart" class.
+            return $(this).css('display') !== 'none';
+        })
         .filter(function () {
             var title1 = this.getAttribute('title');
             var title2 = this.getAttribute('original-title');
@@ -235,20 +276,8 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
 husot.thumbs.StreamThumbsManager.prototype.showThumb = function (name) {
     var self = this;
 
-    var $thumbContainer = self._getThumbContainerForChannel(name);
-
-    // Initial checks
-    if (!$thumbContainer.length) { return };
-    if ($thumbContainer.is(":visible")) { return };
-
-    $thumbContainer.show();
-
-    $thumbContainer.show();
-    husot.log.info('Thumbnail{0} for channel "{1}" wa{2} shown'.format(
-        ($thumbContainer.length > 1 ? 's' : ''),
-        name,
-        ($thumbContainer.length > 1 ? 're' : 's')
-    ));
+    self._showThumbForChannel(name);
+    self._showThumbForGame(name);
 }
 
 // class GameThumbsManager: ThumbsManagerBase
@@ -357,6 +386,7 @@ husot.thumbs.GameThumbsManager.prototype.showThumb = function (name) {
     if ($thumbContainer.is(":visible")) { return };
 
     $thumbContainer.show();
+
     husot.log.info('Thumbnail{0} for game "{1}" wa{2} shown'.format(
         ($thumbContainer.length > 1 ? 's' : ''),
         name,
