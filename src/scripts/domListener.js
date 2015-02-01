@@ -6,6 +6,8 @@ husot.domListener = husot.domListener || {};
 husot.domListener = (function () {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function (mutations) {
+        //husot.debug.hideRedundantElements();
+
         // Don't process page if its URL is not allowed
         if (!isCurrentUrlAllowed()) {
             return;
