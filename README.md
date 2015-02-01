@@ -38,6 +38,8 @@ For platform specific builds use `gulp build-chrome` and `gulp build-userscript`
 - Add test-cases.md document
 - Consider refactoring classes because there are a lot of places with `var self = this;` lines. Perhaps check how to use $.extend function.
 - Rename ".chrome" and ".userscript" to "_chrome" and "_userscript" respectively. Names that start with "." are considered hidden, didn't know that :)
+- Blocked items should be shown in alphabetical order in Settings window.
+- Try to improve performance of hiding functions for cases when a lot of channels and games are added to the block lists.
 
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
