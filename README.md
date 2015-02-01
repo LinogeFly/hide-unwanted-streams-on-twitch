@@ -25,6 +25,7 @@ gulp
 For platform specific builds use `gulp build-chrome` and `gulp build-userscript` commands.
 
 # Version history
+- 1.3.0 Added support for blocking games.
 - 1.2.0 Added Google Chrome Extension platform.
 - 1.1.0 Added support for hiding videos in addition to live streams.
 - 1.0.0 First release. Only Userscript platfom is supported.
@@ -32,11 +33,8 @@ For platform specific builds use `gulp build-chrome` and `gulp build-userscript`
 # Known issues
 
 # TODO
-- Add support for blocking games
 - Add tests for CSS selectors
 - Add tests for Regular Expressions
-- Add test-cases.md document
-- Consider refactoring classes because there are a lot of places with `var self = this;` lines. Perhaps check how to use $.extend function.
 - Rename ".chrome" and ".userscript" to "_chrome" and "_userscript" respectively. Names that start with "." are considered hidden, didn't know that :)
 - Blocked items should be shown in alphabetical order in Settings window.
 - Try to improve performance of hiding functions for cases when a lot of channels and games are added to the block lists.
