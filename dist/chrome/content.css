@@ -51,18 +51,34 @@
     margin: 0;
     border-bottom: 1px solid rgba(0,0,0,0.2);
     margin-bottom: 5px;
+    overflow: auto;
 }
 
 .husot-settings-nav-item {
+    float: left;
+    margin-right: 20px;
 }
 
 .husot-settings-nav-item-name {
     font-size: 14px;
     line-height: 24px;
     padding-bottom: 7px;
-    border-bottom: 1px solid #19191f;
-    color: #19191f;
     display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+    color: #6441a5;
+    border-bottom: 1px solid transparent;
+}
+
+.husot-settings-nav-item-name:hover {
+    color: #19191f;
+    border-bottom: 1px solid rgba(0,0,0,0.35);
+    text-decoration: none;
+}
+
+.husot-settings-nav-item-name-active, .husot-settings-nav-item-name-active:hover {
+    color: #19191f;
+    border-bottom: 1px solid #19191f;
 }
 
 .husot-settings-blockedList {
@@ -84,7 +100,7 @@
 .husot-settings-blockedList-item-name {
     font-size: 14px;
     display: inline-block;
-    width: 220px;
+    width: 250px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -103,7 +119,7 @@
 
 .husot-settings-blockedList-item-unblockBtn {
     float: right;
-    max-width: 100px;
+    max-width: 80px;
     overflow: hidden;
 }
 
@@ -134,12 +150,17 @@
 
 .husot-thumbOverlay a {
     color: #fff;
+    text-decoration: none;
+}
+
+.husot-thumbOverlay a:hover {
+    text-decoration: underline !important;
 }
 
 .husot-thumbOverlay-menu {
     list-style: none;
     padding: 0;
-    margin: 0px;
+    margin: 0;
 }
 
 .husot-thumbOverlay-menu li {

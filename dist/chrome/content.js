@@ -1,43 +1,31 @@
-// Application start
-
-var husot = husot || {};
-
-husot.main = function () {
-    // Run only in top frame
-    if (window.top !== window.self) {
-        return;
-    }
-
-    this.injector.addScripts();
-    this.modalDialog.initOverlay();
-    this.settingsWindow.create();
-    this.domListener.start();
-};
-
-$(document).ready(function () {
-    husot.main();
-});
-
 // Constants
 
+var husot = husot || {};
 husot.constants = husot.constants || {};
+husot.constants.exceptions = husot.constants.exceptions || {};
 
 husot.constants.blockedChannelsSettingsKey = 'blockedChannels';
-husot.constants.minimumStreamsCountOnPage = 20; // TODO: Check if there is such constant already exists on Twitch
+husot.constants.blockedGamesSettingsKey = 'blockedGames';
+husot.constants.blockedChannelsListEmpty = 'No Blocked Channels';
+husot.constants.blockedGamesListEmpty = 'No Blocked Games';
 husot.constants.modalDialogShowingSpeed = 150;
-husot.constants.allowedUrls = [ // TODO: replace with regEx patterns
-    'http://www.twitch.tv/directory/game/',
-    'http://www.twitch.tv/directory/all',
-    'http://www.twitch.tv/directory/random',
-    'http://www.twitch.tv/directory/videos/'
+husot.constants.allowedUrls = [
+    '^http://www.twitch.tv/directory/?$',
+    '^http://www.twitch.tv/directory/all/?$',
+    '^http://www.twitch.tv/directory/all/.+',
+    '^http://www.twitch.tv/directory/game/.+',
+    '^http://www.twitch.tv/directory/random/?$',
+    '^http://www.twitch.tv/directory/videos/.+'
 ];
+husot.constants.exceptions.abstractFunctionCall = 'Cannot call abstract function';
+husot.constants.exceptions.notImplemented = 'Method or operation is not implemented';
 
 // DOM Listener module
 
+var husot = husot || {};
 husot.domListener = husot.domListener || {};
 
 husot.domListener = (function () {
-    // TODO: Add polyfill for MutationObserver
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function (mutations) {
         // Don't process page if its URL is not allowed
@@ -45,9 +33,20 @@ husot.domListener = (function () {
             return;
         }
 
-        husot.thumbsManager.hideThumbs();
+        // Don't run hiding if it's not a stream thumbs adding triggered the DOM change
+        if (isThumbsAdded(mutations, husot.thumbs.streamThumbsManager.getThumbFindSelector())) {
+            husot.thumbs.streamThumbsManager.hideThumbs();
+        }
+
+        // Don't run hiding if it's not a game thumbs adding triggered the DOM change
+        if (isThumbsAdded(mutations, husot.thumbs.gameThumbsManager.getThumbFindSelector())) {
+            husot.thumbs.gameThumbsManager.hideThumbs();
+        }
+
+        // Add overlay menus
         stop();
-        husot.thumbsManager.addThumbOverlays();
+        husot.thumbs.streamThumbsManager.addThumbOverlays();
+        husot.thumbs.gameThumbsManager.addThumbOverlays();
         start();
     });
 
@@ -64,13 +63,18 @@ husot.domListener = (function () {
 
     function isCurrentUrlAllowed() {
         return husot.constants.allowedUrls.some(function (item) {
-            return document.URL.startsWith(item);
+            return (new RegExp(item)).test(document.URL);
+        });
+    }
+
+    function isThumbsAdded(mutations, selector) {
+        return mutations.some(function (item) {
+            return $(item.addedNodes).find(selector).length !== 0;
         });
     }
 
     return {
-        start: start,
-        stor: stop
+        start: start
     };
 })();
 
@@ -85,21 +89,10 @@ if (!String.format) {
     };
 };
 
-if (!String.startsWith) {
-    String.prototype.startsWith = function (str) {
-        return this.slice(0, str.length) == str;
-    };
-};
-
-if (!jQuery.expr[':'].containsIgnoreCase) {
-    jQuery.expr[':'].containsIgnoreCase = function (a, i, m) {
-        return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-    };
-};
-
 // HTML Templates
 // TODO: Move into separate files
 
+var husot = husot || {};
 husot.htmlLayout = husot.htmlLayout || {};
 
 husot.htmlLayout.streamOverlay = '\
@@ -115,10 +108,14 @@ husot.htmlLayout.settingsWindow = '\
     <div class="husot-settings husot-modalWindow">\
         <ul class="husot-settings-nav">\
             <li class="husot-settings-nav-item">\
-                <div class="husot-settings-nav-item-name">Blocked Channels</div>\
+                <a class="husot-settings-nav-item-name" data-husot-contentPanelId="husot-settings-blockedChannelsList">Blocked Channels</a>\
+            </li>\
+            <li class="husot-settings-nav-item">\
+                <a class="husot-settings-nav-item-name" data-husot-contentPanelId="husot-settings-blockedGamesList">Blocked Games</a>\
             </li>\
         </ul>\
-        <ul class="husot-settings-blockedList"></ul>\
+        <ul class="husot-settings-blockedList" id="husot-settings-blockedChannelsList"></ul>\
+        <ul class="husot-settings-blockedList" id="husot-settings-blockedGamesList"></ul>\
         <div class="husot-settings-footer">\
             <a href="#" class="husot-modalClose husot-button">Close</a>\
         </div>\
@@ -126,16 +123,17 @@ husot.htmlLayout.settingsWindow = '\
 
 husot.htmlLayout.modalDialogOverlay = '<div class="husot-modalOverlay"></div>';
 
-husot.htmlLayout.blockedChannelsListItem = '\
+husot.htmlLayout.blockedListItem = '\
     <li class="husot-settings-blockedList-item">\
         <a class="husot-settings-blockedList-item-unblockBtn husot-button" href="javascript:void(0);">Unblock</a>\
         <div class="husot-settings-blockedList-item-name">{0}</div>\
     </li>';
 
-husot.htmlLayout.blockedChannelsListItemEmpty = '<li><div class="husot-settings-blockedList-item-empty">No Blocked Channels</div></li>';
+husot.htmlLayout.blockedListItemEmpty = '<li><div class="husot-settings-blockedList-item-empty">{0}</div></li>';
 
 // Log manager
 
+var husot = husot || {};
 husot.log = husot.log || {};
 
 husot.log.info = function (obj) {
@@ -143,11 +141,20 @@ husot.log.info = function (obj) {
 };
 
 husot.log.error = function (obj) {
-    console.log('%cHUSOT: ' + obj, 'color: #ff0000');
+    console.error('HUSOT: ' + obj);
+};
+
+husot.log.debug = function (obj) {
+    if (typeof husot.debug === 'undefined') {
+        return;
+    }
+
+    console.log('HUSOT DEBUG: ' + obj);
 };
 
 // Modal Dialog module
 
+var husot = husot || {};
 husot.modalDialog = husot.modalDialog || {};
 
 husot.modalDialog = (function () {
@@ -192,13 +199,17 @@ husot.modalDialog = (function () {
 
 // Application settings
 
+var husot = husot || {};
 husot.settings = husot.settings || {};
 
-husot.settings.blockedChannels = (function () {
-    var blockedChannelsList; // For caching
+husot.settings.BlockedItems = function (settingsKey) {
+    this._settingsKey = settingsKey;
+    this._blockedItems; // For caching
+};
 
-    function get(name, callback) {
-        list(function (items) {
+husot.settings.BlockedItems.prototype = {
+    _get: function (name, callback) {
+        this.list(function (items) {
             var $item = $.grep(items, function (x) { return x.name === name; });
 
             if (!$item.length) {
@@ -207,15 +218,16 @@ husot.settings.blockedChannels = (function () {
                 callback($item[0]);
             }
         });
-    }
+    },
+    add: function (name, callback) {
+        var self = this;
 
-    function add(name, callback) {
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             return;
         }
 
-        get(name, function (item) {
+        self._get(name, function (item) {
             // Don't process if already in the list
             if (typeof item !== 'undefined') {
                 callback();
@@ -223,26 +235,27 @@ husot.settings.blockedChannels = (function () {
             }
 
             // Add to the list
-            list(function (items) {
+            self.list(function (items) {
                 items.push({ 'name': name });
-                husot.settings.setValue(husot.constants.blockedChannelsSettingsKey, JSON.stringify(items), function () {
-                    // Invalidate cached Blocked Channels List
-                    blockedChannelsList = undefined;
+                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
+                    // Invalidate cached list of blocked items
+                    self._blockedItems = undefined;
 
                     callback();
                 });
             });
         });
-    }
+    },
+    remove: function (name, callback) {
+        var self = this;
 
-    function remove(name, callback) {
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             callback();
             return;
         }
-
-        get(name, function (item) {
+        
+        this._get(name, function (item) {
             // Don't process if not in the list
             if (typeof item === 'undefined') {
                 callback();
@@ -250,121 +263,196 @@ husot.settings.blockedChannels = (function () {
             }
 
             // Remove from the list
-            list(function (items) {
+            self.list(function (items) {
                 var index = $.inArray(item, items);
                 items.splice(index, 1);
-                husot.settings.setValue(husot.constants.blockedChannelsSettingsKey, JSON.stringify(items), function () {
-                    // Invalidate cached Blocked Channels List
-                    blockedChannelsList = undefined;
+                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
+                    // Invalidate cached list of blocked items
+                    self._blockedItems = undefined;
 
                     callback();
                 });
             });
         });
-    }
+    },
+    list: function (callback) {
+        var self = this;
 
-    function list(callback) {
-        if (typeof blockedChannelsList === 'undefined') {
-            husot.settings.getValue(husot.constants.blockedChannelsSettingsKey, '[]', function (item) {
+        if (typeof self._blockedItems === 'undefined') {
+            husot.settings.getValue(self._settingsKey, '[]', function (item) {
                 // Save in cache
-                blockedChannelsList = JSON.parse(item);
+                self._blockedItems = JSON.parse(item);
 
-                callback(blockedChannelsList);
+                callback(self._blockedItems);
             });
         } else {
-            callback(blockedChannelsList);
+            callback(self._blockedItems);
         }
     }
+};
 
+// Settings UI
+
+var husot = husot || {};
+husot.settings = husot.settings || {};
+husot.settings.ui = husot.settings.ui || {};
+
+// class Tab
+
+husot.settings.ui.Tab = function ($blockedList, blockedItemsManager, emptyText, thumbsManager) {
+    this._$blockedList = $blockedList;
+    this._blockedItemsManager = blockedItemsManager;
+    this._emptyText = emptyText;
+};
+
+husot.settings.ui.Tab.prototype = (function () {
     return {
-        add: add,
-        remove: remove,
-        list: list
-    };
+        _unblockBtn_onClick: function (self, sender) {
+            var $sender = $(sender);
+            var $blockedListItem = $sender.closest('.husot-settings-blockedList-item');
+            var name = $blockedListItem.find('.husot-settings-blockedList-item-name').text();
+
+            self._blockedItemsManager.remove(name, function () {
+                self.loadBlockedItems();
+
+                husot.thumbs.streamThumbsManager.showThumb(name);
+                husot.thumbs.gameThumbsManager.showThumb(name);
+            });
+        },
+        loadBlockedItems: function () {
+            var self = this;
+            this._blockedItemsManager.list(function (items) {
+                self._$blockedList.empty();
+
+                if (items.length === 0) {
+                    self._$blockedList.append(husot.htmlLayout.blockedListItemEmpty.format(self._emptyText));
+                    return;
+                }
+
+                items.forEach(function (item) {
+                    var $blockedListItem = $(husot.htmlLayout.blockedListItem.format(item.name));
+                    var $unblockBtn = $('.husot-settings-blockedList-item-unblockBtn', $blockedListItem);
+                    $unblockBtn.click(function () {
+                        self._unblockBtn_onClick(self, this);
+                    });
+                    self._$blockedList.append($blockedListItem);
+                });
+            });
+        },
+        activate: function () {
+            husot.settings.ui.activateTab(this._$blockedList.attr('id'));
+        }
+    }
 })();
 
-// Settings Window module
+// class Window
 
-husot.settingsWindow = husot.settingsWindow || {};
-
-husot.settingsWindow = (function () {
-    function loadBlockedChannels() {
-        var $settingsWindow = $('.husot-settings');
-        var $blockedList = $('.husot-settings-blockedList', $settingsWindow);
-
-        husot.settings.blockedChannels.list(function (blockedChannels) {
-            $blockedList.empty();
-
-            if (blockedChannels.length === 0) {
-                $blockedList.append(husot.htmlLayout.blockedChannelsListItemEmpty);
-                return;
-            }
-
-            blockedChannels.forEach(function (item) {
-                var $blockedListItem = $(husot.htmlLayout.blockedChannelsListItem.format(item.name));
-                var $unblockBtn = $('.husot-settings-blockedList-item-unblockBtn', $blockedListItem);
-                $unblockBtn.click(unblockBtn_onClick);
-                $blockedList.append($blockedListItem);
-            });
-
-        });
+husot.settings.ui.Window = function () {
+    var create = function () {
+        var $settingsWindow = $(husot.htmlLayout.settingsWindow);
+        $('.husot-settings-nav-item-name', $settingsWindow).click(navItem_onClick);
+        husot.modalDialog.create($settingsWindow);
     }
 
-    function unblockBtn_onClick() {
-        var $sender = $(this);
-        var $blockedListItem = $sender.closest('.husot-settings-blockedList-item');
-        var name = $blockedListItem.find('.husot-settings-blockedList-item-name').text();
-
-        husot.settings.blockedChannels.remove(name, function () {
-            loadBlockedChannels();
-            husot.thumbsManager.showThumb(name);
-        });
+    // Event handlers for switching content of the tabs
+    var navItem_onClick = function () {
+        var tabId = $(this).attr('data-husot-contentPanelId');
+        husot.settings.ui.activateTab(tabId);
     }
 
-    function init() {
-        loadBlockedChannels();
-    }
+    // Class initialization
 
-    function create() {
-        if ($('.husot-settings').length) {
+    create();
+
+    this._blockedChannelsTab = new husot.settings.ui.Tab(
+        $('#husot-settings-blockedChannelsList'),
+        husot.settings.blockedChannels,
+        husot.constants.blockedChannelsListEmpty
+    );
+
+    this._blockedGamesTab = new husot.settings.ui.Tab(
+        $('#husot-settings-blockedGamesList'),
+        husot.settings.blockedGames,
+        husot.constants.blockedGamesListEmpty
+    );
+}
+
+husot.settings.ui.Window.prototype = {
+    init: function (tabName) {
+        // Load tab content
+        this._blockedChannelsTab.loadBlockedItems();
+        this._blockedGamesTab.loadBlockedItems();
+
+        // Activate tab
+        if (typeof tabName === 'undefined' || tabName === '') {
             return;
         }
-
-        husot.modalDialog.create($(husot.htmlLayout.settingsWindow));
-    }
-
-    return {
-        create: create,
-        init: init
-    };
-})();
-
-// Video Thumbnails Manager module
-
-husot.thumbsManager = husot.thumbsManager || {};
-
-husot.thumbsManager = (function () {
-    function getThumbContainer(name) {
-        var $channelLink = $('#directory-list .items .item .info a:containsIgnoreCase("{0}")'.format(name));
-        if (!$channelLink.length) {
-            return $();
+        if (tabName === 'channels') {
+            this._blockedChannelsTab.activate();
         }
-
-        return $channelLink.closest('#directory-list .items .item');
+        if (tabName === 'games') {
+            this._blockedGamesTab.activate();
+        }
     }
+}
 
-    function addThumbOverlay($thumb) {
+// Helper static functions
+
+husot.settings.ui.activateTab = function (tabId) {
+    // Hide all tabs
+    $('.husot-settings-blockedList').hide();
+    $('.husot-settings-nav-item-name').removeClass('husot-settings-nav-item-name-active');
+
+    // Show active tab
+    var $tabHeader = $('.husot-settings-nav-item-name[data-husot-contentPanelId={0}]'.format(tabId));
+    var $tab = $('#{0}'.format(tabId));
+    $tab.show();
+    $tabHeader.addClass('husot-settings-nav-item-name-active');
+};
+
+// Video Thumbnails module
+
+var husot = husot || {};
+husot.thumbs = husot.thumbs || {};
+
+// abstract class ThumbsManagerBase
+
+husot.thumbs.ThumbsManagerBase = function () {
+
+}
+
+husot.thumbs.ThumbsManagerBase.prototype = {
+    _getContainerSelector: function () {
+        throw Error(husot.constants.exceptions.abstractFunctionCall);
+    },
+    _getThumbSelector: function () {
+        throw Error(husot.constants.exceptions.abstractFunctionCall);
+    },
+    _addThumbOverlay: function ($thumb) {
+        var self = this;
+
+        // Initial checks
         if ($thumb.find('.husot-thumbOverlay').length) {
             return;
-        }
+        };
 
         // Add overlay
         var $thumbOverlay = $(husot.htmlLayout.streamOverlay);
         $thumb.append($thumbOverlay);
 
         // Add event handlers for overlay buttons
-        $thumbOverlay.find('.husot-blockStreamBtn').click(blockChannelBtn_onClick);
-        $thumbOverlay.find('.husot-showSettingsBtn').click(showSettingsBtn_onClick);
+        $thumbOverlay.find('.husot-blockStreamBtn').click(function () {
+            self._blockBtn_onClick(self, this)
+        });
+        $thumbOverlay.find('.husot-blockStreamBtn').click(function (event) {
+            event.stopPropagation();
+        });
+        $thumbOverlay.find('.husot-showSettingsBtn').click(function () {
+            self._showSettingsBtn_onClick(self, this);
+        });
+        $thumbOverlay.find('.husot-showSettingsBtn').click(function (event) {
+            event.stopPropagation();
+        });
 
         // Add hover event handler to a stream/video thumb in order to hide/show overlay menu
         $thumb.hover(function () {
@@ -372,109 +460,355 @@ husot.thumbsManager = (function () {
         }, function () {
             $thumbOverlay.hide();
         });
-    }
+    },
+    _blockBtn_onClick: function (self, sender) {
+        throw Error(husot.constants.exceptions.abstractFunctionCall);
+    },
+    _showSettingsBtn_onClick: function (self, sender) {
+        throw Error(husot.constants.exceptions.abstractFunctionCall);
+    },
+    // Triggers "infinite scroll" feature on Twitch to load more stream/video thumbnails
+    // in order to make sure that page it is filled with new thumbnails after some thumbnails were hidden.
+    _loadMoreThumbs: function () {
+        husot.log.debug('Triggering "infinite scroll" to load more thumbs');
 
-    function blockChannelBtn_onClick() {
-        var $sender = $(this);
-        var name = $sender.closest('.content').find('.meta .info a').text().trim();
-
-        husot.settings.blockedChannels.add(name, function () {
-            hideThumb(name);
-            loadMoreThumbs();
-        });
-    }
-
-    function showSettingsBtn_onClick() {
-        husot.settingsWindow.init();
-        husot.modalDialog.show($('.husot-settings'));
-    }
-
-    function addThumbOverlays() {
-        var $thumbs = $('#directory-list .items .item .thumb');
-        if (!$thumbs.length) {
-            return;
-        }
-
-        $thumbs.each(function () {
-            addThumbOverlay($(this));
-        });
-    }
-
-    function hideThumbs() {
-        if (!$('#directory-list .items').length) {
-            return;
-        }
-
-        var atLeastOneThumbWasHidden = false;
-        husot.settings.blockedChannels.list(function (items) {
-            items.forEach(function (item) {
-                var wasHidden = hideThumb(item.name);
-                if (wasHidden) {
-                    atLeastOneThumbWasHidden = true;
-                }
-            });
-
-            if (atLeastOneThumbWasHidden) {
-                loadMoreThumbs();
-            }
-        });
-    }
-
-    function hideThumb(name) {
-        var $thumbContainer = getThumbContainer(name);
-        if (!$thumbContainer.length) {
-            return false;
-        }
-        if (!$thumbContainer.is(":visible")) {
-            return false;
-        }
-
-        $thumbContainer.hide();
-        husot.log.info('Video thumbnail for "{0}" was hidden'.format(name));
-        return true;
-    }
-
-    function showThumb(name) {
-        var $thumbContainer = getThumbContainer(name);
-        if (!$thumbContainer.length) {
-            return;
-        }
-        if ($thumbContainer.is(":visible")) {
-            return;
-        }
-
-        $thumbContainer.show();
-        husot.log.info('Video thumbnail for "{0}" was shown'.format(name));
-    }
-
-    // Trigger infinite scroll feature on Twitch to load more stream/video thumbs if some thumbs were hidden,
-    // so list of stream/video thumbnails is not full and should be fulfilled with new thumbs.
-    function loadMoreThumbs() {
-        var $thumbs = $('#directory-list .items .item .thumb:visible');
-        if (!$thumbs.length) {
-            return;
-        }
-        if ($thumbs.length >= husot.constants.minimumStreamsCountOnPage) {
-            return;
-        }
-
-        // Call injected custom event in order to trigger "loadMore()" function of Twitch
+        // Raise injected custom event that triggers "infinite scroll" feature on Twitch.
         var event = document.createEvent('Event');
         event.initEvent('husot.loadMoreThumbs', true, true);
         document.dispatchEvent(event);
+    },
+    getThumbFindSelector: function () {
+        throw Error(husot.constants.exceptions.abstractFunctionCall);
+    },
+    addThumbOverlays: function () {
+        var self = this;
+
+        // Initial checks
+        var $thumbs = $(self._getThumbSelector());
+        if (!$thumbs.length) {
+            return;
+        };
+
+        $thumbs.each(function () {
+            self._addThumbOverlay($(this));
+        });
+    },
+    hideThumbs: function () {
+        throw Error(husot.constants.exceptions.abstractFunctionCall);
+    },
+    showThumb: function (name) {
+        throw Error(husot.constants.exceptions.abstractFunctionCall);
+    }
+};
+
+// class StreamThumbsManager: ThumbsManagerBase
+
+husot.thumbs.StreamThumbsManager = function () {
+    husot.thumbs.ThumbsManagerBase.call(this);
+}
+
+husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
+husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
+
+husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
+    return '#directory-list .items .item';
+}
+
+husot.thumbs.StreamThumbsManager.prototype._getThumbSelector = function () {
+    return '#directory-list .items .item .thumb';
+}
+
+husot.thumbs.StreamThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
+    husot.settings.ui.window.init('channels');
+    husot.modalDialog.show($('.husot-settings'));
+}
+
+husot.thumbs.StreamThumbsManager.prototype._blockBtn_onClick = function (self, sender) {
+    var $sender = $(sender);
+    var $name = $sender.closest(self._getContainerSelector()).find('.meta .info a');
+
+    if (!$name.length) {
+        log.error('Stream name not found');
+        return;
     }
 
-    return {
-        addThumbOverlays: addThumbOverlays,
-        hideThumbs: hideThumbs,
-        hideThumb: hideThumb,
-        showThumb: showThumb,
-        loadMoreThumbs: loadMoreThumbs
+    var name = $name.text().trim();
+    husot.settings.blockedChannels.add(name, function () {
+        self._hideThumbForChannel(name);
+        self._loadMoreThumbs();
+    });
+}
+
+husot.thumbs.StreamThumbsManager.prototype._hideThumbForChannel = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainerForChannel(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if (!$thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.hide();
+
+    husot.log.info('Thumbnail{0} for channel "{1}" {2} hidden'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 'were' : 'was')
+    ));
+}
+
+husot.thumbs.StreamThumbsManager.prototype._hideThumbForGame = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainerForGame(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if (!$thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.hide();
+
+    husot.log.info('Thumbnail{0} for game "{1}" {2} hidden'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 'were' : 'was')
+    ));
+}
+
+husot.thumbs.StreamThumbsManager.prototype._showThumbForChannel = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainerForChannel(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if ($thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.show();
+
+    husot.log.info('Thumbnail{0} for channel "{1}" {2} shown'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 'were' : 'was')
+    ));
+}
+
+husot.thumbs.StreamThumbsManager.prototype._showThumbForGame = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainerForGame(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if ($thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.show();
+
+    husot.log.info('Thumbnail{0} for game "{1}" {2} shown'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 'were' : 'was')
+    ));
+}
+
+husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = function (name) {
+    var self = this;
+
+    var $channel = $(self._getContainerSelector()).find('.meta .info a').filter(function () {
+        return $(this).text().trim().toLowerCase() === name.toLowerCase();
+    });
+
+    if (!$channel.length) {
+        return $();
+    }
+
+    return $channel.closest(self._getContainerSelector());
+}
+
+husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForGame = function (name) {
+    var self = this;
+
+    var $game = $(self._getContainerSelector())
+        .find('.boxart[title], .boxart[original-title]')
+        .filter(function () {
+            // Check that game thumbnail is hidden explicitly.
+            // jQuery's :visible selector is not used here because it considers element as hidden if an ancestor element is hidden,
+            // and we need to get only explicitly hidden elements with Twitch's ".no-boxart" class.
+            return $(this).css('display') !== 'none';
+        })
+        .filter(function () {
+            var title1 = this.getAttribute('title');
+            var title2 = this.getAttribute('original-title');
+
+            if (title1 !== null && title1.toLowerCase() === name.toLowerCase()) { return true; }
+            if (title2 !== null && title2.toLowerCase() === name.toLowerCase()) { return true; }
+
+            return false;
+        });
+
+    if (!$game.length) {
+        return $();
+    }
+
+    return $game.closest(self._getContainerSelector());
+}
+
+husot.thumbs.StreamThumbsManager.prototype.getThumbFindSelector = function () {
+    return '.item .thumb';
+}
+
+husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
+    var self = this;
+
+    // Initial checks
+    if (!$(self._getThumbSelector()).length) { return; }
+
+    var start = new Date().getTime();
+    husot.log.debug('StreamThumbsManager.hideThumbs() starts');
+
+    // A little bit of callback hell ahead :)
+    husot.settings.blockedChannels.list(function (channels) {
+        // Hide thumbs for blocked channels
+        channels.forEach(function (item) {
+            self._hideThumbForChannel(item.name);
+        });
+
+        // Hide thumbs for blocked games
+        husot.settings.blockedGames.list(function (games) {
+            games.forEach(function (item) {
+                self._hideThumbForGame(item.name);
+            });
+
+            husot.log.debug('StreamThumbsManager.hideThumbs() ends after: {0} ms'.format((new Date().getTime()) - start));
+            self._loadMoreThumbs();
+        });
+    });
+}
+
+husot.thumbs.StreamThumbsManager.prototype.showThumb = function (name) {
+    var self = this;
+
+    self._showThumbForChannel(name);
+    self._showThumbForGame(name);
+}
+
+// class GameThumbsManager: ThumbsManagerBase
+
+husot.thumbs.GameThumbsManager = function () {
+    husot.thumbs.ThumbsManagerBase.call(this);
+}
+
+husot.thumbs.GameThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
+husot.thumbs.GameThumbsManager.prototype.constructor = husot.thumbs.GameThumbsManager;
+
+husot.thumbs.GameThumbsManager.prototype._getContainerSelector = function () {
+    return '#directory-list .items .game.item';
+}
+
+husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
+    return '#directory-list .items .game.item .boxart';
+}
+
+husot.thumbs.GameThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
+    husot.settings.ui.window.init('games');
+    husot.modalDialog.show($('.husot-settings'));
+}
+
+husot.thumbs.GameThumbsManager.prototype._blockBtn_onClick = function (self, sender) {
+    var $sender = $(sender);
+    var $name = $sender.closest(self._getContainerSelector()).find('.meta .title');
+
+    if (!$name.length) {
+        log.error('Game name not found');
+        return;
+    }
+
+    var name = $name.text().trim();
+    husot.settings.blockedGames.add(name, function () {
+        self._hideThumb(name);
+        self._loadMoreThumbs();
+    });
+}
+
+husot.thumbs.GameThumbsManager.prototype._hideThumb = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainer(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if (!$thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.hide();
+
+    husot.log.info('Thumbnail{0} for game "{1}" {2} hidden'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 'were' : 'was')
+    ));
+}
+
+husot.thumbs.GameThumbsManager.prototype._getThumbContainer = function (name) {
+    var self = this;
+
+    var $game = $(self._getContainerSelector()).find('.meta .title').filter(function () {
+        return $(this).text().trim().toLowerCase() === name.toLowerCase();
+    });
+
+    if (!$game.length) {
+        return $();
     };
-})();
+
+    return $game.closest(self._getContainerSelector());
+}
+
+husot.thumbs.GameThumbsManager.prototype.getThumbFindSelector = function () {
+    return '.game.item .boxart';
+}
+
+husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {
+    var self = this;
+
+    // Initial checks
+    if (!$(self._getThumbSelector()).length) {
+        return;
+    };
+
+    var start = new Date().getTime();
+    husot.log.debug('GameThumbsManager.hideThumbs() starts');
+
+    // Hide thumbs for blocked games
+    husot.settings.blockedGames.list(function (items) {
+        items.forEach(function (item) {
+            self._hideThumb(item.name);
+        });
+
+        husot.log.debug('GameThumbsManager.hideThumbs() ends after: {0} ms'.format((new Date().getTime()) - start));
+        self._loadMoreThumbs();
+    });
+};
+
+husot.thumbs.GameThumbsManager.prototype.showThumb = function (name) {
+    var self = this;
+
+    var $thumbContainer = self._getThumbContainer(name);
+
+    // Initial checks
+    if (!$thumbContainer.length) { return };
+    if ($thumbContainer.is(":visible")) { return };
+
+    $thumbContainer.show();
+
+    husot.log.info('Thumbnail{0} for game "{1}" {2} shown'.format(
+        ($thumbContainer.length > 1 ? 's' : ''),
+        name,
+        ($thumbContainer.length > 1 ? 'were' : 'was')
+    ));
+};
 
 // Inject javaScript into main window (Chrome specific)
 
+var husot = husot || {};
 husot.injector = husot.injector || {};
 
 husot.injector.addScripts = function () {
@@ -488,6 +822,7 @@ husot.injector.addScripts = function () {
 
 // Application settings (Chrome specific)
 
+var husot = husot || {};
 husot.settings = husot.settings || {};
 
 husot.settings.setValue = function (key, value, callback) {
@@ -511,3 +846,28 @@ husot.settings.getValue = function (key, defaultValue, callback) {
         }
     });
 };
+
+// Application start
+
+var husot = husot || {};
+
+husot.main = function () {
+    // Run only in top frame
+    if (window.top !== window.self) {
+        return;
+    }
+
+    husot.settings.blockedChannels = new husot.settings.BlockedItems(husot.constants.blockedChannelsSettingsKey);
+    husot.settings.blockedGames = new husot.settings.BlockedItems(husot.constants.blockedGamesSettingsKey);
+    husot.thumbs.streamThumbsManager = new husot.thumbs.StreamThumbsManager();
+    husot.thumbs.gameThumbsManager = new husot.thumbs.GameThumbsManager();
+
+    husot.modalDialog.initOverlay();
+    husot.settings.ui.window = new husot.settings.ui.Window();
+    husot.injector.addScripts();
+    husot.domListener.start();
+};
+
+$(document).ready(function () {
+    husot.main();
+});

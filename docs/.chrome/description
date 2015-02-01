@@ -1,21 +1,24 @@
-This extension adds additional menu on Twitch TV web site for blocking channels. Use the menu to block channels that you don't normally watch on Twitch TV and their streams/videos will not be visible for you anymore.
+This extension adds additional menu on Twitch TV web site for blocking unwanted content. Use the menu to block channels and games that you don't normally watch on Twitch TV so its content, like streams and videos, will not be visible for you anymore.
 
 Key Features:
-  • Block channels
+  • Blocking channels
+  • Blocking games
 
 How to use:
   • Install this extension.
-  • Find the overlay menu by hovering your mouse over video thumbnails on Twitch TV web site.
-  • To block a channel use "Block" button in the overlay menu.
-  • To unblock a channel find "Blocked Channels" tab in Settings window that can be accessed by clicking "Settings" button in the overlay menu. Then use "Unblock" button for the corresponding channel.
+  • Find the overlay menu by hovering your mouse over stream, video or game thumbnail on Twitch TV web site.
+  • To block a channel use "Block" button in the overlay menu on stream or video thumbnail.
+  • To block a game use "Block" button in the overlay menu on game thumbnail.
+  • To unblock content that has been blocked find the overlay menu and click "Settings" button to access Setting window. Use "Blocked Channels" and "Blocked Games" tabs to find blocked content and click "Unblock" button to unblock it.
   
 Supported pages:
-Not all pages on Twitch TV web site are affected by this extension. For example, streams/videos on Home page will not be hidden for blocked channels. Here is the list of supported pages:
+Not all pages on Twitch TV web site are affected by this extension. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
   • Games
   • Channels
   • Videos
   
 Version history
+  • 1.3.0 Added support for blocking games.
   • 1.2.2 Fixed a bug when new video thumbs were not loading sometimes after blocked channels were hidden.
   • 1.2.1 Removed unnecessary permissions.
   • 1.2.0 First release in Chrome Web Store.
