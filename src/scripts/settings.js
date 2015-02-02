@@ -81,9 +81,18 @@ husot.settings.BlockedItems.prototype = {
 
         if (typeof self._blockedItems === 'undefined') {
             husot.settings.getValue(self._settingsKey, '[]', function (item) {
-                // Save in cache
-                self._blockedItems = JSON.parse(item);
+                // Convert to JSON
+                var items = JSON.parse(item);
 
+                // Sort by name alphabetically
+                items.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                });
+
+                // Save in cache
+                self._blockedItems = items;
+
+                // Return
                 callback(self._blockedItems);
             });
         } else {
