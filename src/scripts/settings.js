@@ -93,10 +93,14 @@ husot.settings.BlockedItems.prototype = {
                 self._blockedItems = items;
 
                 // Return
-                callback(self._blockedItems);
+                if (typeof callback !== 'undefined') {
+                    callback(self._blockedItems);
+                }
             });
         } else {
-            callback(self._blockedItems);
+            if (typeof callback !== 'undefined') {
+                callback(self._blockedItems);
+            }
         }
     }
 };

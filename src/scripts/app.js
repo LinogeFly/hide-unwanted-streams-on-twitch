@@ -9,7 +9,10 @@ husot.main = function () {
     }
 
     husot.settings.blockedChannels = new husot.settings.BlockedItems(husot.constants.blockedChannelsSettingsKey);
+    husot.settings.blockedChannels.list(); // Warm up settings so by the hiding time they will be loaded, most likely
     husot.settings.blockedGames = new husot.settings.BlockedItems(husot.constants.blockedGamesSettingsKey);
+    husot.settings.blockedGames.list(); // Warm up settings so by the hiding time they will be loaded, most likely
+
     husot.thumbs.streamThumbsManager = new husot.thumbs.StreamThumbsManager();
     husot.thumbs.gameThumbsManager = new husot.thumbs.GameThumbsManager(husot.thumbs.streamThumbsManager);
 
