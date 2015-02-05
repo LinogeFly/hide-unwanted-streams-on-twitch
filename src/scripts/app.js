@@ -11,7 +11,7 @@ husot.main = function () {
     husot.settings.blockedChannels = new husot.settings.BlockedItems(husot.constants.blockedChannelsSettingsKey);
     husot.settings.blockedGames = new husot.settings.BlockedItems(husot.constants.blockedGamesSettingsKey);
     husot.thumbs.streamThumbsManager = new husot.thumbs.StreamThumbsManager();
-    husot.thumbs.gameThumbsManager = new husot.thumbs.GameThumbsManager();
+    husot.thumbs.gameThumbsManager = new husot.thumbs.GameThumbsManager(husot.thumbs.streamThumbsManager);
 
     husot.modalDialog.initOverlay();
     husot.settings.ui.window = new husot.settings.ui.Window();
