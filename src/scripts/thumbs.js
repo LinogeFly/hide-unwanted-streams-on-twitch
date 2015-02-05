@@ -98,7 +98,7 @@ husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsMa
 husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
 
 husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
-    return '#directory-list .items .stream.item, #directory-list2 .items .video.item';
+    return '#directory-list .items .stream.item, #directory-list .items .video.item';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbSelector = function () {
