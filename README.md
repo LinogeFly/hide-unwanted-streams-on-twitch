@@ -31,6 +31,7 @@ For platform specific builds use `gulp build-chrome` and `gulp build-userscript`
 - 1.0.0 First release. Only Userscript platfom is supported.
 
 # Known issues
+- When unblocking a channel on "Channels" page it becomes visible even if a game is blocked. It will be hidden as expected after refreshing the page.
 
 # TODO
 - Add tests for CSS selectors
