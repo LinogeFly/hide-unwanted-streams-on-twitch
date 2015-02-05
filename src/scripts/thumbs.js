@@ -310,9 +310,11 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
         var blockedChannels = values[0];
         var blockedGames = values[1];
 
-        // Enumerate visible thumbs and hide those that must be hidden
+        // Get visible thumbs
         var hiddenThumbsCount = 0;
-        $thumbContainers = $(self._getContainerSelector() + ':visible');
+        $thumbContainers = $(self._getContainerSelector()).filter(":visible");
+
+        // Enumerate visible thumbs and hide those that must be hidden
         $thumbContainers.each(function () {
             var $item = $(this);
 
