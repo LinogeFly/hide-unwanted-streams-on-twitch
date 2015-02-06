@@ -23,6 +23,7 @@ husot.constants.exceptions.notImplemented = 'Method or operation is not implemen
 husot.constants.exceptions.argumentNullOrEmpty = 'Argument "{0}" is undefined or empty';
 husot.constants.exceptions.elementNotFound = '{0} not found. CSS selector must be broken.';
 husot.constants.exceptions.elementNotFoundFor = '{0} not found for {1}. CSS selector must be broken.';
+husot.constants.exceptions.oneElementExpected = 'More than one element in argument "{0}"';
 
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';

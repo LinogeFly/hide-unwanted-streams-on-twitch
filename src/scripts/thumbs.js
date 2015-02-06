@@ -3,7 +3,6 @@
 var husot = husot || {};
 husot.thumbs = husot.thumbs || {};
 
-// TODO: Multiple containers for GetContainerByName
 // abstract class ThumbsManagerBase
 
 husot.thumbs.ThumbsManagerBase = function () {
@@ -121,39 +120,39 @@ husot.thumbs.StreamThumbsManager.prototype._blockBtn_onClick = function (self, s
         throw Error(husot.constants.exceptions.elementNotFound.format('Thumb container'));
     };
 
-    var $name = self._getChanneNamejQueryElement($thumbContainer);
+    var $name = self._getChannelNameJQueryElement($thumbContainer);
     var name = $name.text().trim();
 
     husot.settings.blockedChannels.add(name, function () {
-        self._hideThumb(name);
+        self._hideThumbs(name);
         self._loadMoreThumbs();
     });
 }
 
-husot.thumbs.StreamThumbsManager.prototype._hideThumb = function (name) {
+husot.thumbs.StreamThumbsManager.prototype._hideThumbs = function (name) {
     var self = this;
 
-    var $thumbContainer = self._getThumbContainerForChannel(name);
+    var $thumbContainers = self._getThumbContainersForChannel(name);
 
     // Initial checks
-    if (!$thumbContainer.length) {
+    if (!$thumbContainers.length) {
         throw Error(husot.constants.exceptions.elementNotFoundFor.format(
             'Thumb container',
             '"{0}" channel'.format(name))
         );
     };
-    if (!$thumbContainer.is(":visible")) { return };
+    if (!$thumbContainers.is(":visible")) { return };
 
-    $thumbContainer.hide();
+    $thumbContainers.hide();
 
     husot.log.info('Thumbnail{0} for channel "{1}" {2} hidden'.format(
-        ($thumbContainer.length > 1 ? 's' : ''),
+        ($thumbContainers.length > 1 ? 's' : ''),
         name,
-        ($thumbContainer.length > 1 ? 'were' : 'was')
+        ($thumbContainers.length > 1 ? 'were' : 'was')
     ));
 }
 
-husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = function (name) {
+husot.thumbs.StreamThumbsManager.prototype._getThumbContainersForChannel = function (name) {
     var self = this;
 
     var $thumbContainers = $(self._getContainerSelector());
@@ -163,7 +162,7 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = functi
         return $();
     }
 
-    var $channel = self._getChanneNamejQueryElement($thumbContainers)
+    var $channel = self._getChannelNameJQueryElement($thumbContainers)
         .filter(function () {
             return $(this).text().trim().toLowerCase() === name.toLowerCase();
         });
@@ -176,7 +175,7 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForChannel = functi
     return $channel.closest(self._getContainerSelector());
 }
 
-husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForGame = function (name) {
+husot.thumbs.StreamThumbsManager.prototype._getThumbContainersForGame = function (name) {
     var self = this;
 
     var $thumbContainers = $(self._getContainerSelector());
@@ -186,7 +185,7 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForGame = function 
         return $();
     }
 
-    var $game = self._getGameNamejQueryElement($thumbContainers)
+    var $game = self._getGameNameJQueryElement($thumbContainers)
         .filter(function () {
             var title1 = this.getAttribute('title');
             var title2 = this.getAttribute('original-title');
@@ -205,7 +204,7 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainerForGame = function 
     return $game.closest(self._getContainerSelector());
 }
 
-husot.thumbs.StreamThumbsManager.prototype._getChanneNamejQueryElement = function ($thumbContainer) {
+husot.thumbs.StreamThumbsManager.prototype._getChannelNameJQueryElement = function ($thumbContainer) {
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
@@ -220,7 +219,7 @@ husot.thumbs.StreamThumbsManager.prototype._getChanneNamejQueryElement = functio
     return $result;
 }
 
-husot.thumbs.StreamThumbsManager.prototype._getGameNamejQueryElement = function ($thumbContainer) {
+husot.thumbs.StreamThumbsManager.prototype._getGameNameJQueryElement = function ($thumbContainer) {
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
@@ -240,8 +239,11 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForChannel = func
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
     }
+    if ($thumbContainer.length !== 1) {
+        throw Error(husot.constants.exceptions.argumentOneElementExpected.format('$thumbContainer'));
+    }
 
-    var $channelName = self._getChanneNamejQueryElement($thumbContainer);
+    var $channelName = self._getChannelNameJQueryElement($thumbContainer);
     var channelName = $channelName.text().trim();
 
     return blockedChannels.some(function (item) {
@@ -256,8 +258,11 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
     }
+    if ($thumbContainer.length !== 1) {
+        throw Error(husot.constants.exceptions.argumentOneElementExpected.format('$thumbContainer'));
+    }
 
-    var $gameName = self._getGameNamejQueryElement($thumbContainer);
+    var $gameName = self._getGameNameJQueryElement($thumbContainer);
     if (!$gameName.length) { // Game name is optional in this manager
         return false;
     }
@@ -336,7 +341,7 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
 husot.thumbs.StreamThumbsManager.prototype.showThumbs = function (name) {
     var self = this;
 
-    var $thumbContainers = self._getThumbContainerForChannel(name);
+    var $thumbContainers = self._getThumbContainersForChannel(name);
 
     // Initial checks
     if (!$thumbContainers.length) { return };
@@ -371,10 +376,10 @@ husot.thumbs.StreamThumbsManager.prototype.showThumbs = function (name) {
     });
 }
 
-husot.thumbs.StreamThumbsManager.prototype.showThumbForGame = function (name) {
+husot.thumbs.StreamThumbsManager.prototype.showThumbsForGame = function (name) {
     var self = this;
 
-    var $thumbContainers = self._getThumbContainerForGame(name);
+    var $thumbContainers = self._getThumbContainersForGame(name);
 
     // Initial checks
     if (!$thumbContainers.length) { return };
@@ -443,16 +448,16 @@ husot.thumbs.GameThumbsManager.prototype._blockBtn_onClick = function (self, sen
         throw Error(husot.constants.exceptions.elementNotFound.format('Thumb container'));
     };
     
-    var $name = self._getGameNamejQueryElement($thumbContainer);
+    var $name = self._getGameNameJQueryElement($thumbContainer);
     var name = $name.text().trim();
 
     husot.settings.blockedGames.add(name, function () {
-        self._hideThumb(name);
+        self._hideThumbs(name);
         self._loadMoreThumbs();
     });
 }
 
-husot.thumbs.GameThumbsManager.prototype._hideThumb = function (name) {
+husot.thumbs.GameThumbsManager.prototype._hideThumbs = function (name) {
     var self = this;
 
     var $thumbContainer = self._getThumbContainer(name);
@@ -485,7 +490,7 @@ husot.thumbs.GameThumbsManager.prototype._getThumbContainer = function (name) {
         return $();
     }
 
-    var $game = self._getGameNamejQueryElement($thumbContainers).filter(function () {
+    var $game = self._getGameNameJQueryElement($thumbContainers).filter(function () {
         return $(this).text().trim().toLowerCase() === name.toLowerCase();
     });
 
@@ -497,7 +502,7 @@ husot.thumbs.GameThumbsManager.prototype._getThumbContainer = function (name) {
     return $game.closest(self._getContainerSelector());
 }
 
-husot.thumbs.GameThumbsManager.prototype._getGameNamejQueryElement = function ($thumbContainer) {
+husot.thumbs.GameThumbsManager.prototype._getGameNameJQueryElement = function ($thumbContainer) {
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
@@ -519,10 +524,11 @@ husot.thumbs.GameThumbsManager.prototype._isThumbMustBeHidden = function ($thumb
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
     }
+    if ($thumbContainer.length !== 1) {
+        throw Error(husot.constants.exceptions.argumentOneElementExpected.format('$thumbContainer'));
+    }
 
-    // TODO: check if more than 1
-
-    var $gameName = self._getGameNamejQueryElement($thumbContainer);
+    var $gameName = self._getGameNameJQueryElement($thumbContainer);
     var gameName = $gameName.text().trim();
 
     return blockedGames.some(function (item) {
@@ -598,5 +604,5 @@ husot.thumbs.GameThumbsManager.prototype.showThumbs = function (name) {
     var self = this;
 
     self._showThumb(name);
-    self.streamThumbsManager.showThumbForGame(name);
+    self.streamThumbsManager.showThumbsForGame(name);
 };
