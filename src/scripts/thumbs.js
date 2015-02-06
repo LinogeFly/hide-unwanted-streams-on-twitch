@@ -6,7 +6,6 @@ husot.thumbs = husot.thumbs || {};
 // abstract class ThumbsManagerBase
 
 husot.thumbs.ThumbsManagerBase = function () {
-
 }
 
 husot.thumbs.ThumbsManagerBase.prototype = {
@@ -85,8 +84,7 @@ husot.thumbs.ThumbsManagerBase.prototype = {
             (count > 1 ? 'were' : 'was')
         ));
     },
-    // TODO: Rename this function
-    getThumbFindSelector: function () {
+    getDomListnerThumbSelector: function () {
         throw Error(husot.exceptions.abstractFunctionCall());
     },
     addThumbOverlays: function () {
@@ -285,8 +283,8 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
     });
 };
 
-husot.thumbs.StreamThumbsManager.prototype.getThumbFindSelector = function () {
-    return '.item .thumb';
+husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
+    return '.stream.item, .video.item';
 }
 
 husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
@@ -525,8 +523,8 @@ husot.thumbs.GameThumbsManager.prototype._showThumbs = function (name) {
     self._notifyAboutShownThumbs($thumbContainer.length);
 };
 
-husot.thumbs.GameThumbsManager.prototype.getThumbFindSelector = function () {
-    return '.game.item .boxart';
+husot.thumbs.GameThumbsManager.prototype.getDomListnerThumbSelector = function () {
+    return '.game.item';
 }
 
 husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {

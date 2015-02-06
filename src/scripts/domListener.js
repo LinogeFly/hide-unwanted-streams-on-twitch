@@ -28,7 +28,7 @@ husot.domListener = (function () {
 
     function modifyThumbs(mutations, thumbsManager) {
         // Process thumbs if they were added to the DOM
-        if (!isThumbsAdded(mutations, thumbsManager.getThumbFindSelector())) { return }
+        if (!isThumbsAdded(mutations, thumbsManager.getDomListnerThumbSelector())) { return }
 
         // Add overlay menu
         stop();
