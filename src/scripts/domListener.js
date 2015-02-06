@@ -11,8 +11,6 @@ husot.domListener = (function () {
             return;
         }
 
-        husot.debug.hideRedundantElements();
-
         modifyThumbs(mutations, husot.thumbs.streamThumbsManager);
         modifyThumbs(mutations, husot.thumbs.gameThumbsManager);
     });
