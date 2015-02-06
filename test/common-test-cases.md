@@ -1,4 +1,4 @@
-# Triggering of "Infinite scroll"
+# Triggering "Infinite scroll"
 
 ## Test case 1
 
