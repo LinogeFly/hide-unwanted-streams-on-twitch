@@ -227,6 +227,16 @@
 ### Expected results
 1. All channel thumbnails should be visible.
 
+## Test case 8
+
+### Actions
+1. Repeat all steps from the previous test case.
+2. Open Settings window.
+3. Unblock the game that was blocked previously.
+
+### Expected results
+1. All channel thumbnails should be visible.
+
 # Game specific Videos (Week) page
 
 ## Test case 1-6
