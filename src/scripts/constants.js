@@ -1,9 +1,8 @@
 ﻿// Constants
 
 var husot = husot || {};
-husot.constants = husot.constants || {};
-husot.constants.exceptions = husot.constants.exceptions || {};
 
+husot.constants = husot.constants || {};
 husot.constants.blockedChannelsSettingsKey = 'blockedChannels';
 husot.constants.blockedGamesSettingsKey = 'blockedGames';
 husot.constants.blockedChannelsListEmpty = 'No Blocked Channels';
@@ -17,5 +16,7 @@ husot.constants.allowedUrls = [
     '^http://www.twitch.tv/directory/random/?$',
     '^http://www.twitch.tv/directory/videos/.+'
 ];
-husot.constants.exceptions.abstractFunctionCall = 'Cannot call abstract function';
-husot.constants.exceptions.notImplemented = 'Method or operation is not implemented';
+
+husot.constants.blockedItemType = husot.constants.blockedItemType || {};
+husot.constants.blockedItemType.game = 'game';
+husot.constants.blockedItemType.channel = 'channel';

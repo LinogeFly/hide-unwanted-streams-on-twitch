@@ -11,21 +11,8 @@ husot.domListener = (function () {
             return;
         }
 
-        // Don't run hiding if it's not a stream thumbs adding triggered the DOM change
-        if (isThumbsAdded(mutations, husot.thumbs.streamThumbsManager.getThumbFindSelector())) {
-            husot.thumbs.streamThumbsManager.hideThumbs();
-        }
-
-        // Don't run hiding if it's not a game thumbs adding triggered the DOM change
-        if (isThumbsAdded(mutations, husot.thumbs.gameThumbsManager.getThumbFindSelector())) {
-            husot.thumbs.gameThumbsManager.hideThumbs();
-        }
-
-        // Add overlay menus
-        stop();
-        husot.thumbs.streamThumbsManager.addThumbOverlays();
-        husot.thumbs.gameThumbsManager.addThumbOverlays();
-        start();
+        modifyThumbs(mutations, husot.thumbs.streamThumbsManager);
+        modifyThumbs(mutations, husot.thumbs.gameThumbsManager);
     });
 
     function start() {
@@ -39,6 +26,19 @@ husot.domListener = (function () {
         observer.disconnect();
     }
 
+    function modifyThumbs(mutations, thumbsManager) {
+        // Process thumbs if they were added to the DOM
+        if (!isThumbsAdded(mutations, thumbsManager.getDomListnerThumbSelector())) { return }
+
+        // Add overlay menu
+        stop();
+        thumbsManager.addThumbOverlays();
+        start();
+
+        // Hide blocked thumbs
+        thumbsManager.hideThumbs();
+    }
+
     function isCurrentUrlAllowed() {
         return husot.constants.allowedUrls.some(function (item) {
             return (new RegExp(item)).test(document.URL);
@@ -47,7 +47,10 @@ husot.domListener = (function () {
 
     function isThumbsAdded(mutations, selector) {
         return mutations.some(function (item) {
-            return $(item.addedNodes).find(selector).length !== 0;
+            return $(item.addedNodes).find(selector).filter(function () {
+                // Check that thumbnail is hidden explicitly and not because an ancestor element is hidden
+                return $(this).css('display') !== 'none';
+            }).length !== 0;
         });
     }
 

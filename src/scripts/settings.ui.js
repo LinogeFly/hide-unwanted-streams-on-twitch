@@ -10,6 +10,7 @@ husot.settings.ui.Tab = function ($blockedList, blockedItemsManager, emptyText, 
     this._$blockedList = $blockedList;
     this._blockedItemsManager = blockedItemsManager;
     this._emptyText = emptyText;
+    this._thumbsManager = thumbsManager;
 };
 
 husot.settings.ui.Tab.prototype = (function () {
@@ -22,8 +23,7 @@ husot.settings.ui.Tab.prototype = (function () {
             self._blockedItemsManager.remove(name, function () {
                 self.loadBlockedItems();
 
-                husot.thumbs.streamThumbsManager.showThumb(name);
-                husot.thumbs.gameThumbsManager.showThumb(name);
+                self._thumbsManager.showThumbs(name);
             });
         },
         loadBlockedItems: function () {
@@ -74,32 +74,38 @@ husot.settings.ui.Window = function () {
     this._blockedChannelsTab = new husot.settings.ui.Tab(
         $('#husot-settings-blockedChannelsList'),
         husot.settings.blockedChannels,
-        husot.constants.blockedChannelsListEmpty
+        husot.constants.blockedChannelsListEmpty,
+        husot.thumbs.streamThumbsManager
     );
 
     this._blockedGamesTab = new husot.settings.ui.Tab(
         $('#husot-settings-blockedGamesList'),
         husot.settings.blockedGames,
-        husot.constants.blockedGamesListEmpty
+        husot.constants.blockedGamesListEmpty,
+        husot.thumbs.gameThumbsManager
     );
 }
 
 husot.settings.ui.Window.prototype = {
-    init: function (tabName) {
+    init: function (blockedItemType) {
         // Load tab content
         this._blockedChannelsTab.loadBlockedItems();
         this._blockedGamesTab.loadBlockedItems();
 
         // Activate tab
-        if (typeof tabName === 'undefined' || tabName === '') {
+        if (typeof blockedItemType === 'undefined' || blockedItemType === '') {
             return;
         }
-        if (tabName === 'channels') {
+        if (blockedItemType === husot.constants.blockedItemType.channel) {
             this._blockedChannelsTab.activate();
+            return;
         }
-        if (tabName === 'games') {
+        if (blockedItemType === husot.constants.blockedItemType.game) {
             this._blockedGamesTab.activate();
+            return;
         }
+
+        throw Error('Unknown blockedItemType');
     }
 }
 

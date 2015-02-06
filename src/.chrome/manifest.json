@@ -19,6 +19,7 @@
             ],
             "js": [
                 "vendor/jquery-1.11.2.min.js",
+                "vendor/promise-6.1.0.min.js",
                 "content.js"
             ],
             "css": [
