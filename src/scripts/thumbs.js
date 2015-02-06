@@ -333,8 +333,10 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
             }
         });
 
-        self._notifyAboutHiddenThumbs(hiddenThumbsCount);
-        self._loadMoreThumbs();
+        if (hiddenThumbsCount > 0) {
+            self._notifyAboutHiddenThumbs(hiddenThumbsCount);
+            self._loadMoreThumbs();
+        }
 
         husot.log.debug('StreamThumbsManager.hideThumbs() ends after {0} ms'.format((new Date().getTime()) - start));
     });
@@ -554,8 +556,10 @@ husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {
             }
         });
 
-        self._notifyAboutHiddenThumbs(hiddenThumbsCount);
-        self._loadMoreThumbs();
+        if (hiddenThumbsCount > 0) {
+            self._notifyAboutHiddenThumbs(hiddenThumbsCount);
+            self._loadMoreThumbs();
+        }
 
         husot.log.debug('GameThumbsManager.hideThumbs() ends after {0} ms'.format((new Date().getTime()) - start));
     });
