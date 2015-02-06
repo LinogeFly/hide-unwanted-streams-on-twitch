@@ -76,7 +76,7 @@
 5. Unblock all games that were blocked previously.
 
 ### Expected results
-1. Thumbnails for blocked games should be visible.
+1. Thumbnails for unblocked games should be visible.
 
 ## Test case 9
 
@@ -85,7 +85,7 @@
 2. Refresh the page.
 
 ### Expected results
-1. Thumbnails for blocked games should be visible.
+1. Thumbnails for unblocked games should be visible.
 
 ## Test case 10
 
