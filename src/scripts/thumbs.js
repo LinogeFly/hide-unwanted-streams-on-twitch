@@ -11,10 +11,10 @@ husot.thumbs.ThumbsManagerBase = function () {
 
 husot.thumbs.ThumbsManagerBase.prototype = {
     _getContainerSelector: function () {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
+        throw Error(husot.exceptions.abstractFunctionCall());
     },
     _getThumbSelector: function () {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
+        throw Error(husot.exceptions.abstractFunctionCall());
     },
     _addThumbOverlay: function ($thumb) {
         var self = this;
@@ -50,10 +50,10 @@ husot.thumbs.ThumbsManagerBase.prototype = {
         });
     },
     _blockBtn_onClick: function (self, sender) {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
+        throw Error(husot.exceptions.abstractFunctionCall());
     },
     _showSettingsBtn_onClick: function (self, sender) {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
+        throw Error(husot.exceptions.abstractFunctionCall());
     },
     // Triggers "infinite scroll" feature on Twitch to load more stream/video thumbnails
     // in order to make sure that page it is filled with new thumbnails after some thumbnails were hidden.
@@ -67,7 +67,7 @@ husot.thumbs.ThumbsManagerBase.prototype = {
     },
     // TODO: Rename this function
     getThumbFindSelector: function () {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
+        throw Error(husot.exceptions.abstractFunctionCall());
     },
     addThumbOverlays: function () {
         var self = this;
@@ -81,10 +81,10 @@ husot.thumbs.ThumbsManagerBase.prototype = {
         });
     },
     hideThumbs: function () {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
+        throw Error(husot.exceptions.abstractFunctionCall());
     },
     showThumbs: function (name) {
-        throw Error(husot.constants.exceptions.abstractFunctionCall);
+        throw Error(husot.exceptions.abstractFunctionCall());
     }
 };
 
@@ -117,7 +117,7 @@ husot.thumbs.StreamThumbsManager.prototype._blockBtn_onClick = function (self, s
 
     // Initial checks
     if (!$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.elementNotFound.format('Thumb container'));
+        throw Error(husot.exceptions.elementNotFound('Thumb container'));
     };
 
     var $name = self._getChannelNameJQueryElement($thumbContainer);
@@ -136,10 +136,7 @@ husot.thumbs.StreamThumbsManager.prototype._hideThumbs = function (name) {
 
     // Initial checks
     if (!$thumbContainers.length) {
-        throw Error(husot.constants.exceptions.elementNotFoundFor.format(
-            'Thumb container',
-            '"{0}" channel'.format(name))
-        );
+        throw Error(husot.exceptions.elementNotFoundFor('Thumb container', '"{0}" channel'.format(name)));
     };
 
     $thumbContainers.hide();
@@ -207,13 +204,13 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainersForGame = function
 husot.thumbs.StreamThumbsManager.prototype._getChannelNameJQueryElement = function ($thumbContainer) {
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
 
     var $result = $thumbContainer.find('.meta .info a');
 
     if (!$result.length) {
-        throw Error(husot.constants.exceptions.elementNotFound.format('Channel name'));
+        throw Error(husot.exceptions.elementNotFound('Channel name'));
     }
 
     return $result;
@@ -222,7 +219,7 @@ husot.thumbs.StreamThumbsManager.prototype._getChannelNameJQueryElement = functi
 husot.thumbs.StreamThumbsManager.prototype._getGameNameJQueryElement = function ($thumbContainer) {
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
 
     return $thumbContainer.find('.boxart[title], .boxart[original-title]')
@@ -237,10 +234,10 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForChannel = func
 
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
     if ($thumbContainer.length !== 1) {
-        throw Error(husot.constants.exceptions.argumentOneElementExpected.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentOneElementExpected('$thumbContainer'));
     }
 
     var $channelName = self._getChannelNameJQueryElement($thumbContainer);
@@ -256,10 +253,10 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
 
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
     if ($thumbContainer.length !== 1) {
-        throw Error(husot.constants.exceptions.argumentOneElementExpected.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentOneElementExpected('$thumbContainer'));
     }
 
     var $gameName = self._getGameNameJQueryElement($thumbContainer);
@@ -443,7 +440,7 @@ husot.thumbs.GameThumbsManager.prototype._blockBtn_onClick = function (self, sen
 
     // Initial checks
     if (!$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.elementNotFound.format('Thumb container'));
+        throw Error(husot.exceptions.elementNotFound('Thumb container'));
     };
     
     var $name = self._getGameNameJQueryElement($thumbContainer);
@@ -462,10 +459,7 @@ husot.thumbs.GameThumbsManager.prototype._hideThumbs = function (name) {
 
     // Initial checks
     if (!$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.elementNotFoundFor.format(
-            'Thumb container',
-            '"{0}" game'.format(name))
-        );
+        throw Error(husot.exceptions.elementNotFoundFor('Thumb container', '"{0}" game'.format(name)));
     };
 
     $thumbContainer.hide();
@@ -503,13 +497,13 @@ husot.thumbs.GameThumbsManager.prototype._getThumbContainer = function (name) {
 husot.thumbs.GameThumbsManager.prototype._getGameNameJQueryElement = function ($thumbContainer) {
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
 
     var $result = $thumbContainer.find('.meta .title');
 
     if (!$result.length) {
-        throw Error(husot.constants.exceptions.elementNotFound.format('Game name'));
+        throw Error(husot.exceptions.elementNotFound('Game name'));
     }
 
     return $result;
@@ -520,10 +514,10 @@ husot.thumbs.GameThumbsManager.prototype._isThumbMustBeHidden = function ($thumb
 
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
-        throw Error(husot.constants.exceptions.argumentNullOrEmpty.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
     if ($thumbContainer.length !== 1) {
-        throw Error(husot.constants.exceptions.argumentOneElementExpected.format('$thumbContainer'));
+        throw Error(husot.exceptions.argumentOneElementExpected('$thumbContainer'));
     }
 
     var $gameName = self._getGameNameJQueryElement($thumbContainer);
