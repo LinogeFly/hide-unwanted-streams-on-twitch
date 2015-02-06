@@ -25,6 +25,7 @@ gulp
 For platform specific builds use `gulp build-chrome` and `gulp build-userscript` commands.
 
 # Version history
+- 1.3.1 Fixed performance issue that occured when a lot of channels and games were blocked. Blocked items are now sorted alphabetically in Settings window.
 - 1.3.0 Added support for blocking games.
 - 1.2.0 Added Google Chrome Extension platform.
 - 1.1.0 Added support for hiding videos in addition to live streams.
