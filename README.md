@@ -31,14 +31,12 @@ For platform specific builds use `gulp build-chrome` and `gulp build-userscript`
 - 1.0.0 First release. Only Userscript platfom is supported.
 
 # Known issues
-- When unblocking a channel on "Channels" page it becomes visible even if a game is blocked. It will be hidden as expected after refreshing the page.
 
 # TODO
 - Add tests for CSS selectors
 - Add tests for Regular Expressions
 - Rename ".chrome" and ".userscript" to "_chrome" and "_userscript" respectively. Names that start with "." are considered hidden, didn't know that :)
-- Blocked items should be shown in alphabetical order in Settings window.
-- Try to improve performance of hiding functions for cases when a lot of channels and games are added to the block lists.
+- Add icon for userscript version
 
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
