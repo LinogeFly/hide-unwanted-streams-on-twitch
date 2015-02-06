@@ -21,6 +21,8 @@ husot.constants.exceptions = husot.constants.exceptions || {};
 husot.constants.exceptions.abstractFunctionCall = 'Cannot call abstract function';
 husot.constants.exceptions.notImplemented = 'Method or operation is not implemented';
 husot.constants.exceptions.argumentNullOrEmpty = 'Argument "{0}" is undefined or empty';
+husot.constants.exceptions.elementNotFound = '{0} not found. CSS selector must be broken.';
+husot.constants.exceptions.elementNotFoundFor = '{0} not found for {1}. CSS selector must be broken.';
 
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';
