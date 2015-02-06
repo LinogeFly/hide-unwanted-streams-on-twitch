@@ -65,6 +65,26 @@ husot.thumbs.ThumbsManagerBase.prototype = {
         event.initEvent('husot.loadMoreThumbs', true, true);
         document.dispatchEvent(event);
     },
+    _notifyAboutHiddenThumbs: function (count) {
+        // Initial checks
+        if (count === 0) { return }
+
+        husot.log.info('{0} thumbnail{1} {2} hidden'.format(
+            count,
+            (count > 1 ? 's' : ''),
+            (count > 1 ? 'were' : 'was')
+        ));
+    },
+    _notifyAboutShownThumbs: function (count) {
+        // Initial checks
+        if (count === 0) { return }
+
+        husot.log.info('{0} thumbnail{1} {2} shown'.format(
+            count,
+            (count > 1 ? 's' : ''),
+            (count > 1 ? 'were' : 'was')
+        ));
+    },
     // TODO: Rename this function
     getThumbFindSelector: function () {
         throw Error(husot.exceptions.abstractFunctionCall());
@@ -140,13 +160,7 @@ husot.thumbs.StreamThumbsManager.prototype._hideThumbs = function (name) {
     };
 
     $thumbContainers.hide();
-
-    husot.log.info('{0} thumbnail{1} for channel "{2}" {3} hidden'.format(
-        $thumbContainers.length,
-        ($thumbContainers.length > 1 ? 's' : ''),
-        name,
-        ($thumbContainers.length > 1 ? 'were' : 'was')
-    ));
+    self._notifyAboutHiddenThumbs($thumbContainers.length);
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbContainersForChannel = function (name) {
@@ -321,17 +335,10 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
             }
         });
 
-        // Write summary for hidden thumbs in log
-        if (hiddenThumbsCount > 0) {
-            husot.log.info('{0} thumbnail{1} {2} hidden'.format(
-                hiddenThumbsCount,
-                (hiddenThumbsCount > 1 ? 's' : ''),
-                (hiddenThumbsCount > 1 ? 'were' : 'was')
-            ));
-        }
+        self._notifyAboutHiddenThumbs(hiddenThumbsCount);
+        self._loadMoreThumbs();
 
         husot.log.debug('StreamThumbsManager.hideThumbs() ends after {0} ms'.format((new Date().getTime()) - start));
-        self._loadMoreThumbs();
     });
 }
 
@@ -360,15 +367,7 @@ husot.thumbs.StreamThumbsManager.prototype.showThumbs = function (name) {
             shownThumbsCount++;
         });
 
-        // Write summary for shown thumbs in log
-        if (shownThumbsCount > 0) {
-            husot.log.info('{0} thumbnail{1} for channel "{2}" {3} shown'.format(
-                shownThumbsCount,
-                (shownThumbsCount > 1 ? 's' : ''),
-                name,
-                (shownThumbsCount > 1 ? 'were' : 'was')
-            ));
-        }
+        self._notifyAboutShownThumbs(shownThumbsCount);
     });
 }
 
@@ -397,15 +396,7 @@ husot.thumbs.StreamThumbsManager.prototype.showThumbsForGame = function (name) {
             shownThumbsCount++;
         });
 
-        // Write summary for shown thumbs in log
-        if (shownThumbsCount > 0) {
-            husot.log.info('{0} thumbnail{1} for game "{2}" {3} shown'.format(
-                shownThumbsCount,
-                (shownThumbsCount > 1 ? 's' : ''),
-                name,
-                (shownThumbsCount > 1 ? 'were' : 'was')
-            ));
-        }
+        self._notifyAboutShownThumbs(shownThumbsCount);
     });
 }
 
@@ -463,13 +454,7 @@ husot.thumbs.GameThumbsManager.prototype._hideThumbs = function (name) {
     };
 
     $thumbContainer.hide();
-
-    husot.log.info('{0} thumbnail{1} for game "{2}" {3} hidden'.format(
-        $thumbContainer.length,
-        ($thumbContainer.length > 1 ? 's' : ''),
-        name,
-        ($thumbContainer.length > 1 ? 'were' : 'was')
-    ));
+    self._notifyAboutHiddenThumbs($thumbContainer.length);
 }
 
 husot.thumbs.GameThumbsManager.prototype._getThumbContainer = function (name) {
@@ -537,13 +522,7 @@ husot.thumbs.GameThumbsManager.prototype._showThumbs = function (name) {
     if (!$thumbContainer.length) { return };
 
     $thumbContainer.show();
-
-    husot.log.info('{0} thumbnail{1} for game "{2}" {3} shown'.format(
-        $thumbContainer.length,
-        ($thumbContainer.length > 1 ? 's' : ''),
-        name,
-        ($thumbContainer.length > 1 ? 'were' : 'was')
-    ));
+    self._notifyAboutShownThumbs($thumbContainer.length);
 };
 
 husot.thumbs.GameThumbsManager.prototype.getThumbFindSelector = function () {
@@ -577,17 +556,10 @@ husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {
             }
         });
 
-        // Write summary for hidden thumbs in log
-        if (hiddenThumbsCount > 0) {
-            husot.log.info('{0} thumbnail{1} {2} hidden'.format(
-                hiddenThumbsCount,
-                (hiddenThumbsCount > 1 ? 's' : ''),
-                (hiddenThumbsCount > 1 ? 'were' : 'was')
-            ));
-        }
+        self._notifyAboutHiddenThumbs(hiddenThumbsCount);
+        self._loadMoreThumbs();
 
         husot.log.debug('GameThumbsManager.hideThumbs() ends after {0} ms'.format((new Date().getTime()) - start));
-        self._loadMoreThumbs();
     });
 };
 
