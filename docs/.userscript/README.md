@@ -20,10 +20,10 @@ After installation there will be a menu added on [Twitch TV](http://www.twitch.t
 ![Overlay menu for channel](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/master/docs/screenshots/screenshot-1-640x400.png)
 
 ## Blocking a channel
-In order to block a channel use `Block` button in the [overlay menu](#overlay-menu) on stream or video thumbnail. The channel will be added to the "Blocked Channels" list and content of that channel will not be visible anymore unless unblocked back.
+To block a channel use `Block` button in the [overlay menu](#overlay-menu) on stream or video thumbnail. The channel will be added to the "Blocked Channels" list and content of that channel will not be visible anymore unless unblocked back.
 
 ## Blocking a game
-In order to block a game use `Block` button in the [overlay menu](#overlay-menu) on the game thumbnail. The game will be added to the "Blocked Games" list and content of that game will not be visible anymore unless unblocked back. See picture below:
+To block a game navigate to [All Games](http://www.twitch.tv/directory) page and use `Block` button in the [overlay menu](#overlay-menu) on the game thumbnail. The game will be added to the "Blocked Games" list and content of that game will not be visible anymore unless unblocked back. See picture below:
 
 ![Overlay menu for game](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/3c0123f6750857c7ddefdfd7b230badee793e412/docs/screenshots/screenshot-3-640x400.png)
 
@@ -34,9 +34,9 @@ To unblock content that has been blocked find the [overlay menu](#overlay-menu) 
 
 ## Supported pages
 Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by this solution. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
-- Games
-- Channels
-- Videos
+- [Games](http://www.twitch.tv/directory)
+- [Channels](http://www.twitch.tv/directory/all)
+- [Videos](http://www.twitch.tv/directory/videos/week)
 
 # Version history
 - 1.3.1 Fixed performance issue that occurred when a lot of channels and games were blocked. Blocked items are now sorted alphabetically in Settings window.
