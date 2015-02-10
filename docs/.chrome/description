@@ -6,13 +6,13 @@ Key Features:
 
 How to use:
   • Install this extension.
-  • Find the overlay menu by hovering your mouse over stream, video or game thumbnail on Twitch TV web site.
-  • To block a channel use "Block" button in the overlay menu on stream or video thumbnail.
-  • To block a game navigate to "All Games" page (http://www.twitch.tv/directory) and use "Block" button in the overlay menu on game thumbnail.
-  • To unblock content that has been blocked find the overlay menu and click "Settings" button to access Setting window. Use "Blocked Channels" and "Blocked Games" tabs to find blocked content and click "Unblock" button to unblock it.
+  • Find the overlay menu by hovering mouse over stream, video or game thumbnail on "Games", "Channels" or "Video" page on Twitch TV web site.
+  • To block a channel navigate to "Channels" or "Videos" page and use "Block" button in the overlay menu on stream or video thumbnail.
+  • To block a game navigate to "All Games" page and use "Block" button in the overlay menu on game thumbnail.
+  • To unblock content that has been blocked use the overlay menu and click "Settings" button to access Setting window. Open "Blocked Channels" and "Blocked Games" tabs to find blocked content and click "Unblock" button to unblock it.
   
 Supported pages:
-Not all pages on Twitch TV web site are affected by this extension. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
+Keep in mind that not all pages on Twitch TV web site are affected by this extension. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
   • Games
   • Channels
   • Videos
