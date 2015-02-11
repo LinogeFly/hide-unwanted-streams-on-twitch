@@ -37,12 +37,12 @@ var buildUserScriptJs = function (isRelease) {
     // Prepare files list
     var src = [
         'build/userscript/_temp/manifest.txt',
-        'src/scripts/*.js',
-        '!src/scripts/app.js', // Must go last so it will be added later on
-        'src/.userscript/scripts/*.js',
+        'src/core/scripts/*.js',
+        '!src/core/scripts/app.js', // Must go last so it will be added later on
+        'src/userscript/scripts/*.js',
     ];
     if (isRelease) {
-        src.push('!src/scripts/debug.js');
+        src.push('!src/core/scripts/debug.js');
     };
 
     return gulp.src(src)
@@ -53,26 +53,26 @@ var buildUserScriptJs = function (isRelease) {
             return fs.readFileSync('build/userscript/_temp/main.css', 'utf8');
         }))
         .pipe(concat('husot.user.js'))
-        .pipe(concat.footer('\n' + fs.readFileSync('src/scripts/app.js', 'utf8')))
+        .pipe(concat.footer('\n' + fs.readFileSync('src/core/scripts/app.js', 'utf8')))
         .pipe(gulp.dest('build/userscript'));
 }
 
 gulp.task('build-userscript-css', ['build-clean'], function () {
-    return gulp.src('src/styles/*.css')
+    return gulp.src('src/core/styles/*.css')
         .pipe(concat('main.css'))
         .pipe(minifyCss())
         .pipe(gulp.dest('build/userscript/_temp'));
 });
 
 gulp.task('build-userscript-injects', ['build-clean'], function () {
-    return gulp.src('src/scripts/injects/*.js')
+    return gulp.src('src/core/scripts/injects/*.js')
         .pipe(concat('injects.js'))
         .pipe(uglify())
         .pipe(gulp.dest('build/userscript/_temp'));
 });
 
 gulp.task('build-userscript-manifest', ['build-clean'], function () {
-    return insertManifestData(gulp.src('src/.userscript/manifest.txt'))
+    return insertManifestData(gulp.src('src/userscript/manifest.txt'))
         .pipe(gulp.dest('build/userscript/_temp'));
 });
 
@@ -98,27 +98,27 @@ gulp.task('release-userscript', ['release-userscript-js', 'release-clean'], func
 var buildChromeJs = function (isRelease) {
     // Prepare files list
     var src = [
-        'src/scripts/*.js',
-        '!src/scripts/app.js', // Must go last so it will be added later on
-        'src/.chrome/scripts/*.js'
+        'src/core/scripts/*.js',
+        '!src/core/scripts/app.js', // Must go last so it will be added later on
+        'src/chrome/scripts/*.js'
     ];
     if (isRelease) {
-        src.push('!src/scripts/debug.js');
+        src.push('!src/core/scripts/debug.js');
     };
 
     return gulp.src(src)
         .pipe(concat('content.js'))
-        .pipe(concat.footer('\n' + fs.readFileSync('src/scripts/app.js', 'utf8')))
+        .pipe(concat.footer('\n' + fs.readFileSync('src/core/scripts/app.js', 'utf8')))
         .pipe(gulp.dest('build/chrome'));
 };
 
 gulp.task('build-chrome-manifest', ['build-clean'], function () {
-    return insertManifestData(gulp.src('src/.chrome/manifest.json'))
+    return insertManifestData(gulp.src('src/chrome/manifest.json'))
         .pipe(gulp.dest('build/chrome'));
 });
 
 gulp.task('build-chrome-css', ['build-clean'], function () {
-    return gulp.src('src/styles/*.css')
+    return gulp.src('src/core/styles/*.css')
         .pipe(concat('content.css'))
         .pipe(gulp.dest('build/chrome'));
 });
@@ -128,7 +128,7 @@ gulp.task('build-chrome-js', ['build-clean'], function () {
 });
 
 gulp.task('build-chrome-injects', ['build-clean'], function () {
-    return gulp.src('src/scripts/injects/*.*')
+    return gulp.src('src/core/scripts/injects/*.*')
         .pipe(concat('injects.js'))
         .pipe(gulp.dest('build/chrome'));
 });
@@ -139,7 +139,7 @@ gulp.task('build-chrome-vendor', ['build-clean'], function () {
 });
 
 gulp.task('build-chrome-images', ['build-clean'], function () {
-    return gulp.src('src/.chrome/images/*.png')
+    return gulp.src('src/chrome/images/*.png')
         .pipe(gulp.dest('build/chrome/images'));
 });
 
@@ -167,12 +167,7 @@ gulp.task('watch', function () {
         [
             'src/**/*.js',
             'src/**/*.css',
-            'src/.chrome/**/*.js',
-            'src/.chrome/**/*.css',
-            'src/.chrome/**/manifest.*',
-            'src/.userscript/**/*.js',
-            'src/.userscript/**/*.css',
-            'src/.userscript/**/manifest.*',
+            'src/**/manifest.*',
         ],
         ['build']);
 });
