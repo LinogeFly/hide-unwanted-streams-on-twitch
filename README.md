@@ -36,7 +36,6 @@ For platform specific builds use `gulp build-chrome` and `gulp build-userscript`
 # TODO
 - Add tests for CSS selectors
 - Add tests for Regular Expressions
-- Rename ".chrome" and ".userscript" to "_chrome" and "_userscript" respectively. Names that start with "." are considered hidden, didn't know that :)
 - Solve the problem when thumbnails blink during hiding. In the other words thumbnails are loaded and there is small lag before they become hidden.
 
 # Links
