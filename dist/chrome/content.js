@@ -10,8 +10,7 @@ husot.constants.blockedGamesListEmpty = 'No Blocked Games';
 husot.constants.modalDialogShowingSpeed = 150;
 husot.constants.allowedUrls = [
     '^http://www.twitch.tv/directory/?$',
-    '^http://www.twitch.tv/directory/all/?$',
-    '^http://www.twitch.tv/directory/all/.+',
+    '^http://www.twitch.tv/directory/all(/?|/.+)$',
     '^http://www.twitch.tv/directory/game/.+',
     '^http://www.twitch.tv/directory/random/?$',
     '^http://www.twitch.tv/directory/videos/.+'
@@ -64,7 +63,7 @@ husot.domListener = (function () {
 
     function isCurrentUrlAllowed() {
         return husot.constants.allowedUrls.some(function (item) {
-            return (new RegExp(item)).test(document.URL);
+            return (new RegExp(item)).test(decodeURIComponent(document.URL));
         });
     }
 
@@ -278,7 +277,7 @@ husot.settings.BlockedItems.prototype = {
             callback();
             return;
         }
-        
+
         this._get(name, function (item) {
             // Don't process if not in the list
             if (typeof item === 'undefined') {
@@ -565,6 +564,17 @@ husot.thumbs.ThumbsManagerBase.prototype = {
 
 husot.thumbs.StreamThumbsManager = function () {
     husot.thumbs.ThumbsManagerBase.call(this);
+
+    this._customChannelNameSelectors = [
+        {
+            selector: '.meta .title a',
+            urls: [
+                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive(/?|[?].+)$',
+                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive/map/(.+)$'
+            ]
+        }
+    ];
+
 }
 
 husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
@@ -669,18 +679,41 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainersForGame = function
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getChannelNameJQueryElement = function ($thumbContainer) {
+    var self = this;
+
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
 
-    var $result = $thumbContainer.find('.meta .info a');
+    var $result = $thumbContainer.find(self._getChannelNameCssSelector());
 
     if (!$result.length) {
         throw Error(husot.exceptions.elementNotFound('Channel name'));
     }
 
     return $result;
+}
+
+husot.thumbs.StreamThumbsManager.prototype._getChannelNameCssSelector = function ($thumbContainer) {
+    var self = this;
+
+    // Default
+    var result = '.meta .info a';
+
+    // Use custom URL specific selector if there is any that matches current URL
+    self._customChannelNameSelectors.forEach(function (item) {
+        var isMatch = item.urls.some(function (url) {
+            return (new RegExp(url)).test(decodeURIComponent(document.URL));
+        });
+
+        if (isMatch) {
+            result = item.selector;
+            return;
+        }
+    });
+
+    return result;
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getGameNameJQueryElement = function ($thumbContainer) {
@@ -804,7 +837,7 @@ husot.thumbs.StreamThumbsManager.prototype.showThumbs = function (name) {
 
     // Initial checks
     if (!$thumbContainers.length) { return };
-    
+
     new Promise(function (resolve, reject) { // Load block list for games
         husot.settings.blockedGames.list(function (items) {
             resolve(items);
@@ -860,7 +893,7 @@ husot.thumbs.StreamThumbsManager.prototype.showThumbsForGame = function (name) {
 husot.thumbs.GameThumbsManager = function (streamThumbsManager) {
     husot.thumbs.ThumbsManagerBase.call(this);
 
-    this.streamThumbsManager = streamThumbsManager;
+    this._streamThumbsManager = streamThumbsManager;
 }
 
 husot.thumbs.GameThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
@@ -888,7 +921,7 @@ husot.thumbs.GameThumbsManager.prototype._blockBtn_onClick = function (self, sen
     if (!$thumbContainer.length) {
         throw Error(husot.exceptions.elementNotFound('Thumb container'));
     };
-    
+
     var $name = self._getGameNameJQueryElement($thumbContainer);
     var name = $name.text().trim();
 
@@ -989,7 +1022,7 @@ husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {
 
     var start = new Date().getTime();
     husot.log.debug('GameThumbsManager.hideThumbs() starts');
-    
+
     new Promise(function (resolve, reject) { // Load blocked list for games
         husot.settings.blockedGames.list(function (items) {
             resolve(items);
@@ -1024,7 +1057,7 @@ husot.thumbs.GameThumbsManager.prototype.showThumbs = function (name) {
     var self = this;
 
     self._showThumbs(name);
-    self.streamThumbsManager.showThumbsForGame(name);
+    self._streamThumbsManager.showThumbsForGame(name);
 };
 
 // Inject javaScript into main window (Chrome specific)
