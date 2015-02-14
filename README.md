@@ -32,7 +32,6 @@ For platform specific builds use `gulp build-chrome` and `gulp build-userscript`
 - 1.0.0 First release. Only Userscript platfom is supported.
 
 # Known issues
-- Hiding doesn't work on [Counter-Strike: Global Offensive](http://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive) page. Looks like payout of that page is a bit different and channel name cannot be found with current CSS selector.
 
 # TODO
 - Add tests for CSS selectors
