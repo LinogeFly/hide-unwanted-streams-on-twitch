@@ -110,6 +110,17 @@ husot.thumbs.ThumbsManagerBase.prototype = {
 
 husot.thumbs.StreamThumbsManager = function () {
     husot.thumbs.ThumbsManagerBase.call(this);
+
+    this._customChannelNameSelectors = [
+        {
+            selector: '.meta .title a',
+            urls: [
+                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive/?$',
+                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive/.+$'
+            ]
+        }
+    ];
+
 }
 
 husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
@@ -214,12 +225,14 @@ husot.thumbs.StreamThumbsManager.prototype._getThumbContainersForGame = function
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getChannelNameJQueryElement = function ($thumbContainer) {
+    var self = this;
+
     // Initial checks
     if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
         throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
     }
 
-    var $result = $thumbContainer.find('.meta .info a');
+    var $result = $thumbContainer.find(self._getChannelNameCssSelector());
 
     if (!$result.length) {
         throw Error(husot.exceptions.elementNotFound('Channel name'));
@@ -227,6 +240,28 @@ husot.thumbs.StreamThumbsManager.prototype._getChannelNameJQueryElement = functi
 
     return $result;
 }
+
+husot.thumbs.StreamThumbsManager.prototype._getChannelNameCssSelector = function ($thumbContainer) {
+    var self = this;
+
+    // Default
+    var result = '.meta .info a';
+
+    // Use custom URL specific selector if there is any that matches current URL
+    self._customChannelNameSelectors.forEach(function (item) {
+        var isMatch = item.urls.some(function (url) {
+            return (new RegExp(url)).test(decodeURIComponent(document.URL));
+        });
+
+        if (isMatch) {
+            result = item.selector;
+            return;
+        }
+    });
+
+    return result;
+}
+
 
 husot.thumbs.StreamThumbsManager.prototype._getGameNameJQueryElement = function ($thumbContainer) {
     // Initial checks
