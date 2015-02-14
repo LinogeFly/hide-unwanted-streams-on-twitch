@@ -115,8 +115,7 @@ husot.thumbs.StreamThumbsManager = function () {
         {
             selector: '.meta .title a',
             urls: [
-                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive/?$',
-                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive/.+$'
+                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive(/?|/.+|[?].+)$'
             ]
         }
     ];
@@ -261,7 +260,6 @@ husot.thumbs.StreamThumbsManager.prototype._getChannelNameCssSelector = function
 
     return result;
 }
-
 
 husot.thumbs.StreamThumbsManager.prototype._getGameNameJQueryElement = function ($thumbContainer) {
     // Initial checks
