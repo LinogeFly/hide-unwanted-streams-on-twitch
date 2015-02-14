@@ -264,3 +264,77 @@
 
 ### Expected results
 1. Same results as for test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+# Counter-Strike: Global Offensive Live Channels page
+
+## Test case 1-6
+
+### Actions
+1. Open [Counter-Strike: Global Offensive Live Channels](http://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive) page.
+2. Repeat all steps except 1-st one from test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+### Expected results
+1. Same results as for test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+# Counter-Strike: Global Offensive Live Channels page (Sort by Skill)
+
+## Test case 1-6
+
+### Actions
+1. Open [Counter-Strike: Global Offensive Live Channels](http://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive) page.
+2. Sort channels by skill. To do that use "Sort By" menu on the page.
+3. Repeat all steps except 1-st one from test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+### Expected results
+1. Same results as for test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+# Counter-Strike: Global Offensive Live Channels page (Filtered by a map)
+
+## Test case 1-6
+
+### Actions
+1. Open [Counter-Strike: Global Offensive Live Channels](http://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive) page.
+2. Filter channels by a map. To do that select the map in filter area on top of the page.
+3. Repeat all steps except 1-st one from test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+### Expected results
+1. Same results as for test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+# Counter-Strike: Global Offensive Videos (Week) page
+
+## Test case 1-6
+
+### Actions
+1. Open [Counter-Strike: Global Offensive Live Channels](http://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive) page.
+2. Click on "Videos" tab link.
+3. Click on "Week" subtab link.
+4. Repeat all steps except 1-st one from test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+### Expected results
+1. Same results as for test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+# Counter-Strike: Global Offensive Videos (Month) page
+
+## Test case 1-6
+
+### Actions
+1. Open [Counter-Strike: Global Offensive Live Channels](http://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive) page.
+2. Click on "Videos" tab link.
+3. Click on "Month" subtab link.
+4. Repeat all steps except 1-st one from test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+### Expected results
+1. Same results as for test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+# Counter-Strike: Global Offensive Videos (All Time) page
+
+## Test case 1-6
+
+### Actions
+1. Open [Counter-Strike: Global Offensive Live Channels](http://www.twitch.tv/directory/game/Counter-Strike%3A%20Global%20Offensive) page.
+2. Click on "Videos" tab link.
+3. Click on "All Time" subtab link.
+4. Repeat all steps except 1-st one from test cases 1-6 of [Top Channels page](#top-channels-page) group.
+
+### Expected results
+1. Same results as for test cases 1-6 of [Top Channels page](#top-channels-page) group.
