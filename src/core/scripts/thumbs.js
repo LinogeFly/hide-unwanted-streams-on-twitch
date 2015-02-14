@@ -384,7 +384,7 @@ husot.thumbs.StreamThumbsManager.prototype.showThumbs = function (name) {
 
     // Initial checks
     if (!$thumbContainers.length) { return };
-    
+
     new Promise(function (resolve, reject) { // Load block list for games
         husot.settings.blockedGames.list(function (items) {
             resolve(items);
@@ -440,7 +440,7 @@ husot.thumbs.StreamThumbsManager.prototype.showThumbsForGame = function (name) {
 husot.thumbs.GameThumbsManager = function (streamThumbsManager) {
     husot.thumbs.ThumbsManagerBase.call(this);
 
-    this.streamThumbsManager = streamThumbsManager;
+    this._streamThumbsManager = streamThumbsManager;
 }
 
 husot.thumbs.GameThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);
@@ -468,7 +468,7 @@ husot.thumbs.GameThumbsManager.prototype._blockBtn_onClick = function (self, sen
     if (!$thumbContainer.length) {
         throw Error(husot.exceptions.elementNotFound('Thumb container'));
     };
-    
+
     var $name = self._getGameNameJQueryElement($thumbContainer);
     var name = $name.text().trim();
 
@@ -569,7 +569,7 @@ husot.thumbs.GameThumbsManager.prototype.hideThumbs = function () {
 
     var start = new Date().getTime();
     husot.log.debug('GameThumbsManager.hideThumbs() starts');
-    
+
     new Promise(function (resolve, reject) { // Load blocked list for games
         husot.settings.blockedGames.list(function (items) {
             resolve(items);
@@ -604,5 +604,5 @@ husot.thumbs.GameThumbsManager.prototype.showThumbs = function (name) {
     var self = this;
 
     self._showThumbs(name);
-    self.streamThumbsManager.showThumbsForGame(name);
+    self._streamThumbsManager.showThumbsForGame(name);
 };

@@ -41,7 +41,7 @@ husot.domListener = (function () {
 
     function isCurrentUrlAllowed() {
         return husot.constants.allowedUrls.some(function (item) {
-            return (new RegExp(item)).test(document.URL);
+            return (new RegExp(item)).test(decodeURIComponent(document.URL));
         });
     }
 

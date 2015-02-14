@@ -55,7 +55,7 @@ husot.settings.BlockedItems.prototype = {
             callback();
             return;
         }
-        
+
         this._get(name, function (item) {
             // Don't process if not in the list
             if (typeof item === 'undefined') {
