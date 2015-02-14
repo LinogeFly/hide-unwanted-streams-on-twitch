@@ -69,11 +69,9 @@
 ## Test case 8
 
 ### Actions
-1. Open [All Games](http://www.twitch.tv/directory) page.
-2. Block some top games that are currently being streamed.
-3. Open [Top Channels](http://www.twitch.tv/directory/all) page.
-4. Open Settings window.
-5. Unblock all games that were blocked previously.
+1. Repeat all steps from the previous test case.
+2. Open Settings window.
+3. Unblock all games that were blocked previously.
 
 ### Expected results
 1. Thumbnails for unblocked games should be visible.
