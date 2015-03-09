@@ -3,6 +3,9 @@ This solution is for hiding unwanted content on [Twitch TV](http://www.twitch.tv
 - Extension for Google Chrome. Available on Chrome Web Store [here](https://chrome.google.com/webstore/detail/hide-unwanted-streams-on/kpgfplcjhleaadnmjmkjddcmekdhdiia).
 - Userscript, to be used with userscript managers such as [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/). Can be installed from [here](https://openuserjs.org/scripts/LinogeFly/Hide_unwanted_streams_on_Twitch).
 
+# How to use
+See (User Guide)[https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/tree/master/docs/user-guide.md] document.
+
 # How to build
 ## Prerequisites
 Before you can build this solution, you must install and configure the following dependencies on your machine:

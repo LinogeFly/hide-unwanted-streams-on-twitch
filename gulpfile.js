@@ -80,15 +80,28 @@ gulp.task('build-userscript-js', ['build-userscript-manifest', 'build-userscript
     return buildUserScriptJs(false);
 });
 
-gulp.task('build-userscript', ['build-userscript-js', 'build-clean']);
+gulp.task('build-userscript-readme', ['build-clean'], function () {
+    return gulp.src([
+            'docs/userscript/description.md',
+            'docs/userscript/installation.md',
+            'docs/user-guide.md',
+            'docs/userscript/version-history.md',
+            'docs/userscript/links.md'
+        ])
+        .pipe(concat('README.md'))
+        .pipe(gulp.dest('build/userscript'));
+});
+
+gulp.task('build-userscript', ['build-userscript-js', 'build-userscript-readme', 'build-clean']);
 
 gulp.task('release-userscript-js', ['build-userscript-manifest', 'build-userscript-css', 'build-userscript-injects'], function () {
     return buildUserScriptJs(true);
 });
 
-gulp.task('release-userscript', ['release-userscript-js', 'release-clean'], function () {
+gulp.task('release-userscript', ['build-userscript-readme', 'release-userscript-js', 'release-clean'], function () {
     return gulp.src([
-            'build/userscript/husot.user.js'
+            'build/userscript/husot.user.js',
+            'build/userscript/README.md'
         ])
         .pipe(gulp.dest('dist/userscript'));
 });
@@ -152,7 +165,7 @@ gulp.task('release-chrome-js', ['release-clean'], function () {
 gulp.task('release-chrome', ['build-chrome-manifest', 'build-chrome-css', 'build-chrome-injects', 'build-chrome-vendor', 'build-chrome-images', 'release-chrome-js', 'release-clean'], function () {
     return gulp.src([
             'build/chrome/**/*'
-        ])
+    ])
         .pipe(gulp.dest('dist/chrome'));
 });
 
