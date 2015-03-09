@@ -4,7 +4,7 @@ This solution is for hiding unwanted content on [Twitch TV](http://www.twitch.tv
 - Userscript, to be used with userscript managers such as [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/). Can be installed from [here](https://openuserjs.org/scripts/LinogeFly/Hide_unwanted_streams_on_Twitch).
 
 # How to use
-See (User Guide)[https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/tree/master/docs/user-guide.md] document.
+See [User Guide](https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/tree/master/docs/user-guide.md) document.
 
 # How to build
 ## Prerequisites
