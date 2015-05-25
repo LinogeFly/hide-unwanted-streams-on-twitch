@@ -31,6 +31,13 @@ gulp.task('release-clean', function () {
 
 gulp.task('clean', ['build-clean', 'release-clean']);
 
+gulp.task('build-injects', ['build-clean'], function () {
+    return gulp.src('src/core/scripts/injects/*.js')
+        .pipe(concat('injects.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('build/_temp'));
+});
+
 // Userscript tasks
 
 var buildUserScriptJs = function (isRelease) {
@@ -47,7 +54,7 @@ var buildUserScriptJs = function (isRelease) {
 
     return gulp.src(src)
         .pipe(replace('{{APP_EMBEDDED_INJECT_SCRIPTS}}', function () {
-            return jsStringEscape(fs.readFileSync('build/userscript/_temp/injects.js', 'utf8'));
+            return jsStringEscape(fs.readFileSync('build/_temp/injects.js', 'utf8'));
         }))
         .pipe(replace('{{APP_EMBEDDED_STYLES}}', function () {
             return fs.readFileSync('build/userscript/_temp/main.css', 'utf8');
@@ -64,19 +71,12 @@ gulp.task('build-userscript-css', ['build-clean'], function () {
         .pipe(gulp.dest('build/userscript/_temp'));
 });
 
-gulp.task('build-userscript-injects', ['build-clean'], function () {
-    return gulp.src('src/core/scripts/injects/*.js')
-        .pipe(concat('injects.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest('build/userscript/_temp'));
-});
-
 gulp.task('build-userscript-manifest', ['build-clean'], function () {
     return insertManifestData(gulp.src('src/userscript/manifest.txt'))
         .pipe(gulp.dest('build/userscript/_temp'));
 });
 
-gulp.task('build-userscript-js', ['build-userscript-manifest', 'build-userscript-css', 'build-userscript-injects'], function () {
+gulp.task('build-userscript-js', ['build-userscript-manifest', 'build-userscript-css', 'build-injects'], function () {
     return buildUserScriptJs(false);
 });
 
@@ -94,7 +94,7 @@ gulp.task('build-userscript-readme', ['build-clean'], function () {
 
 gulp.task('build-userscript', ['build-userscript-js', 'build-userscript-readme', 'build-clean']);
 
-gulp.task('release-userscript-js', ['build-userscript-manifest', 'build-userscript-css', 'build-userscript-injects'], function () {
+gulp.task('release-userscript-js', ['build-userscript-manifest', 'build-userscript-css', 'build-injects'], function () {
     return buildUserScriptJs(true);
 });
 
@@ -120,6 +120,9 @@ var buildChromeJs = function (isRelease) {
     };
 
     return gulp.src(src)
+        .pipe(replace('{{APP_EMBEDDED_INJECT_SCRIPTS}}', function () {
+            return jsStringEscape(fs.readFileSync('build/_temp/injects.js', 'utf8'));
+        }))
         .pipe(concat('content.js'))
         .pipe(concat.footer('\n' + fs.readFileSync('src/core/scripts/app.js', 'utf8')))
         .pipe(gulp.dest('build/chrome'));
@@ -140,12 +143,6 @@ gulp.task('build-chrome-js', ['build-clean'], function () {
     return buildChromeJs(false);
 });
 
-gulp.task('build-chrome-injects', ['build-clean'], function () {
-    return gulp.src('src/core/scripts/injects/*.*')
-        .pipe(concat('injects.js'))
-        .pipe(gulp.dest('build/chrome'));
-});
-
 gulp.task('build-chrome-vendor', ['build-clean'], function () {
     return gulp.src('vendor/*.*')
         .pipe(gulp.dest('build/chrome/vendor'));
@@ -156,13 +153,13 @@ gulp.task('build-chrome-images', ['build-clean'], function () {
         .pipe(gulp.dest('build/chrome/images'));
 });
 
-gulp.task('build-chrome', ['build-chrome-manifest', 'build-chrome-css', 'build-chrome-js', 'build-chrome-injects', 'build-chrome-vendor', 'build-chrome-images']);
+gulp.task('build-chrome', ['build-chrome-manifest', 'build-chrome-css', 'build-chrome-js', 'build-injects', 'build-chrome-vendor', 'build-chrome-images']);
 
 gulp.task('release-chrome-js', ['release-clean'], function () {
     return buildChromeJs(true);
 });
 
-gulp.task('release-chrome', ['build-chrome-manifest', 'build-chrome-css', 'build-chrome-injects', 'build-chrome-vendor', 'build-chrome-images', 'release-chrome-js', 'release-clean'], function () {
+gulp.task('release-chrome', ['build-chrome-manifest', 'build-chrome-css', 'build-injects', 'build-chrome-vendor', 'build-chrome-images', 'release-chrome-js', 'release-clean'], function () {
     return gulp.src([
             'build/chrome/**/*'
     ])

@@ -1,4 +1,4 @@
-﻿// Inject javaScript into main window (Userscript specific)
+﻿// Inject javaScript into main window
 
 var husot = husot || {};
 husot.injector = husot.injector || {};
