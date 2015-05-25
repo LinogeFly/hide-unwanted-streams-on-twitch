@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on Twitch TV, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.2
+// @version      1.3.3
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://www.twitch.tv/*
@@ -235,6 +235,18 @@ husot.modalDialog = (function () {
         close: close,
     };
 })();
+
+// Inject javaScript into main window
+
+var husot = husot || {};
+husot.injector = husot.injector || {};
+
+husot.injector.addScripts = function () {
+    var script = document.createElement('script');
+    script.textContent = 'document.addEventListener(\"husot.loadMoreThumbs\",function(){var e=Ember.View.views[$(\"#directory-list .items > .ember-view\").attr(\"id\")];\"undefined\"!=typeof e&&e._ensureViewFilled()});';
+    (document.head || document.documentElement).appendChild(script);
+    script.parentNode.removeChild(script);
+};
 
 // Application settings
 
@@ -1088,18 +1100,6 @@ husot.thumbs.GameThumbsManager.prototype.showThumbs = function (name) {
     style.textContent = '.husot-button{background:#6441a5;color:#fff;padding:0 10px;font-size:12px;text-align:center;cursor:pointer;height:30px;display:inline-block;line-height:30px}.husot-button:hover{background:#7550ba;text-decoration:none}.husot-modalOverlay{display:none;background:rgba(33,18,51,.9);position:fixed;z-index:10000;top:0;bottom:0;left:0;padding:20px 0;width:100%;overflow-x:hidden;overflow-y:auto}.husot-modalWindow{display:none;position:relative;opacity:1;margin:50px auto 0}.husot-settings{font:12px "Helvetica Neue",Helvetica,Arial,sans-serif;color:#32323e;width:360px;background:#FFF;padding:20px}.husot-settings-nav{list-style:none;padding:0;margin:0 0 5px;border-bottom:1px solid rgba(0,0,0,.2);overflow:auto}.husot-settings-nav-item{float:left;margin-right:20px}.husot-settings-nav-item-name{font-size:14px;line-height:24px;padding-bottom:7px;display:inline-block;cursor:pointer;text-decoration:none;color:#6441a5;border-bottom:1px solid transparent}.husot-settings-nav-item-name:hover{color:#19191f;border-bottom:1px solid rgba(0,0,0,.35);text-decoration:none}.husot-settings-nav-item-name-active,.husot-settings-nav-item-name-active:hover{color:#19191f;border-bottom:1px solid #19191f}.husot-settings-blockedList{list-style:none;padding:0;margin:0 0 5px;overflow-y:auto;min-height:240px;max-height:400px}.husot-settings-blockedList-item{margin:5px 0;clear:both;overflow:auto}.husot-settings-blockedList-item-name{font-size:14px;display:inline-block;width:250px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;height:30px;float:left;line-height:30px}.husot-settings-blockedList-item-empty{text-align:center;font-size:16px;color:#bbb;font-style:italic;padding:20px 0}.husot-settings-blockedList-item-unblockBtn{float:right;max-width:80px;overflow:hidden}.husot-settings-footer{text-align:center;width:100%;margin:0 0 5px;padding:20px 0 0;border-top:1px solid #dedede}.husot-settings-footer .husot-button{min-width:70px}.husot-thumbOverlay{display:none;position:absolute;bottom:5px;left:5px;color:#fff;background-color:#000;padding:0 5px;opacity:.75;font:12px "Helvetica Neue",Helvetica,Arial,sans-serif;line-height:22px}.husot-thumbOverlay a{color:#fff;text-decoration:none}.husot-thumbOverlay a:hover{text-decoration:underline!important}.husot-thumbOverlay-menu{list-style:none;padding:0;margin:0}.husot-thumbOverlay-menu li,.husot-thumbOverlay-menu-separator{display:inline}';
     (document.head || document.documentElement).appendChild(style);
 })();
-
-// Inject javaScript into main window (Userscript specific)
-
-var husot = husot || {};
-husot.injector = husot.injector || {};
-
-husot.injector.addScripts = function () {
-    var script = document.createElement('script');
-    script.textContent = 'document.addEventListener(\"husot.loadMoreThumbs\",function(){var e=Ember.View.views[$(\"#directory-list .items > .ember-view\").attr(\"id\")];\"undefined\"!=typeof e&&e._ensureViewFilled()});';
-    (document.head || document.documentElement).appendChild(script);
-    script.parentNode.removeChild(script);
-};
 
 // Application settings (Userscript specific)
 

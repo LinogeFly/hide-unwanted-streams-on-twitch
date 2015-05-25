@@ -220,6 +220,18 @@ husot.modalDialog = (function () {
     };
 })();
 
+// Inject javaScript into main window
+
+var husot = husot || {};
+husot.injector = husot.injector || {};
+
+husot.injector.addScripts = function () {
+    var script = document.createElement('script');
+    script.textContent = 'document.addEventListener(\"husot.loadMoreThumbs\",function(){var e=Ember.View.views[$(\"#directory-list .items > .ember-view\").attr(\"id\")];\"undefined\"!=typeof e&&e._ensureViewFilled()});';
+    (document.head || document.documentElement).appendChild(script);
+    script.parentNode.removeChild(script);
+};
+
 // Application settings
 
 var husot = husot || {};
@@ -1058,20 +1070,6 @@ husot.thumbs.GameThumbsManager.prototype.showThumbs = function (name) {
 
     self._showThumbs(name);
     self._streamThumbsManager.showThumbsForGame(name);
-};
-
-// Inject javaScript into main window (Chrome specific)
-
-var husot = husot || {};
-husot.injector = husot.injector || {};
-
-husot.injector.addScripts = function () {
-    var script = document.createElement('script');
-    script.src = chrome.extension.getURL('injects.js');
-    script.onload = function () {
-        this.parentNode.removeChild(this);
-    };
-    (document.head || document.documentElement).appendChild(script);
 };
 
 // Application settings (Chrome specific)
