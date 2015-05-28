@@ -45,13 +45,13 @@ var buildUserScriptJs = function (isRelease) {
     var src = [
         'build/userscript/_temp/manifest.txt',
         'src/core/scripts/*.js',
-        'src/core/scripts/tests/*.js',
+        'src/core/tests/*.js',
         '!src/core/scripts/app.js', // Must go last so it will be added later on
         'src/userscript/scripts/*.js'
     ];
     if (isRelease) {
         src.push('!src/core/scripts/debug.js');
-        src.push('!src/core/scripts/tests/*.js');
+        src.push('!src/core/tests/*.js');
     };
 
     return gulp.src(src)
@@ -114,13 +114,15 @@ var buildChromeJs = function (isRelease) {
     // Prepare files list
     var src = [
         'src/core/scripts/*.js',
-        'src/core/scripts/tests/*.js',
+        'src/core/tests/*.js',
         '!src/core/scripts/app.js', // Must go last so it will be added later on
-        'src/chrome/scripts/*.js'
+        'src/chrome/scripts/*.js',
+        'src/chrome/tests/*.js'
     ];
     if (isRelease) {
         src.push('!src/core/scripts/debug.js');
-        src.push('!src/core/scripts/tests/*.js');
+        src.push('!src/core/tests/*.js');
+        src.push('!src/chrome/tests/*.js');
     };
 
     return gulp.src(src)
