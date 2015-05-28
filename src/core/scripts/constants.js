@@ -15,7 +15,6 @@ husot.constants.allowedUrls = [
     '^http://www.twitch.tv/directory/random/?$',
     '^http://www.twitch.tv/directory/videos/.+'
 ];
-
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';
 husot.constants.blockedItemType.channel = 'channel';
