@@ -27,6 +27,13 @@ gulp
 ```
 For platform specific builds use `gulp build-chrome` and `gulp build-userscript` commands.
 
+# How to run tests
+Currently, tests are semi-automatic. To run tests open browser's console, select "Hide unwanted streams on Twitch" scope and run the following command:
+```
+husot.tests.runAll()
+```
+Failing tests will throw errors into console.
+
 # Version history
 - 1.3.2 Fixed a bug when streams were not hiding on CS:GO pages.
 - 1.3.1 Fixed performance issue that occurred when a lot of channels and games were blocked. Blocked items are now sorted alphabetically in Settings window.
