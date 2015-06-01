@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on Twitch TV, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.3
+// @version      1.3.4
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://www.twitch.tv/*
@@ -31,7 +31,6 @@ husot.constants.allowedUrls = [
     '^http://www.twitch.tv/directory/random/?$',
     '^http://www.twitch.tv/directory/videos/.+'
 ];
-
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';
 husot.constants.blockedItemType.channel = 'channel';
@@ -102,17 +101,26 @@ husot.domListener = (function () {
 var husot = husot || {};
 husot.exceptions = husot.exceptions || {};
 
-husot.exceptions.abstractFunctionCall = function () { return 'Cannot call abstract function' };
-husot.exceptions.notImplemented = function () { return 'Method or operation is not implemented' };
+husot.exceptions.abstractFunctionCall = function () {
+    return 'Cannot call abstract function'
+};
+
+husot.exceptions.notImplemented = function () {
+    return 'Method or operation is not implemented'
+};
+
 husot.exceptions.argumentNullOrEmpty = function (argumentName) {
     return 'Argument "{0}" is undefined or empty'.format(argumentName);
 };
+
 husot.exceptions.argumentOneElementExpected = function (argumentName) {
     return 'More than one element in argument "{0}"'.format(argumentName);
 };
+
 husot.exceptions.elementNotFound = function (elementName) {
     return '{0} not found. CSS selector must be broken.'.format(elementName);
 };
+
 husot.exceptions.elementNotFoundFor = function (elementName, forName) {
     return '{0} not found for {1}. CSS selector must be broken.'.format(elementName, forName);
 };
