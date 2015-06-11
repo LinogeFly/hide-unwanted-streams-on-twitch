@@ -9,11 +9,11 @@ husot.constants.blockedChannelsListEmpty = 'No Blocked Channels';
 husot.constants.blockedGamesListEmpty = 'No Blocked Games';
 husot.constants.modalDialogShowingSpeed = 150;
 husot.constants.allowedUrls = [
-    '^http://www.twitch.tv/directory/?$',
-    '^http://www.twitch.tv/directory/all(/?|/.+)$',
-    '^http://www.twitch.tv/directory/game/.+',
-    '^http://www.twitch.tv/directory/random/?$',
-    '^http://www.twitch.tv/directory/videos/.+'
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/?$',
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/all(/?|/.+)$',
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/.+',
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/random/?$',
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/videos/.+'
 ];
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';
@@ -28,7 +28,7 @@ husot.domListener = (function () {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function (mutations) {
         // Don't process page if its URL is not allowed
-        if (!isCurrentUrlAllowed()) {
+        if (!isUrlAllowed(document.URL)) {
             return;
         }
 
@@ -60,9 +60,9 @@ husot.domListener = (function () {
         thumbsManager.hideThumbs();
     }
 
-    function isCurrentUrlAllowed() {
+    function isUrlAllowed(url) {
         return husot.constants.allowedUrls.some(function (item) {
-            return (new RegExp(item)).test(decodeURIComponent(document.URL));
+            return (new RegExp(item)).test(decodeURIComponent(url));
         });
     }
 
@@ -76,7 +76,8 @@ husot.domListener = (function () {
     }
 
     return {
-        start: start
+        start: start,
+        isUrlAllowed: isUrlAllowed
     };
 })();
 
@@ -589,12 +590,11 @@ husot.thumbs.StreamThumbsManager = function () {
         {
             selector: '.meta .title a',
             urls: [
-                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive(/?|[?].+)$',
-                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive/map/(.+)$'
+                '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/Counter-Strike: Global Offensive(/?|[?].+)$',
+                '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/Counter-Strike: Global Offensive/map/(.+)$'
             ]
         }
     ];
-
 }
 
 husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);

@@ -35,6 +35,7 @@ husot.tests.runAll()
 Failing tests will throw errors into console.
 
 # Version history
+- 1.3.5 Fixed a bug when solution was not working if Twitch was accessed with language specific URL.
 - 1.3.4 Fixed a bug when it was not possible to save long block lists due to quotation limit for settings (in Chrome only).
 - 1.3.3 Fixed a bug when "Infinite scroll" didn't get triggered sometimes on Games page (in Chrome only).
 - 1.3.2 Fixed a bug when streams were not hiding on CS:GO pages.
