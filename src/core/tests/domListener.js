@@ -1,4 +1,4 @@
-﻿// Allowed URLs Tests
+﻿// DOM Listner Tests
 
 var husot = husot || {};
 husot.tests = husot.tests || {};
