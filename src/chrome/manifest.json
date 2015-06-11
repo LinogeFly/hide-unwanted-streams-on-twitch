@@ -15,7 +15,7 @@
     "content_scripts": [
         {
             "matches": [
-                "http://www.twitch.tv/*"
+                "*://*.twitch.tv/*"
             ],
             "js": [
                 "vendor/jquery-1.11.2.min.js",
@@ -31,6 +31,6 @@
 
     "permissions": [
         "storage",
-        "http://www.twitch.tv/*"
+        "*://*.twitch.tv/*"
     ]
 }

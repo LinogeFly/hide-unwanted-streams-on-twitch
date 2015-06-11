@@ -115,12 +115,11 @@ husot.thumbs.StreamThumbsManager = function () {
         {
             selector: '.meta .title a',
             urls: [
-                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive(/?|[?].+)$',
-                '^http://www.twitch.tv/directory/game/Counter-Strike: Global Offensive/map/(.+)$'
+                '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/Counter-Strike: Global Offensive(/?|[?].+)$',
+                '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/Counter-Strike: Global Offensive/map/(.+)$'
             ]
         }
     ];
-
 }
 
 husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsManagerBase.prototype);

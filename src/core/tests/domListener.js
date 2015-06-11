@@ -13,8 +13,15 @@ husot.tests.domListener.runAll = function () {
 
 husot.tests.domListener.shouldAllowUrls = function () {
     var urls = [
+        'http://twitch.tv/directory',
+        'http://twitch.tv/directory/',
+        'https://twitch.tv/directory',
+        'https://twitch.tv/directory/',
         'http://www.twitch.tv/directory',
         'http://www.twitch.tv/directory/',
+        'http://en.twitch.tv/directory',
+        'http://en.twitch.tv/directory/',
+
         'http://www.twitch.tv/directory/all',
         'http://www.twitch.tv/directory/all/',
         'http://www.twitch.tv/directory/game/Minecraft',
@@ -40,8 +47,14 @@ husot.tests.domListener.shouldAllowUrls = function () {
 
 husot.tests.domListener.shouldNotAllowUrls = function () {
     var urls = [
+        'http://twitch.tv',
+        'http://twitch.tv/',
+        'https://twitch.tv',
+        'https://twitch.tv/',
         'http://www.twitch.tv',
         'http://www.twitch.tv/',
+        'http://en.twitch.tv',
+        'http://en.twitch.tv/',
         'http://www.twitch.tv/bla-bla-bla',
         'http://www.twitch.tv/bla-bla-bla/',
         'http://www.twitch.tv/directory/bla-bla-bla',
