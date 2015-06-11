@@ -7,7 +7,7 @@ husot.domListener = (function () {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function (mutations) {
         // Don't process page if its URL is not allowed
-        if (!isCurrentUrlAllowed()) {
+        if (!isUrlAllowed(document.URL)) {
             return;
         }
 
@@ -39,9 +39,9 @@ husot.domListener = (function () {
         thumbsManager.hideThumbs();
     }
 
-    function isCurrentUrlAllowed() {
+    function isUrlAllowed(url) {
         return husot.constants.allowedUrls.some(function (item) {
-            return (new RegExp(item)).test(decodeURIComponent(document.URL));
+            return (new RegExp(item)).test(decodeURIComponent(url));
         });
     }
 
@@ -55,6 +55,7 @@ husot.domListener = (function () {
     }
 
     return {
-        start: start
+        start: start,
+        isUrlAllowed: isUrlAllowed
     };
 })();

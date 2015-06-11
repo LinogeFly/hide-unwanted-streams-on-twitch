@@ -48,7 +48,6 @@ Failing tests will throw errors into console.
 
 # TODO
 - Add tests for CSS selectors
-- Add tests for Regular Expressions
 - Solve the problem when thumbnails blink during hiding. In the other words thumbnails are loaded and there is small lag before they become hidden.
 
 # Links
