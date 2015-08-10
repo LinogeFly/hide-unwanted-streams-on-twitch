@@ -1090,10 +1090,12 @@ husot.settings.getChunkKey = function (key, index) {
 };
 
 husot.settings.getChunkKeys = function (key, index) {
+    index = typeof index !== 'undefined' ? index : 0;
+
     var self = this,
         result = [];
 
-    for (i = 0; i < chrome.storage.sync.MAX_ITEMS; i++) {
+    for (i = index; i < chrome.storage.sync.MAX_ITEMS; i++) {
         var chunkKey = self.getChunkKey(key, i);
         result.push(chunkKey);
     }
@@ -1111,7 +1113,7 @@ husot.settings.setValue = function (key, value, callback) {
 
     husot.log.debug('husot.settings.setValue() starts');
 
-    // Splitting value into chuncks in case if value is bigger than QUOTA_BYTES_PER_ITEM
+    // Splitting value into chunks in case if value is bigger than QUOTA_BYTES_PER_ITEM
     while (value.length > 0) {
         chunkKey = self.getChunkKey(key, i);
         // I case if you are wondering about -2 at the end see: https://code.google.com/p/chromium/issues/detail?id=261572
@@ -1122,9 +1124,16 @@ husot.settings.setValue = function (key, value, callback) {
         i++;
     }
 
-    // Remove old value and set new value afterwards
-    chrome.storage.sync.remove(self.getChunkKeys(key), function () {
-        chrome.storage.sync.set(items, function () {
+    // Save new value chunks
+    chrome.storage.sync.set(items, function () {
+        if (chrome.runtime.error) {
+            husot.log.debug('husot.settings.setValue() ends after {0} ms with error'.format((new Date().getTime()) - start));
+            callback();
+            return;
+        }
+
+        // Remove old chunks
+        chrome.storage.sync.remove(self.getChunkKeys(key, i), function () {
             husot.log.debug('husot.settings.setValue() ends after {0} ms'.format((new Date().getTime()) - start));
             callback();
         });
