@@ -2,7 +2,7 @@
 document.addEventListener('husot.loadMoreThumbs', function (e) {
     $('#directory-list .items > .ember-view').each(function () {
         var viewId = $(this).attr('id');
-        var thumbsView = Ember.View.views[viewId];
+        var thumbsView = App.__container__.lookup("-view-registry:main")[viewId];
 
         if (typeof thumbsView === 'undefined') {
             return;
