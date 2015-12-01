@@ -236,7 +236,7 @@ husot.injector = husot.injector || {};
 
 husot.injector.addScripts = function () {
     var script = document.createElement('script');
-    script.textContent = 'document.addEventListener(\"husot.loadMoreThumbs\",function(e){$(\"#directory-list .items > .ember-view\").each(function(){var e=$(this).attr(\"id\"),i=App.__container__.lookup(\"-view-registry:main\")[e];\"undefined\"!=typeof i&&\"undefined\"!=typeof i._ensureViewFilled&&i._ensureViewFilled()})});';
+    script.textContent = 'document.addEventListener(\"husot.loadMoreThumbs\",function(){$(\"#directory-list .items > .ember-view\").trigger(\"scroll\")});';
     (document.head || document.documentElement).appendChild(script);
     script.parentNode.removeChild(script);
 };

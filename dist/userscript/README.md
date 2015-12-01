@@ -39,7 +39,8 @@ Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by thi
 - [Videos](http://www.twitch.tv/directory/videos)
 
 # Version history
-- 1.3.8 Fixed a bug when "Infinite scroll" stopped triggering after Ember framework version update on Twitch.
+- 1.3.9 Optimized "Infinite scroll" triggering.
+- 1.3.8 Fixed a bug when "Infinite scroll" stopped triggering after Ember framework update on Twitch.
 - 1.3.7 Fixed a bug when "Infinite scroll" didn't get triggered sometimes on language specific Channels page.
 - 1.3.5 Fixed a bug when solution was not working if Twitch was accessed with language specific URL.
 - 1.3.2 Fixed a bug when streams were not hiding on CS:GO pages.
