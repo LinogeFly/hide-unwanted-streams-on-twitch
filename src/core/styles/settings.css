@@ -61,13 +61,14 @@
 .husot-settings-blockedList-item-name {
     font-size: 14px;
     display: inline-block;
-    width: 250px;
+    width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     height: 30px;
     float: left;
     line-height: 30px;
+    padding-right: 80px;
 }
 
 .husot-settings-blockedList-item-empty {
@@ -82,6 +83,7 @@
     float: right;
     max-width: 80px;
     overflow: hidden;
+    margin-left: -80px;
 }
 
 .husot-settings-footer {

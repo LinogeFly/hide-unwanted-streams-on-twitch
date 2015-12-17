@@ -11,6 +11,7 @@
 }
 
 .husot-button:hover {
+    color: #fff;
     background: #7550ba;
     text-decoration: none;
 }
