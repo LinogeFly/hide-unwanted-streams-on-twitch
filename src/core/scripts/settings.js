@@ -52,7 +52,7 @@ husot.settings.BlockedItems.prototype = {
             return;
         }
 
-        husot.log.debug('husot.settings.add() starts');
+        husot.log.debug('husot.settings.BlockedItems.add() starts');
         self._get(name, function (item) {
             // Don't process if already in the list
             if (typeof item !== 'undefined') {
@@ -68,7 +68,7 @@ husot.settings.BlockedItems.prototype = {
                     // Invalidate cached list of blocked items
                     self._blockedItems = undefined;
 
-                    husot.log.debug('husot.settings.add() ends after {0} ms'.format((new Date().getTime()) - start));
+                    husot.log.debug('husot.settings.BlockedItems.add() ends after {0} ms'.format((new Date().getTime()) - start));
 
                     callback();
                 });
@@ -109,7 +109,7 @@ husot.settings.BlockedItems.prototype = {
             start = new Date().getTime();
 
         if (typeof self._blockedItems === 'undefined') {
-            husot.log.debug('husot.settings.list() starts');
+            husot.log.debug('husot.settings.BlockedItems.list() starts');
             husot.settings.getValue(self._settingsKey, '[]', function (item) {
                 // Convert to JSON
                 var items = self._parse(item);
@@ -122,7 +122,7 @@ husot.settings.BlockedItems.prototype = {
                 // Save in cache
                 self._blockedItems = items;
 
-                husot.log.debug('husot.settings.list() ends after {0} ms'.format((new Date().getTime()) - start));
+                husot.log.debug('husot.settings.BlockedItems.list() ends after {0} ms'.format((new Date().getTime()) - start));
 
                 // Return
                 if (typeof callback !== 'undefined') {
