@@ -20,14 +20,39 @@ husot.settings.BlockedItems.prototype = {
             }
         });
     },
+    // String parameter value can be raw JSON string or compressed JSON string.
+    _parse: function (str) {
+        try {
+            // Try to decompress first
+            var decompressed = LZString.decompressFromUTF16(str);
+
+            if (typeof decompressed === 'undefined' || decompressed === null || decompressed === '')
+                // When there is nothing to decompress it's raw JSON string
+                // so just parse original string to JSON
+                return JSON.parse(str);
+            else
+                // When decompression is successfull parse decompressed string to JSON
+                return JSON.parse(decompressed)
+        } catch (err) {
+            // Decompress + parse to JSON fails when string is not compressed
+            // so just parse original string to JSON
+            return JSON.parse(str);
+        }
+    },
+    _stringity: function (val) {
+        // Stringify to JSON and compress
+        return LZString.compressToUTF16(JSON.stringify(val));
+    },
     add: function (name, callback) {
-        var self = this;
+        var self = this,
+            start = new Date().getTime();
 
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             return;
         }
 
+        husot.log.debug('husot.settings.add() starts');
         self._get(name, function (item) {
             // Don't process if already in the list
             if (typeof item !== 'undefined') {
@@ -38,9 +63,12 @@ husot.settings.BlockedItems.prototype = {
             // Add to the list
             self.list(function (items) {
                 items.push({ 'name': name });
-                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
+
+                husot.settings.setValue(self._settingsKey, self._stringity(items), function () {
                     // Invalidate cached list of blocked items
                     self._blockedItems = undefined;
+
+                    husot.log.debug('husot.settings.add() ends after {0} ms'.format((new Date().getTime()) - start));
 
                     callback();
                 });
@@ -67,7 +95,7 @@ husot.settings.BlockedItems.prototype = {
             self.list(function (items) {
                 var index = $.inArray(item, items);
                 items.splice(index, 1);
-                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
+                husot.settings.setValue(self._settingsKey, self._stringify(items), function () {
                     // Invalidate cached list of blocked items
                     self._blockedItems = undefined;
 
@@ -77,12 +105,14 @@ husot.settings.BlockedItems.prototype = {
         });
     },
     list: function (callback) {
-        var self = this;
+        var self = this,
+            start = new Date().getTime();
 
         if (typeof self._blockedItems === 'undefined') {
+            husot.log.debug('husot.settings.list() starts');
             husot.settings.getValue(self._settingsKey, '[]', function (item) {
                 // Convert to JSON
-                var items = JSON.parse(item);
+                var items = self._parse(item);
 
                 // Sort by name alphabetically
                 items.sort(function (a, b) {
@@ -91,6 +121,8 @@ husot.settings.BlockedItems.prototype = {
 
                 // Save in cache
                 self._blockedItems = items;
+
+                husot.log.debug('husot.settings.list() ends after {0} ms'.format((new Date().getTime()) - start));
 
                 // Return
                 if (typeof callback !== 'undefined') {
