@@ -21,7 +21,8 @@ husot.tests.chromeSettings.bigTestValue = '[{"name":"A Game of Thrones: Genesis"
 husot.tests.chromeSettings.testDataForBigValueShouldBeBiggerThatQuotaLimit = function () {
     var self = this;
 
-    if (self.bigTestValue.length < chrome.storage.sync.QUOTA_BYTES_PER_ITEM / 2) {
+    // Times 2 because JavaScript string takes 2 bytes per character in UTF-8
+    if (self.bigTestValue.length * 2 < chrome.storage.sync.QUOTA_BYTES_PER_ITEM) {
         husot.tests.fail();
     }
 };
