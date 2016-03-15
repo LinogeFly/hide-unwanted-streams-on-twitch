@@ -15,7 +15,7 @@ To block a game navigate to [Games](http://www.twitch.tv/directory) page and use
 ## Unblocking content
 To unblock content that has been blocked use the [overlay menu](#overlay-menu) and click `Settings` button to access Setting window. Open "Blocked Channels" and "Blocked Games" tabs to find blocked items and click `Unblock` button to unblock them, like on the following picture:
 
-![Settings window](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/3c0123f6750857c7ddefdfd7b230badee793e412/docs/screenshots/screenshot-2-640x400.png)
+![Settings window](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/338c2c3c037e1677fa136d9527cadb329721c161/docs/screenshots/screenshot-2-640x400.png)
 
 ## Supported pages
 Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by this solution. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
