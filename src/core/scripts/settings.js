@@ -20,29 +20,6 @@ husot.settings.BlockedItems.prototype = {
             }
         });
     },
-    // String parameter value can be raw JSON string or compressed JSON string.
-    _parse: function (str) {
-        try {
-            // Try to decompress first
-            var decompressed = LZString.decompressFromUTF16(str);
-
-            if (typeof decompressed === 'undefined' || decompressed === null || decompressed === '')
-                // When there is nothing to decompress it's raw JSON string
-                // so just parse original string to JSON
-                return JSON.parse(str);
-            else
-                // When decompression is successfull parse decompressed string to JSON
-                return JSON.parse(decompressed)
-        } catch (err) {
-            // Decompress + parse to JSON fails when string is not compressed
-            // so just parse original string to JSON
-            return JSON.parse(str);
-        }
-    },
-    _stringity: function (val) {
-        // Stringify to JSON and compress
-        return LZString.compressToUTF16(JSON.stringify(val));
-    },
     add: function (name, callback) {
         var self = this,
             start = new Date().getTime();
@@ -64,7 +41,7 @@ husot.settings.BlockedItems.prototype = {
             self.list(function (items) {
                 items.push({ 'name': name });
 
-                husot.settings.setValue(self._settingsKey, self._stringity(items), function () {
+                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
                     // Invalidate cached list of blocked items
                     self._blockedItems = undefined;
 
@@ -95,7 +72,7 @@ husot.settings.BlockedItems.prototype = {
             self.list(function (items) {
                 var index = $.inArray(item, items);
                 items.splice(index, 1);
-                husot.settings.setValue(self._settingsKey, self._stringify(items), function () {
+                husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
                     // Invalidate cached list of blocked items
                     self._blockedItems = undefined;
 
@@ -112,7 +89,7 @@ husot.settings.BlockedItems.prototype = {
             husot.log.debug('husot.settings.BlockedItems.list() starts');
             husot.settings.getValue(self._settingsKey, '[]', function (item) {
                 // Convert to JSON
-                var items = self._parse(item);
+                var items = JSON.parse(item);
 
                 // Sort by name alphabetically
                 items.sort(function (a, b) {
