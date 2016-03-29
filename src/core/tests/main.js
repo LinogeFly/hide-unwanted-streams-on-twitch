@@ -6,6 +6,7 @@ husot.tests = husot.tests || {};
 husot.tests.runAll = function () {
     husot.tests.chromeSettings.runAll();
     husot.tests.domListener.runAll();
+    husot.tests.blockedItems.runAll();
 };
 
 husot.tests.fail = function (message) {

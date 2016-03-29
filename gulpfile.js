@@ -47,7 +47,8 @@ var buildUserScriptJs = function (isRelease) {
         'src/core/scripts/*.js',
         'src/core/tests/*.js',
         '!src/core/scripts/app.js', // Must go last so it will be added later on
-        'src/userscript/scripts/*.js'
+        'src/userscript/scripts/*.js',
+        'src/userscript/tests/*.js'
     ];
     if (isRelease) {
         src.push('!src/core/scripts/debug.js');

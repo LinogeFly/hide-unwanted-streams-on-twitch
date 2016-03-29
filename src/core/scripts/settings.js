@@ -11,7 +11,7 @@ husot.settings.BlockedItems = function (settingsKey) {
 husot.settings.BlockedItems.prototype = {
     _get: function (name, callback) {
         this.list(function (items) {
-            var $item = $.grep(items, function (x) { return x.name === name; });
+            var $item = $.grep(items, function (x) { return x === name; });
 
             if (!$item.length) {
                 callback();
@@ -39,7 +39,7 @@ husot.settings.BlockedItems.prototype = {
 
             // Add to the list
             self.list(function (items) {
-                items.push({ 'name': name });
+                items.push(name);
 
                 husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
                     // Invalidate cached list of blocked items
@@ -91,9 +91,20 @@ husot.settings.BlockedItems.prototype = {
                 // Convert to JSON
                 var items = JSON.parse(item);
 
+                items = items.map(function (x) {
+                    // Bakward compatibility
+                    // Previously, items were stored not as array of strings but as objects with 'name' property.
+                    // So trying to fetch 'name' property first.
+                    if (typeof x.name !== 'undefined') {
+                        return x.name;
+                    }
+
+                    return x;
+                });
+
                 // Sort by name alphabetically
                 items.sort(function (a, b) {
-                    return a.name.localeCompare(b.name);
+                    return a.localeCompare(b);
                 });
 
                 // Save in cache

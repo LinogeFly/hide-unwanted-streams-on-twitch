@@ -37,7 +37,7 @@ husot.settings.ui.Tab.prototype = (function () {
                 }
 
                 items.forEach(function (item) {
-                    var $blockedListItem = $(husot.htmlLayout.blockedListItem.format(item.name));
+                    var $blockedListItem = $(husot.htmlLayout.blockedListItem.format(item));
                     var $unblockBtn = $('.husot-settings-blockedList-item-unblockBtn', $blockedListItem);
                     $unblockBtn.click(function () {
                         self._unblockBtn_onClick(self, this);

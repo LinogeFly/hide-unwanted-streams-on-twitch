@@ -289,7 +289,7 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForChannel = func
     var channelName = $channelName.text().trim();
 
     return blockedChannels.some(function (item) {
-        return channelName.toLowerCase() === item.name.toLowerCase();
+        return channelName.toLowerCase() === item.toLowerCase();
     });
 };
 
@@ -312,7 +312,7 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
     var gameName = $gameName.attr('title') || $gameName.attr('original-title');
 
     return blockedGames.some(function (item) {
-        return gameName.toLowerCase() === item.name.toLowerCase();
+        return gameName.toLowerCase() === item.toLowerCase();
     });
 };
 
@@ -542,7 +542,7 @@ husot.thumbs.GameThumbsManager.prototype._isThumbMustBeHidden = function ($thumb
     var gameName = $gameName.text().trim();
 
     return blockedGames.some(function (item) {
-        return gameName.toLowerCase() === item.name.toLowerCase();
+        return gameName.toLowerCase() === item.toLowerCase();
     });
 };
 
