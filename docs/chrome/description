@@ -15,17 +15,8 @@ How to use:
   • To unblock content that has been blocked use the overlay menu and click "Settings" button to access Setting window. Open "Blocked Channels" and "Blocked Games" tabs to find blocked content and click "Unblock" button to unblock it.
   
 Version history:
+  • 1.3.11 Optimized space usage for block lists.
   • 1.3.10 Fixed small UI issues that appeared after Twitch's Whispers update.
   • 1.3.9 Optimized "Infinite scroll" triggering.
   • 1.3.8 Fixed a bug when "Infinite scroll" stopped triggering after Ember framework update on Twitch.
   • 1.3.7 Fixed a bug when "Infinite scroll" didn't get triggered sometimes on language specific Channels page.
-  • 1.3.6 Fixed a bug when block list was getting reset if hitting total storage limit for a Chrome extension.
-  • 1.3.5 Fixed a bug when extension was not working if Twitch was accessed with language specific URL.
-  • 1.3.4 Fixed a bug when it was not possible to save long block lists due to quotation limit for settings.
-  • 1.3.3 Fixed a bug when "Infinite scroll" didn't get triggered sometimes on Games page.
-  • 1.3.2 Fixed a bug when streams were not hiding on CS:GO pages.
-  • 1.3.1 Fixed performance issue that occurred when a lot of channels and games were blocked. Blocked items are now sorted alphabetically in Settings window.
-  • 1.3.0 Added support for blocking games.
-  • 1.2.2 Fixed a bug when new video thumbs were not loading sometimes after blocked channels were hidden.
-  • 1.2.1 Removed unnecessary permissions.
-  • 1.2.0 First release in Chrome Web Store.
