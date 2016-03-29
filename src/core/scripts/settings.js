@@ -92,7 +92,7 @@ husot.settings.BlockedItems.prototype = {
                 var items = JSON.parse(item);
 
                 items = items.map(function (x) {
-                    // Bakward compatibility
+                    // Backward compatibility
                     // Previously, items were stored not as array of strings but as objects with 'name' property.
                     // So trying to fetch 'name' property first.
                     if (typeof x.name !== 'undefined') {
