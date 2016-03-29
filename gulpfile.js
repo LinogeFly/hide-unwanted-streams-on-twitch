@@ -53,6 +53,7 @@ var buildUserScriptJs = function (isRelease) {
     if (isRelease) {
         src.push('!src/core/scripts/debug.js');
         src.push('!src/core/tests/*.js');
+        src.push('!src/userscript/tests/*.js');
     };
 
     return gulp.src(src)
