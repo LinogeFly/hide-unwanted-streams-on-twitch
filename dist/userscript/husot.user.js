@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on Twitch TV, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.10
+// @version      1.3.11
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://*.twitch.tv/*
@@ -271,7 +271,7 @@ husot.settings.BlockedItems = function (settingsKey) {
 husot.settings.BlockedItems.prototype = {
     _get: function (name, callback) {
         this.list(function (items) {
-            var $item = $.grep(items, function (x) { return x.name === name; });
+            var $item = $.grep(items, function (x) { return x === name; });
 
             if (!$item.length) {
                 callback();
@@ -281,13 +281,15 @@ husot.settings.BlockedItems.prototype = {
         });
     },
     add: function (name, callback) {
-        var self = this;
+        var self = this,
+            start = new Date().getTime();
 
         // Initial checks
         if (typeof name === 'undefined' || name === '') {
             return;
         }
 
+        husot.log.debug('husot.settings.BlockedItems.add() starts');
         self._get(name, function (item) {
             // Don't process if already in the list
             if (typeof item !== 'undefined') {
@@ -297,10 +299,13 @@ husot.settings.BlockedItems.prototype = {
 
             // Add to the list
             self.list(function (items) {
-                items.push({ 'name': name });
+                items.push(name);
+
                 husot.settings.setValue(self._settingsKey, JSON.stringify(items), function () {
                     // Invalidate cached list of blocked items
                     self._blockedItems = undefined;
+
+                    husot.log.debug('husot.settings.BlockedItems.add() ends after {0} ms'.format((new Date().getTime()) - start));
 
                     callback();
                 });
@@ -337,20 +342,35 @@ husot.settings.BlockedItems.prototype = {
         });
     },
     list: function (callback) {
-        var self = this;
+        var self = this,
+            start = new Date().getTime();
 
         if (typeof self._blockedItems === 'undefined') {
+            husot.log.debug('husot.settings.BlockedItems.list() starts');
             husot.settings.getValue(self._settingsKey, '[]', function (item) {
                 // Convert to JSON
                 var items = JSON.parse(item);
 
+                items = items.map(function (x) {
+                    // Backward compatibility
+                    // Previously, items were stored not as array of strings but as objects with 'name' property.
+                    // So trying to fetch 'name' property first.
+                    if (typeof x.name !== 'undefined') {
+                        return x.name;
+                    }
+
+                    return x;
+                });
+
                 // Sort by name alphabetically
                 items.sort(function (a, b) {
-                    return a.name.localeCompare(b.name);
+                    return a.localeCompare(b);
                 });
 
                 // Save in cache
                 self._blockedItems = items;
+
+                husot.log.debug('husot.settings.BlockedItems.list() ends after {0} ms'.format((new Date().getTime()) - start));
 
                 // Return
                 if (typeof callback !== 'undefined') {
@@ -404,7 +424,7 @@ husot.settings.ui.Tab.prototype = (function () {
                 }
 
                 items.forEach(function (item) {
-                    var $blockedListItem = $(husot.htmlLayout.blockedListItem.format(item.name));
+                    var $blockedListItem = $(husot.htmlLayout.blockedListItem.format(item));
                     var $unblockBtn = $('.husot-settings-blockedList-item-unblockBtn', $blockedListItem);
                     $unblockBtn.click(function () {
                         self._unblockBtn_onClick(self, this);
@@ -781,7 +801,7 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForChannel = func
     var channelName = $channelName.text().trim();
 
     return blockedChannels.some(function (item) {
-        return channelName.toLowerCase() === item.name.toLowerCase();
+        return channelName.toLowerCase() === item.toLowerCase();
     });
 };
 
@@ -804,7 +824,7 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
     var gameName = $gameName.attr('title') || $gameName.attr('original-title');
 
     return blockedGames.some(function (item) {
-        return gameName.toLowerCase() === item.name.toLowerCase();
+        return gameName.toLowerCase() === item.toLowerCase();
     });
 };
 
@@ -1034,7 +1054,7 @@ husot.thumbs.GameThumbsManager.prototype._isThumbMustBeHidden = function ($thumb
     var gameName = $gameName.text().trim();
 
     return blockedGames.some(function (item) {
-        return gameName.toLowerCase() === item.name.toLowerCase();
+        return gameName.toLowerCase() === item.toLowerCase();
     });
 };
 

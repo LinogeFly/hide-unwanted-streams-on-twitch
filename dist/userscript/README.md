@@ -30,7 +30,7 @@ To block a game navigate to [Games](http://www.twitch.tv/directory) page and use
 ## Unblocking content
 To unblock content that has been blocked use the [overlay menu](#overlay-menu) and click `Settings` button to access Setting window. Open "Blocked Channels" and "Blocked Games" tabs to find blocked items and click `Unblock` button to unblock them, like on the following picture:
 
-![Settings window](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/3c0123f6750857c7ddefdfd7b230badee793e412/docs/screenshots/screenshot-2-640x400.png)
+![Settings window](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/338c2c3c037e1677fa136d9527cadb329721c161/docs/screenshots/screenshot-2-640x400.png)
 
 ## Supported pages
 Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by this solution. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
@@ -39,17 +39,11 @@ Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by thi
 - [Videos](http://www.twitch.tv/directory/videos)
 
 # Version history
+- 1.3.11 Optimized space usage for block lists.
 - 1.3.10 Fixed small UI issues that appeared after Twitch's Whispers update.
 - 1.3.9 Optimized "Infinite scroll" triggering.
 - 1.3.8 Fixed a bug when "Infinite scroll" stopped triggering after Ember framework update on Twitch.
 - 1.3.7 Fixed a bug when "Infinite scroll" didn't get triggered sometimes on language specific Channels page.
-- 1.3.5 Fixed a bug when solution was not working if Twitch was accessed with language specific URL.
-- 1.3.2 Fixed a bug when streams were not hiding on CS:GO pages.
-- 1.3.1 Fixed performance issue that occurred when a lot of channels and games were blocked. Blocked items are now sorted alphabetically in Settings window.
-- 1.3.0 Added support for blocking games.
-- 1.2.2 Fixed a bug when new video thumbs were not loading sometimes after blocked channels were hidden.
-- 1.1.0 Added support for hiding videos in addition to live streams.
-- 1.0.0 First release.
 
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
