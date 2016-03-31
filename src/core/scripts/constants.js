@@ -5,6 +5,7 @@ var husot = husot || {};
 husot.constants = husot.constants || {};
 husot.constants.blockedChannelsSettingsKey = 'blockedChannels';
 husot.constants.blockedGamesSettingsKey = 'blockedGames';
+husot.constants.blockedLanguagesSettingsKey = 'blockedLanguages';
 husot.constants.blockedChannelsListEmpty = 'No Blocked Channels';
 husot.constants.blockedGamesListEmpty = 'No Blocked Games';
 husot.constants.modalDialogShowingSpeed = 150;

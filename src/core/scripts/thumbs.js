@@ -316,6 +316,15 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
     });
 };
 
+husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForLanguage = function ($thumbContainer, blockedLanguages) {
+    return false;
+
+    var viewId = $thumbContainer.parent('.ember-view').attr('id');
+    var view = App.__container__.lookup("-view-registry:main")[viewId];
+    var language = view.controller.stream.channel.broadcaster_language;
+    var userId = view.controller.stream.user.id;
+};
+
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
     return '.stream.item, .video.item';
 }
@@ -337,11 +346,17 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
             resolve(items);
         });
     });
+    var blockedLanguagesPromise = new Promise(function (resolve, reject) {
+        husot.settings.blockedLanguages.list(function (items) {
+            resolve(items);
+        });
+    });
 
     // Hide thumbnails after block lists are loaded
-    Promise.all([blockedChannelsPromise, blockedGamesPromise]).then(function (values) {
+    Promise.all([blockedChannelsPromise, blockedGamesPromise, blockedLanguagesPromise]).then(function (values) {
         var blockedChannels = values[0];
         var blockedGames = values[1];
+        var blockedLanguages = values[2];
 
         // Get visible thumbs
         $thumbContainers = $(self._getContainerSelector()).filter(':visible');
@@ -360,6 +375,13 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
 
             // Hide for games
             if (self._isThumbMustBeHiddenForGame($item, blockedGames)) {
+                $item.hide();
+                hiddenThumbsCount++;
+                return;
+            }
+
+            // Hide for languages
+            if (self._isThumbMustBeHiddenForLanguage($item, blockedLanguages)) {
                 $item.hide();
                 hiddenThumbsCount++;
                 return;

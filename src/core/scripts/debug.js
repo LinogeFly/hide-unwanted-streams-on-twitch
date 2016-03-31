@@ -27,3 +27,7 @@ husot.debug.setBlockedGamesList = function () {
 
     husot.settings.setValue(husot.constants.blockedGamesSettingsKey, manyGames, function () { });
 };
+
+husot.debug.setBlockedLanguagesList = function () {
+    husot.settings.setValue(husot.constants.blockedLanguagesSettingsKey, '["ru","fr"]', function () { });
+};
