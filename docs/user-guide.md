@@ -22,3 +22,4 @@ Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by thi
 - [Games](http://www.twitch.tv/directory)
 - [Channels](http://www.twitch.tv/directory/all)
 - [Videos](http://www.twitch.tv/directory/videos)
+- [Following](http://www.twitch.tv/directory/following)

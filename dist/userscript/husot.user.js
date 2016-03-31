@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on Twitch TV, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.11
+// @version      1.3.12
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://*.twitch.tv/*
@@ -30,7 +30,8 @@ husot.constants.allowedUrls = [
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/all(/?|/.+)$',
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/.+',
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/random/?$',
-    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/videos/.+'
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/videos/.+',
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/following(/?|/.+)$'
 ];
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';

@@ -37,13 +37,14 @@ Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by thi
 - [Games](http://www.twitch.tv/directory)
 - [Channels](http://www.twitch.tv/directory/all)
 - [Videos](http://www.twitch.tv/directory/videos)
+- [Following](http://www.twitch.tv/directory/following)
 
 # Version history
+- 1.3.12 Added support for Following pages.
 - 1.3.11 Optimized space usage for block lists.
 - 1.3.10 Fixed small UI issues that appeared after Twitch's Whispers update.
 - 1.3.9 Optimized "Infinite scroll" triggering.
 - 1.3.8 Fixed a bug when "Infinite scroll" stopped triggering after Ember framework update on Twitch.
-- 1.3.7 Fixed a bug when "Infinite scroll" didn't get triggered sometimes on language specific Channels page.
 
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
