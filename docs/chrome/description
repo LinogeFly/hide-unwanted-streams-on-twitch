@@ -1,4 +1,4 @@
-This extension adds special menu on Twitch TV web site for blocking unwanted content. Use the menu to add channels and games that you don't normally watch on Twitch TV to a block list, so its content, like streams and videos, will not be visible for you anymore.
+This extension adds special menu on twitch.tv for blocking unwanted content. Use the menu to block channels and games that you don't normally watch on twitch.tv and those will not be visible for you anymore.
 
 Key Features:
   • Blocking channels
@@ -9,9 +9,9 @@ The extension works only on "Directory" pages (http://www.twitch.tv/directory) s
 
 How to use:
   • Install this extension.
-  • Find the overlay menu by hovering mouse over stream, video or game thumbnail on "Games", "Channels" or "Video" page on Twitch TV web site.
-  • To block a channel navigate to "Channels" or "Videos" page and use "Block" button in the overlay menu on a stream or video thumbnail.
-  • To block a game navigate to "Games" page and use "Block" button in the overlay menu on a game thumbnail.
+  • Find the overlay menu by hovering mouse over stream, video or game thumbnail on twitch.tv.
+  • To block a channel open "Channels" or any game page and use "Block" button in the overlay menu on a stream thumbnail.
+  • To block a game open "Games" page and use "Block" button in the overlay menu on a game thumbnail.
   • To unblock content that has been blocked use the overlay menu and click "Settings" button to access Setting window. Open "Blocked Channels" and "Blocked Games" tabs to find blocked content and click "Unblock" button to unblock it.
   
 Version history:
