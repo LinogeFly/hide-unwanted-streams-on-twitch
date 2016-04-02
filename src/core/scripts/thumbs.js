@@ -326,10 +326,21 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForLanguage = fun
     if ($thumbContainer.length !== 1) {
         throw Error(husot.exceptions.argumentOneElementExpected('$thumbContainer'));
     }
+    if (typeof thumbsData === 'undefined' || !thumbsData.length) {
+        return false; // There is nothing to hide for language because languages are supposed to be recieved in thumbsData
+    }
 
     var $channelName = self._getChannelNameJQueryElement($thumbContainer);
     var channelName = $channelName.text().trim();
-    var channelData = thumbsData.find(function (x) { return x.channel.toLowerCase() === channelName.toLowerCase() });
+
+    var channelData = thumbsData.find(function (x) {
+        if (typeof x.channel === 'undefined') { return false }
+        return x.channel.toLowerCase() === channelName.toLowerCase()
+    });
+
+    if (typeof channelData === 'undefined' || typeof channelData.language === 'undefined') {
+        return false;
+    }
 
     return blockedLanguages.some(function (x) {
         return channelData.language.toLowerCase() === x.toLowerCase();

@@ -1,30 +1,35 @@
-﻿document.addEventListener('husot-event-getThumbnailData', function (e) {
-    var start = new Date().getTime();
+﻿document.addEventListener('husot-event-getThumbnailData', function (args) {
+    function getThumbsData() {
+        if (typeof args.detail === 'undefined' || typeof args.detail.thumbSelector === 'undefined') {
+            return [];
+        }
 
-    console.log('HUSOT: ' + 'husot-event-getThumbnailData starts');
+        try {
+            var result = [];
 
-    var $thumbs = $(e.detail.thumbSelector);
-    var thumbsData = [];
+            $(args.detail.thumbSelector).each(function () {
+                var $item = $(this);
+                var viewId = $item.parent('.ember-view').attr('id');
+                var view = App.__container__.lookup("-view-registry:main")[viewId];
+                var language = view.controller.stream.channel.broadcaster_language;
+                var channel = view.controller.stream.channel.display_name;
 
-    $thumbs.each(function () {
-        var $item = $(this);
-        var viewId = $item.parent('.ember-view').attr('id');
-        var view = App.__container__.lookup("-view-registry:main")[viewId];
-        var language = view.controller.stream.channel.broadcaster_language;
-        var channel = view.controller.stream.channel.display_name;
+                result.push({
+                    language: language,
+                    channel: channel
+                });
+            });
 
-        thumbsData.push({
-            language: language,
-            channel: channel
-        });
-    });
-
-    console.log('HUSOT: ' + $thumbs.length);
-    console.log('HUSOT: ' + 'husot-event-getThumbnailData ends after ' + ((new Date().getTime()) - start) + ' ms');
-    //console.log('HUSOT: ' + JSON.stringify(thumbsData));
+            return result;
+        }
+        catch (err) {
+            // Could have logged the error here but Twitch overrides console.log.error function, Kappa
+            return [];
+        }
+    }
 
     window.postMessage({
-        direction: "husot-message-getThumbnailData",
-        message: JSON.stringify(thumbsData)
+        direction: 'husot-message-gotThumbnailData',
+        message: JSON.stringify(getThumbsData())
     }, "*");
 });

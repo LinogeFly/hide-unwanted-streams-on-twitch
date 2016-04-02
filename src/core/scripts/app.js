@@ -21,7 +21,7 @@ husot.main = function () {
     husot.thumbs.gameThumbsManager = new husot.thumbs.GameThumbsManager(husot.thumbs.streamThumbsManager);
 
     window.addEventListener('message', function (event) {
-        if (event.data.direction && event.data.direction === 'husot-message-getThumbnailData') {
+        if (event.data.direction && event.data.direction === 'husot-message-gotThumbnailData') {
             var thumbsData = JSON.parse(event.data.message);
 
             husot.thumbs.streamThumbsManager.hideThumbs(thumbsData);
