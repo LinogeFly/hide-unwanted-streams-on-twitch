@@ -61,7 +61,7 @@ husot.thumbs.ThumbsManagerBase.prototype = {
 
         // Raise injected custom event that triggers "infinite scroll" feature on Twitch.
         var event = document.createEvent('Event');
-        event.initEvent('husot.loadMoreThumbs', true, true);
+        event.initEvent('husot-event-loadMoreThumbs', true, true);
         document.dispatchEvent(event);
     },
     _notifyAboutHiddenThumbs: function (count) {
@@ -316,20 +316,31 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
     });
 };
 
-husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForLanguage = function ($thumbContainer, blockedLanguages) {
-    return false;
+husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForLanguage = function ($thumbContainer, blockedLanguages, thumbsData) {
+    var self = this;
 
-    var viewId = $thumbContainer.parent('.ember-view').attr('id');
-    var view = App.__container__.lookup("-view-registry:main")[viewId];
-    var language = view.controller.stream.channel.broadcaster_language;
-    var userId = view.controller.stream.user.id;
+    // Initial checks
+    if (typeof $thumbContainer === 'undefined' || !$thumbContainer.length) {
+        throw Error(husot.exceptions.argumentNullOrEmpty('$thumbContainer'));
+    }
+    if ($thumbContainer.length !== 1) {
+        throw Error(husot.exceptions.argumentOneElementExpected('$thumbContainer'));
+    }
+
+    var $channelName = self._getChannelNameJQueryElement($thumbContainer);
+    var channelName = $channelName.text().trim();
+    var channelData = thumbsData.find(function (x) { return x.channel.toLowerCase() === channelName.toLowerCase() });
+
+    return blockedLanguages.some(function (x) {
+        return channelData.language.toLowerCase() === x.toLowerCase();
+    });
 };
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
     return '.stream.item, .video.item';
 }
 
-husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
+husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function (thumbsData) {
     var self = this;
 
     var start = new Date().getTime();
@@ -381,7 +392,7 @@ husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
             }
 
             // Hide for languages
-            if (self._isThumbMustBeHiddenForLanguage($item, blockedLanguages)) {
+            if (self._isThumbMustBeHiddenForLanguage($item, blockedLanguages, thumbsData)) {
                 $item.hide();
                 hiddenThumbsCount++;
                 return;

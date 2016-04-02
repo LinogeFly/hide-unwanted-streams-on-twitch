@@ -35,8 +35,15 @@ husot.domListener = (function () {
         thumbsManager.addThumbOverlays();
         start();
 
+        var event = document.createEvent('CustomEvent');
+        var eventData = {
+            thumbSelector: thumbsManager.getDomListnerThumbSelector()
+        };
+        event.initCustomEvent('husot-event-getThumbnailData', true, true, eventData);
+        document.dispatchEvent(event);
+
         // Hide blocked thumbs
-        thumbsManager.hideThumbs();
+        //thumbsManager.hideThumbs();
     }
 
     function isUrlAllowed(url) {

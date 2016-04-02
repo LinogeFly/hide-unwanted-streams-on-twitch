@@ -1,4 +1,4 @@
 // Loads more stream/video thumbnails
-document.addEventListener('husot.loadMoreThumbs', function () {
+document.addEventListener('husot-event-loadMoreThumbs', function () {
     $('#directory-list .items > .ember-view').trigger('scroll');
 });
