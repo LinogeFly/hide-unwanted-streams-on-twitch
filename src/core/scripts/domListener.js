@@ -74,6 +74,7 @@ husot.domListener = (function () {
 
     return {
         start: start,
-        isUrlAllowed: isUrlAllowed
+        isUrlAllowed: isUrlAllowed,
+        getThumbnailData: getThumbnailData
     };
 })();

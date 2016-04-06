@@ -8,8 +8,6 @@ husot.main = function () {
         return;
     }
 
-    husot.debug.setBlockedLanguagesList();
-
     husot.settings.blockedChannels = new husot.settings.BlockedItems(husot.constants.blockedChannelsSettingsKey);
     husot.settings.blockedChannels.list(); // Warm up settings loading
     husot.settings.blockedGames = new husot.settings.BlockedItems(husot.constants.blockedGamesSettingsKey);

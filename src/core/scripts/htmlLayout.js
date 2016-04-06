@@ -45,13 +45,13 @@ husot.htmlLayout.blockedListItem = '\
 husot.htmlLayout.languageBlockedListItemAllowed = '\
     <li class="husot-settings-blockedList-item">\
         <div class="husot-settings-blockedList-item-name"><span>{0}<span>&nbsp;<span class="allowed">(Allowed)</span></div>\
-        <a class="husot-settings-blockedList-item-unblockBtn husot-button" href="javascript:void(0);">Block</a>\
+        <a class="husot-settings-blockedList-item-unblockBtn husot-button" data-action="block" data-language="{1}" href="javascript:void(0);">Block</a>\
     </li>';
 
 husot.htmlLayout.languageBlockedListItemBlocked = '\
     <li class="husot-settings-blockedList-item">\
         <div class="husot-settings-blockedList-item-name"><span>{0}<span>&nbsp;<span class="blocked">(Blocked)</span></div>\
-        <a class="husot-settings-blockedList-item-unblockBtn husot-button" href="javascript:void(0);">Unblock</a>\
+        <a class="husot-settings-blockedList-item-unblockBtn husot-button" data-action="unblock" data-language="{1}" href="javascript:void(0);">Unblock</a>\
     </li>';
 
 husot.htmlLayout.blockedListItemEmpty = '<li><div class="husot-settings-blockedList-item-empty">{0}</div></li>';
