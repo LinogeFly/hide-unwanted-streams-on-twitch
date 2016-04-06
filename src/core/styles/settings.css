@@ -91,9 +91,9 @@
 
 .husot-settings-blockedList-item-unblockBtn {
     float: right;
-    max-width: 80px;
+    width: 70px;
     overflow: hidden;
-    margin-left: -80px;
+    margin-left: -70px;
 }
 
 .husot-settings-footer {
@@ -105,5 +105,5 @@
 }
 
 .husot-settings-footer .husot-button {
-    min-width: 70px;
+    width: 80px;
 }

@@ -133,22 +133,20 @@ husot.settings.ui.LanguagesTab.prototype = (function () {
             self._$blockedList.empty();
 
             husot.constants.blockLanguages.forEach(function (lang) {
-                var langUiItem = getLanguageUiName(items, lang);
-                var $blockedListUiItem = $(husot.htmlLayout.blockedListItem.format(langUiItem));
-                self._$blockedList.append($blockedListUiItem);
+                self._$blockedList.append(getLanguageUiItem(items, lang));
             });
         });
     }
 
-    function getLanguageUiName(blockList, lang) {
-        var isBlocked = blockList.some(function (x) {
-            return lang.code.toLowerCase() === x.toLowerCase();
+    function getLanguageUiItem(blockedLanguages, language) {
+        var isBlocked = blockedLanguages.some(function (x) {
+            return language.code.toLowerCase() === x.toLowerCase();
         });
 
         if (isBlocked)
-            return husot.htmlLayout.languageNameBlocked.format(lang.name);
+            return husot.htmlLayout.languageBlockedListItemBlocked.format(language.name);
         else
-            return husot.htmlLayout.languageNameAllowed.format(lang.name);
+            return husot.htmlLayout.languageBlockedListItemAllowed.format(language.name);
     }
 })();
 
