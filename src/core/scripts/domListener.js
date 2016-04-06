@@ -15,6 +15,15 @@ husot.domListener = (function () {
         modifyThumbs(mutations, husot.thumbs.gameThumbsManager);
     });
 
+    window.addEventListener('message', function (event) {
+        if (event.data.direction && event.data.direction === 'husot-message-gotThumbnailData') {
+            var thumbsData = JSON.parse(event.data.message);
+
+            husot.thumbs.streamThumbsManager.hideThumbs(thumbsData);
+            husot.thumbs.gameThumbsManager.hideThumbs();
+        }
+    });
+
     function start() {
         observer.observe(document.body, {
             childList: true,
@@ -35,15 +44,8 @@ husot.domListener = (function () {
         thumbsManager.addThumbOverlays();
         start();
 
-        var event = document.createEvent('CustomEvent');
-        var eventData = {
-            thumbSelector: thumbsManager.getDomListnerThumbSelector()
-        };
-        event.initCustomEvent('husot-event-getThumbnailData', true, true, eventData);
-        document.dispatchEvent(event);
-
-        // Hide blocked thumbs
-        //thumbsManager.hideThumbs();
+        // Dispatch event to load thumbnail data from main window
+        getThumbnailData(thumbsManager);
     }
 
     function isUrlAllowed(url) {
@@ -59,6 +61,15 @@ husot.domListener = (function () {
                 return $(this).css('display') !== 'none';
             }).length !== 0;
         });
+    }
+
+    function getThumbnailData(thumbsManager) {
+        var event = document.createEvent('CustomEvent');
+        var eventData = {
+            thumbSelector: thumbsManager.getDomListnerThumbSelector()
+        };
+        event.initCustomEvent('husot-event-getThumbnailData', true, true, eventData);
+        document.dispatchEvent(event);
     }
 
     return {

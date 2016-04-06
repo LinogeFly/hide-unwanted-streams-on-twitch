@@ -1,9 +1,5 @@
 ﻿document.addEventListener('husot-event-getThumbnailData', function (args) {
-    function getThumbsData() {
-        if (typeof args.detail === 'undefined' || typeof args.detail.thumbSelector === 'undefined') {
-            return [];
-        }
-
+    function parseChannelData(thumbSelector) {
         try {
             var result = [];
 
@@ -28,8 +24,17 @@
         }
     }
 
-    window.postMessage({
-        direction: 'husot-message-gotThumbnailData',
-        message: JSON.stringify(getThumbsData())
-    }, "*");
+    function postMessage(data) {
+        window.postMessage({
+            direction: 'husot-message-gotThumbnailData',
+            message: JSON.stringify(data)
+        }, "*");
+    }
+
+    if (typeof args.detail === 'undefined' || typeof args.detail.thumbSelector === 'undefined') {
+        postMessage([]);
+        return;
+    }
+
+    postMessage(parseChannelData(args.detail.thumbSelector));
 });
