@@ -329,16 +329,22 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForLanguage = fun
     if (typeof thumbsData === 'undefined' || !thumbsData.length) {
         return false; // There is nothing to hide for language because languages are supposed to be recieved in thumbsData
     }
+    if (typeof blockedLanguages === 'undefined' || !thumbsData.length) {
+        return false; // There are no languages to be blocked
+    }
 
     var $channelName = self._getChannelNameJQueryElement($thumbContainer);
     var channelName = $channelName.text().trim();
 
     var channelData = thumbsData.find(function (x) {
-        if (typeof x.channel === 'undefined') { return false }
+        if (typeof x.channel === 'undefined' || x.channel === null || x.channel === '') {
+            return false;
+        }
+
         return x.channel.toLowerCase() === channelName.toLowerCase()
     });
 
-    if (typeof channelData === 'undefined' || typeof channelData.language === 'undefined') {
+    if (typeof channelData === 'undefined' || typeof channelData.language === 'undefined' || channelData.language === null || channelData.language === '') {
         return false;
     }
 
