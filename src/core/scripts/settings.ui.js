@@ -84,6 +84,11 @@ husot.settings.ui.Window = function () {
         husot.constants.blockedGamesListEmpty,
         husot.thumbs.gameThumbsManager
     );
+
+    this._blockedLanguagesTab = new husot.settings.ui.LanguagesTab(
+        $('#husot-settings-blockedLanguagesList'),
+        husot.settings.blockedLanguages
+    );
 }
 
 husot.settings.ui.Window.prototype = {
@@ -91,6 +96,7 @@ husot.settings.ui.Window.prototype = {
         // Load tab content
         this._blockedChannelsTab.loadBlockedItems();
         this._blockedGamesTab.loadBlockedItems();
+        this._blockedLanguagesTab.loadBlockedItems();
 
         // Activate tab
         if (typeof blockedItemType === 'undefined' || blockedItemType === '') {
@@ -108,6 +114,43 @@ husot.settings.ui.Window.prototype = {
         throw Error('Unknown blockedItemType');
     }
 }
+
+// Languages Tab class
+
+husot.settings.ui.LanguagesTab = function ($blockedList, blockedItemsManager) {
+    this._$blockedList = $blockedList;
+    this._blockedItemsManager = blockedItemsManager;
+}
+
+husot.settings.ui.LanguagesTab.prototype = (function () {
+    return {
+        loadBlockedItems: loadBlockedItems
+    }
+
+    function loadBlockedItems() {
+        var self = this;
+        self._blockedItemsManager.list(function (items) {
+            self._$blockedList.empty();
+
+            husot.constants.blockLanguages.forEach(function (lang) {
+                var langUiItem = getLanguageUiName(items, lang);
+                var $blockedListUiItem = $(husot.htmlLayout.blockedListItem.format(langUiItem));
+                self._$blockedList.append($blockedListUiItem);
+            });
+        });
+    }
+
+    function getLanguageUiName(blockList, lang) {
+        var isBlocked = blockList.some(function (x) {
+            return lang.code.toLowerCase() === x.toLowerCase();
+        });
+
+        if (isBlocked)
+            return husot.htmlLayout.languageNameBlocked.format(lang.name);
+        else
+            return husot.htmlLayout.languageNameAllowed.format(lang.name);
+    }
+})();
 
 // Helper static functions
 

@@ -71,6 +71,16 @@
     padding-right: 80px;
 }
 
+.husot-settings-blockedList-item-name .allowed {
+    color: #265007;
+    font-style: italic;
+}
+
+.husot-settings-blockedList-item-name .blocked {
+    color: #9b0909;
+    font-style: italic;
+}
+
 .husot-settings-blockedList-item-empty {
     text-align: center;
     font-size: 16px;

@@ -17,14 +17,18 @@ husot.htmlLayout.settingsWindow = '\
     <div class="husot-settings husot-modalWindow">\
         <ul class="husot-settings-nav">\
             <li class="husot-settings-nav-item">\
-                <a class="husot-settings-nav-item-name" data-husot-contentPanelId="husot-settings-blockedChannelsList">Blocked Channels</a>\
+                <a class="husot-settings-nav-item-name" data-husot-contentPanelId="husot-settings-blockedChannelsList">Channels</a>\
             </li>\
             <li class="husot-settings-nav-item">\
-                <a class="husot-settings-nav-item-name" data-husot-contentPanelId="husot-settings-blockedGamesList">Blocked Games</a>\
+                <a class="husot-settings-nav-item-name" data-husot-contentPanelId="husot-settings-blockedGamesList">Games</a>\
+            </li>\
+            <li class="husot-settings-nav-item">\
+                <a class="husot-settings-nav-item-name" data-husot-contentPanelId="husot-settings-blockedLanguagesList">Languages</a>\
             </li>\
         </ul>\
         <ul class="husot-settings-blockedList" id="husot-settings-blockedChannelsList"></ul>\
         <ul class="husot-settings-blockedList" id="husot-settings-blockedGamesList"></ul>\
+        <ul class="husot-settings-blockedList" id="husot-settings-blockedLanguagesList"></ul>\
         <div class="husot-settings-footer">\
             <a href="#" class="husot-modalClose husot-button">Close</a>\
         </div>\
@@ -39,3 +43,7 @@ husot.htmlLayout.blockedListItem = '\
     </li>';
 
 husot.htmlLayout.blockedListItemEmpty = '<li><div class="husot-settings-blockedList-item-empty">{0}</div></li>';
+
+husot.htmlLayout.languageNameAllowed = '<span>{0}<span>&nbsp;<span class="allowed">(Allowed)</span>';
+
+husot.htmlLayout.languageNameBlocked = '<span>{0}<span>&nbsp;<span class="blocked">(Blocked)</span>';
