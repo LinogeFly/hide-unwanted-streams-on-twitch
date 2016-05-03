@@ -14,11 +14,14 @@ husot.modalDialog = (function () {
         $(document.body).append($overlay);
     }
 
-    function create($modalWindow) {
+    function create($modalWindow, onClose) {
         $modalWindow.click(function (event) {
             event.stopPropagation();
         });
-        $modalWindow.find('.husot-modalClose').click(close);
+        $modalWindow.find('.husot-modalClose').click(function () {
+            close();
+            onClose();
+        });
         $('.husot-modalOverlay').append($modalWindow);
     }
 
@@ -28,7 +31,7 @@ husot.modalDialog = (function () {
         $modalWindow.animate({ 'margin-top': '40px' }, husot.constants.modalDialogShowingSpeed);
     }
 
-    function close(event) {
+    function close() {
         $('.husot-modalOverlay').fadeOut(husot.constants.modalDialogShowingSpeed);
         var $modalWindow = $('.husot-modalWindow');
         $modalWindow.fadeOut(husot.constants.modalDialogShowingSpeed);

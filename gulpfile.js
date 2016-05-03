@@ -34,7 +34,7 @@ gulp.task('clean', ['build-clean', 'release-clean']);
 gulp.task('build-injects', ['build-clean'], function () {
     return gulp.src('src/core/scripts/injects/*.js')
         .pipe(concat('injects.js'))
-        .pipe(uglify())
+        //.pipe(uglify())
         .pipe(gulp.dest('build/_temp'));
 });
 
@@ -44,7 +44,8 @@ var buildUserScriptJs = function (isRelease) {
     // Prepare files list
     var src = [
         'build/userscript/_temp/manifest.txt',
-        'src/core/scripts/*.js',
+        'src/core/scripts/**/*.js',
+        '!src/core/scripts/injects/*.js',
         'src/core/tests/*.js',
         '!src/core/scripts/app.js', // Must go last so it will be added later on
         'src/userscript/scripts/*.js',
@@ -115,7 +116,9 @@ gulp.task('release-userscript', ['build-userscript-readme', 'release-userscript-
 var buildChromeJs = function (isRelease) {
     // Prepare files list
     var src = [
-        'src/core/scripts/*.js',
+        'src/core/scripts/**/*.js',
+        '!src/core/scripts/thumbs.old.js',
+        '!src/core/scripts/injects/*.js',
         'src/core/tests/*.js',
         '!src/core/scripts/app.js', // Must go last so it will be added later on
         'src/chrome/scripts/*.js',
@@ -180,7 +183,7 @@ gulp.task('build', ['build-userscript', 'build-chrome']);
 
 gulp.task('release', ['release-userscript', 'release-chrome']);
 
-gulp.task('watch', function () {
+gulp.task('watch', ['build'], function () {
     gulp.watch(
         [
             'src/**/*.js',

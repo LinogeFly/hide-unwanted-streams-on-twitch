@@ -30,7 +30,7 @@ husot.htmlLayout.settingsWindow = '\
         <ul class="husot-settings-blockedList" id="husot-settings-blockedGamesList"></ul>\
         <ul class="husot-settings-blockedList" id="husot-settings-blockedLanguagesList"></ul>\
         <div class="husot-settings-footer">\
-            <a href="#" class="husot-modalClose husot-button">Close</a>\
+            <a href="javascript:void(0);" class="husot-modalClose husot-button">Close</a>\
         </div>\
     </div>';
 

@@ -16,7 +16,8 @@ husot.main = function () {
     husot.settings.blockedLanguages.list(); // Warm up settings loading
 
     husot.thumbs.streamThumbsManager = new husot.thumbs.StreamThumbsManager();
-    husot.thumbs.gameThumbsManager = new husot.thumbs.GameThumbsManager(husot.thumbs.streamThumbsManager);
+    husot.thumbs.videoThumbsManager = new husot.thumbs.VideoThumbsManager();
+    husot.thumbs.gameThumbsManager = new husot.thumbs.GameThumbsManager();
 
     husot.modalDialog.initOverlay();
     husot.settings.ui.window = new husot.settings.ui.Window();
@@ -27,3 +28,5 @@ husot.main = function () {
 $(document).ready(function () {
     husot.main();
 });
+
+

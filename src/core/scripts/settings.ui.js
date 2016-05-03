@@ -22,7 +22,7 @@ husot.settings.ui.Tab.prototype = (function () {
 
             self._blockedItemsManager.remove(name, function () {
                 self.loadBlockedItems();
-                self._thumbsManager.showThumbs(name);
+                //self._thumbsManager.showThumbs(name);
             });
         },
         loadBlockedItems: function () {
@@ -57,7 +57,18 @@ husot.settings.ui.Window = function () {
     var create = function () {
         var $settingsWindow = $(husot.htmlLayout.settingsWindow);
         $('.husot-settings-nav-item-name', $settingsWindow).click(navItem_onClick);
-        husot.modalDialog.create($settingsWindow);
+        husot.modalDialog.create($settingsWindow, function () {
+            var messageData = {
+                thumbsSelector: husot.thumbs.streamThumbsManager.getDomListnerThumbSelector(),
+                thumbsManagerId: husot.thumbs.streamThumbsManager.getId(),
+                callback: 'husot-message-gotThumbnailData-full'
+            };
+
+            window.postMessage({
+                direction: 'husot-message-getThumbnailData',
+                message: JSON.stringify(messageData)
+            }, "*");
+        });
     }
 
     // Event handlers for switching content of the tabs
@@ -153,7 +164,7 @@ husot.settings.ui.LanguagesTab.prototype = (function () {
         if (action.toLowerCase() === 'block') {
             self._blockedItemsManager.add(lang, function () {
                 self.loadBlockedItems();
-                husot.domListener.getThumbnailData(self._thumbsManager);
+                //husot.domListener.getThumbnailData(self._thumbsManager);
 
             });
         }
