@@ -22,4 +22,3 @@ Not all pages on [twitch.tv](http://www.twitch.tv/) are affected by this solutio
 - [Games](http://www.twitch.tv/directory)
 - [Channels](http://www.twitch.tv/directory/all)
 - [Videos](http://www.twitch.tv/directory/videos)
-- [Following](http://www.twitch.tv/directory/following)

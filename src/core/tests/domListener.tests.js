@@ -35,18 +35,7 @@ husot.tests.domListener.shouldAllowUrls = function () {
         'http://www.twitch.tv/directory/random',
         'http://www.twitch.tv/directory/random/',
         'http://www.twitch.tv/directory/videos/week',
-        'http://www.twitch.tv/directory/videos/week/',
-
-        'http://www.twitch.tv/directory/following',
-        'http://www.twitch.tv/directory/following/',
-        'http://www.twitch.tv/directory/following/live',
-        'http://www.twitch.tv/directory/following/live/',
-        'http://www.twitch.tv/directory/following/hosts',
-        'http://www.twitch.tv/directory/following/hosts/',
-        'http://www.twitch.tv/directory/following/games',
-        'http://www.twitch.tv/directory/following/games/',
-        'http://www.twitch.tv/directory/following/videos',
-        'http://www.twitch.tv/directory/following/videos/'
+        'http://www.twitch.tv/directory/videos/week/'
     ];
 
     urls.forEach(function (url) {

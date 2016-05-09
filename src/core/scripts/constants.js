@@ -13,8 +13,7 @@ husot.constants.allowedUrls = [
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/all(/?|/.+)$',
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/.+',
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/random/?$',
-    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/videos/.+',
-    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/following(/?|/.+)$'
+    '^https?://([a-zA-Z]+\.)?twitch.tv/directory/videos/.+'
 ];
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';

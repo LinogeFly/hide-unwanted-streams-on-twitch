@@ -2,7 +2,7 @@
 A standalone extension for Google Chrome is now available on Chrome Web Store, [here](https://chrome.google.com/webstore/detail/hide-unwanted-streams-on/kpgfplcjhleaadnmjmkjddcmekdhdiia). No need to use [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) anymore if you are a Google Chrome user.
 
 # Description
-Allows to hide content that you don't want to see on [Twitch TV](http://www.twitch.tv/) by blocking channels and games. Blocked content will not be visible for you anymore on Directory pages, such as Games, Channels, Videos etc.
+Allows to hide content that you don't want to see on [twitch.tv](http://www.twitch.tv/) by blocking channels and games. Blocked content will not be visible for you anymore on Directory pages, such as Games, Channels, Videos etc.
 
 # Installation and System Requirements
 This is not a standalone application or web browser extension but a so-called userscript. It is designed to work with userscript manager extension installed in your browser.
@@ -15,15 +15,15 @@ The userscript works with the following configurations:
 
 # How to use
 ## Overlay menu
-After installation there will be a menu added on [Twitch TV](http://www.twitch.tv/) web site for using and configuring "Hide unwanted streams on Twitch" solution. The menu can be accessed by hovering mouse over a stream, video or game thumbnail image on supported pages (see [Supported pages](#supported-pages) section further in this document), like on the following screenshot:
+After installation there will be a menu added on [twitch.tv](http://www.twitch.tv/) for using and configuring "Hide unwanted streams on Twitch" solution. The menu can be accessed by hovering mouse over a stream, video or game thumbnail on supported pages (see [Supported pages](#supported-pages) section further in this document), like on the following screenshot:
 
 ![Overlay menu for channel](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/73a09b4c344c9ffeec56dfd832297b037ce113a7/docs/screenshots/screenshot-1-640x400.png)
 
 ## Blocking a channel
-To block a channel navigate to [Channels](http://www.twitch.tv/directory/all) or [Videos](http://www.twitch.tv/directory/videos) page and use `Block` button in the [overlay menu](#overlay-menu) on a stream or video thumbnail. The channel will be added to the "Blocked Channels" list and content of that channel will not be visible anymore unless unblocked back.
+To block a channel open [Channels](http://www.twitch.tv/directory/all) page or any game page, for example [Dark Souls](http://www.twitch.tv/directory/game/Dark%20Souls) page and use `Block` button in the [overlay menu](#overlay-menu) on a stream thumbnail. The channel will be added to the "Blocked Channels" list and content of that channel will not be visible anymore unless unblocked back.
 
 ## Blocking a game
-To block a game navigate to [Games](http://www.twitch.tv/directory) page and use `Block` button in the [overlay menu](#overlay-menu) on a game thumbnail. The game will be added to the "Blocked Games" list and content of that game will not be visible anymore unless unblocked back. See picture below:
+To block a game open [Games](http://www.twitch.tv/directory) page and use `Block` button in the [overlay menu](#overlay-menu) on a game thumbnail. The game will be added to the "Blocked Games" list and content of that game will not be visible anymore unless unblocked back. See picture below:
 
 ![Overlay menu for game](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/3c0123f6750857c7ddefdfd7b230badee793e412/docs/screenshots/screenshot-3-640x400.png)
 
@@ -33,18 +33,16 @@ To unblock content that has been blocked use the [overlay menu](#overlay-menu) a
 ![Settings window](https://cdn.rawgit.com/LinogeFly/hide-unwanted-streams-on-twitch/338c2c3c037e1677fa136d9527cadb329721c161/docs/screenshots/screenshot-2-640x400.png)
 
 ## Supported pages
-Not all pages on [Twitch TV](http://www.twitch.tv/) web site are affected by this solution. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
+Not all pages on [twitch.tv](http://www.twitch.tv/) are affected by this solution. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
 - [Games](http://www.twitch.tv/directory)
 - [Channels](http://www.twitch.tv/directory/all)
 - [Videos](http://www.twitch.tv/directory/videos)
-- [Following](http://www.twitch.tv/directory/following)
 
 # Version history
+- 1.3.13 Reverted back Following pages support.
 - 1.3.12 Added support for Following pages.
 - 1.3.11 Optimized space usage for block lists.
 - 1.3.10 Fixed small UI issues that appeared after Twitch's Whispers update.
 - 1.3.9 Optimized "Infinite scroll" triggering.
-- 1.3.8 Fixed a bug when "Infinite scroll" stopped triggering after Ember framework update on Twitch.
-
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
