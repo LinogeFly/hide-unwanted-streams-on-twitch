@@ -44,5 +44,6 @@ Not all pages on [twitch.tv](http://www.twitch.tv/) are affected by this solutio
 - 1.3.11 Optimized space usage for block lists.
 - 1.3.10 Fixed small UI issues that appeared after Twitch's Whispers update.
 - 1.3.9 Optimized "Infinite scroll" triggering.
+
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
