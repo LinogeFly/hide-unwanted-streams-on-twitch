@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on twitch.tv, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.13
+// @version      1.3.14
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://*.twitch.tv/*
@@ -638,11 +638,11 @@ husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsMa
 husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
 
 husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
-    return '#directory-list .items .stream.item, #directory-list .items .video.item';
+    return '#directory-list .items .infinite-scroll > .ember-view';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbSelector = function () {
-    return '#directory-list .items .stream.item .thumb, #directory-list .items .video.item .thumb';
+    return '#directory-list .items .infinite-scroll > .ember-view .thumb';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
@@ -957,11 +957,11 @@ husot.thumbs.GameThumbsManager.prototype = Object.create(husot.thumbs.ThumbsMana
 husot.thumbs.GameThumbsManager.prototype.constructor = husot.thumbs.GameThumbsManager;
 
 husot.thumbs.GameThumbsManager.prototype._getContainerSelector = function () {
-    return '#directory-list .items .game.item';
+    return '#directory-list .js-directory-game';
 }
 
 husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
-    return '#directory-list .items .game.item .boxart';
+    return '#directory-list .js-directory-game .game-item .aspect';
 }
 
 husot.thumbs.GameThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
