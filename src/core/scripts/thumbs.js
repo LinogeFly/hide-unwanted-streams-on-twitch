@@ -126,11 +126,11 @@ husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsMa
 husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
 
 husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
-    return '#directory-list .items .infinite-scroll > .ember-view';
+    return '#directory-list .items .tower > .ember-view';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbSelector = function () {
-    return '#directory-list .items .infinite-scroll > .ember-view .thumb';
+    return '#directory-list .items .tower > .ember-view .thumb';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
