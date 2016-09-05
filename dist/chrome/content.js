@@ -236,7 +236,7 @@ husot.injector = husot.injector || {};
 
 husot.injector.addScripts = function () {
     var script = document.createElement('script');
-    script.textContent = 'document.addEventListener(\"husot.loadMoreThumbs\",function(){$(\"#directory-list .items > .ember-view\").trigger(\"scroll\")});';
+    script.textContent = 'document.addEventListener(\"husot.loadMoreThumbs\",function(){$(\"#directory-list\").trigger(\"scroll\")});';
     (document.head || document.documentElement).appendChild(script);
     script.parentNode.removeChild(script);
 };
