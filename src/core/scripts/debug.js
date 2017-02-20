@@ -4,10 +4,9 @@ var husot = husot || {};
 husot.debug = husot.debug || {};
 
 husot.debug.hideRedundantElements = function () {
-    $('#logo').hide();
-    $('.item .thumb .cap > img').hide();
-    $('.directory_header .title').hide();
-    $('.game.item .boxart > img').removeAttr('src');
+    $('.warp__logo').hide();
+    $('.game.item img').hide();
+    $('.stream.item img').hide();
 };
 
 husot.debug.setBlockedChannelsList = function () {

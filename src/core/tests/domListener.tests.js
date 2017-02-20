@@ -35,7 +35,9 @@ husot.tests.domListener.shouldAllowUrls = function () {
         'http://www.twitch.tv/directory/random',
         'http://www.twitch.tv/directory/random/',
         'http://www.twitch.tv/directory/videos/week',
-        'http://www.twitch.tv/directory/videos/week/'
+        'http://www.twitch.tv/directory/videos/week/',
+        'http://www.twitch.tv/communities/Speedrunning',
+        'http://www.twitch.tv/communities/Speedrunning/'
     ];
 
     urls.forEach(function (url) {
@@ -58,7 +60,10 @@ husot.tests.domListener.shouldNotAllowUrls = function () {
         'http://www.twitch.tv/bla-bla-bla',
         'http://www.twitch.tv/bla-bla-bla/',
         'http://www.twitch.tv/directory/bla-bla-bla',
-        'http://www.twitch.tv/directory/bla-bla-bla/'
+        'http://www.twitch.tv/directory/bla-bla-bla/',
+        'http://www.twitch.tv/communities',
+        'http://www.twitch.tv/communities/',
+        'http://www.twitch.tv/communities/Speedrunning/bla-bla-bla'
     ];
 
     urls.forEach(function (url) {
