@@ -14,7 +14,7 @@ husot.constants.allowedUrls = [
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/.+',
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/random/?$',
     '^https?://([a-zA-Z]+\.)?twitch.tv/directory/videos/.+',
-    '^https?://([a-zA-Z]+\.)?twitch.tv/communities/.+', // TODO: this has to be more accurate.
+    '^https?://([a-zA-Z]+\.)?twitch.tv/communities/[^/]+/?$'
 ];
 husot.constants.blockedItemType = husot.constants.blockedItemType || {};
 husot.constants.blockedItemType.game = 'game';
