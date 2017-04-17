@@ -12,12 +12,12 @@
 }
 
 .husot-thumbOverlay a {
-    color: #fff;
-    text-decoration: none;
+    color: #fff !important;
+    text-decoration: none !important;
 }
 
 .husot-thumbOverlay a:hover {
-    color: #fff;
+    color: #fff !important;
     text-decoration: underline !important;
 }
 

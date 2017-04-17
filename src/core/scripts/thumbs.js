@@ -130,7 +130,7 @@ husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbSelector = function () {
-    return '.js-directory .items .tower > .ember-view .thumb';
+    return '.js-directory .items .tower > .ember-view .thumb, .js-directory .items .tower > .ember-view .card__img';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._showSettingsBtn_onClick = function (self, sender) {
@@ -244,7 +244,7 @@ husot.thumbs.StreamThumbsManager.prototype._getChannelNameCssSelector = function
     var self = this;
 
     // Default
-    var result = '.meta .info a';
+    var result = '.meta .info a, .card__body .card__info a';
 
     // Use custom URL specific selector if there is any that matches current URL
     self._customChannelNameSelectors.forEach(function (item) {
@@ -317,7 +317,7 @@ husot.thumbs.StreamThumbsManager.prototype._isThumbMustBeHiddenForGame = functio
 };
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '.stream.item, .video.item';
+    return '.stream.item, .video.item, .card';
 }
 
 husot.thumbs.StreamThumbsManager.prototype.hideThumbs = function () {
