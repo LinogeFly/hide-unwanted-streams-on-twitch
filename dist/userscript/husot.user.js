@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on twitch.tv, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.20
+// @version      1.3.21
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://*.twitch.tv/*
@@ -635,22 +635,7 @@ husot.thumbs.StreamThumbsManager = function () {
         // Default (should be the last one)
         {
             selector: '.card__body .card__info a'
-        },
-    ];
-
-    this._domListnerThumbSelectors = [
-        {
-            selector: '.card',
-            urls: [
-                '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/Counter-Strike: Global Offensive(/?|[?].+)$',
-                '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/Counter-Strike: Global Offensive/map/(.+)$',
-                '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/League of Legends(/?)$'
-            ]
-        },
-        // Default (should be the last one)
-        {
-            selector: '.qa-stream-preview.ember-view'
-        },
+        }
     ];
 }
 
@@ -670,9 +655,7 @@ husot.thumbs.StreamThumbsManager.prototype._getGameNameSelector = function () {
 }
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    var self = this;
-
-    return self.getSelector(self._domListnerThumbSelectors);
+    return '[data-tt_medium=twitch_directory], [data-tt_medium=twitch_video_directory]';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getChannelNameSelector = function () {
@@ -1012,7 +995,7 @@ husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
 }
 
 husot.thumbs.GameThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '.js-directory-game.ember-view';
+    return '[data-tt_medium=twitch_games_directory]';
 }
 
 husot.thumbs.GameThumbsManager.prototype._getGameNameSelector = function () {
