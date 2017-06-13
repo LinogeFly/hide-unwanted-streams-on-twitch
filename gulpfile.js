@@ -89,8 +89,7 @@ gulp.task('build-userscript-readme', ['build-clean'], function () {
             'docs/userscript/description.md',
             'docs/userscript/installation.md',
             'docs/user-guide.md',
-            'docs/userscript/version-history.md',
-            'docs/userscript/links.md'
+            'docs/userscript/version-history.md'
         ])
         .pipe(concat('README.md'))
         .pipe(gulp.dest('build/userscript'));
