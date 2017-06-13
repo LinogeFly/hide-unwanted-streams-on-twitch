@@ -39,11 +39,10 @@ Not all pages on [twitch.tv](http://www.twitch.tv/) are affected by this solutio
 - [Videos](http://www.twitch.tv/directory/videos)
 
 # Version history
+- 1.3.20 Hot fix for blocking games/streams. Blocking for videos still doesn't work. Will be fixed soon.
 - 1.3.19 Hot fix due to recent Twitch updates.
 - 1.3.18 Fixed an issue when blocking stopped working on League of Legends page.
 - 1.3.17 Added support for Communities pages.
 - 1.3.16 Fixed a bug when "Infinite scroll" stopped triggering on Games page.
-- 1.3.15 Fixed a bug when blocking for streams wasn't working in language specific sections.
-
 # Links
 - [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)

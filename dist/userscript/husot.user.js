@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on twitch.tv, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.19
+// @version      1.3.20
 // @author       LinogeFly
 // @supportURL   https://github.com/LinogeFly/hide-unwanted-streams-on-twitch/issues
 // @include      http://*.twitch.tv/*
@@ -86,7 +86,7 @@ husot.domListener = (function () {
 
     function isThumbsAdded(mutations, selector) {
         return mutations.some(function (item) {
-            return $(item.addedNodes).find(selector).filter(function () {
+            return $(item.addedNodes).find(selector).addBack(selector).filter(function () {
                 // Check that thumbnail is hidden explicitly and not because an ancestor element is hidden
                 return $(this).css('display') !== 'none';
             }).length !== 0;
@@ -649,7 +649,7 @@ husot.thumbs.StreamThumbsManager = function () {
         },
         // Default (should be the last one)
         {
-            selector: '[data-test-selector=stream-preview-card], [data-test-selector=video-preview-card]'
+            selector: '.qa-stream-preview.ember-view'
         },
     ];
 }
@@ -1012,7 +1012,7 @@ husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
 }
 
 husot.thumbs.GameThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-test-selector=game-card]';
+    return '.js-directory-game.ember-view';
 }
 
 husot.thumbs.GameThumbsManager.prototype._getGameNameSelector = function () {

@@ -47,7 +47,7 @@ husot.domListener = (function () {
 
     function isThumbsAdded(mutations, selector) {
         return mutations.some(function (item) {
-            return $(item.addedNodes).find(selector).filter(function () {
+            return $(item.addedNodes).find(selector).addBack(selector).filter(function () {
                 // Check that thumbnail is hidden explicitly and not because an ancestor element is hidden
                 return $(this).css('display') !== 'none';
             }).length !== 0;

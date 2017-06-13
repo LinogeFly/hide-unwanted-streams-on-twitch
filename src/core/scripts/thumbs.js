@@ -136,7 +136,7 @@ husot.thumbs.StreamThumbsManager = function () {
         },
         // Default (should be the last one)
         {
-            selector: '[data-test-selector=stream-preview-card], [data-test-selector=video-preview-card]'
+            selector: '.qa-stream-preview.ember-view'
         },
     ];
 }
@@ -499,7 +499,7 @@ husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
 }
 
 husot.thumbs.GameThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-test-selector=game-card]';
+    return '.js-directory-game.ember-view';
 }
 
 husot.thumbs.GameThumbsManager.prototype._getGameNameSelector = function () {
