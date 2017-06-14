@@ -1,4 +1,5 @@
 # Version history
+- 1.3.22 Optimized CSS selectors for finding stream/video/game thumbs.
 - 1.3.21 Fixed an issue when video blocking got broken after recent Twitch update.
 - 1.3.20 Hot fix for blocking games/streams. Blocking for videos still doesn't work. Will be fixed soon.
 - 1.3.19 Hot fix due to recent Twitch updates.

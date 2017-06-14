@@ -142,7 +142,7 @@ husot.thumbs.StreamThumbsManager.prototype._getGameNameSelector = function () {
 }
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-tt_medium=twitch_directory], [data-tt_medium=twitch_video_directory]';
+    return '[data-tt_content=live_channel], [data-tt_content=popular_videos], [data-tt_content=recent_videos], [data-tt_content=recommended_videos]';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getChannelNameSelector = function () {
@@ -482,7 +482,7 @@ husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
 }
 
 husot.thumbs.GameThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-tt_medium=twitch_games_directory]';
+    return '[data-tt_content=popular_games], [data-tt_content=followed_game]';
 }
 
 husot.thumbs.GameThumbsManager.prototype._getGameNameSelector = function () {
