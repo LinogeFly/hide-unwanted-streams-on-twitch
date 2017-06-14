@@ -63,10 +63,7 @@ Failing tests will throw errors into console.
 - 1.0.0 First release. Only Userscript platfom is supported.
 
 # Known issues
+- None, for now.
 
-# TODO
-- Add tests for CSS selectors
-- Solve the problem when thumbnails blink during hiding. In the other words thumbnails are loaded and there is small lag before they become hidden.
-
-# Links
-- [Topic on Reddit](http://www.reddit.com/r/Twitch/comments/2segt6/hiding_unwanted_streams_on_twitch/)
+# Support
+If you find an issue, you want to give a feedback or have any comments - you can contact on Reddit [/u/LinogeFly](https://www.reddit.com/message/compose/?to=LinogeFly).
