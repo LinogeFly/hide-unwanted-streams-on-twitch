@@ -39,9 +39,4 @@ Not all pages on [twitch.tv](http://www.twitch.tv/) are affected by this solutio
 - [Videos](http://www.twitch.tv/directory/videos)
 
 # Version history
-- 1.3.22 Optimized CSS selectors for finding stream/video/game thumbs.
-- 1.3.21 Fixed an issue when video blocking got broken after recent Twitch update.
-- 1.3.20 Hot fix for blocking games/streams. Blocking for videos still doesn't work. Will be fixed soon.
-- 1.3.19 Hot fix due to recent Twitch updates.
-- 1.3.18 Fixed an issue when blocking stopped working on League of Legends page.
-- 1.3.17 Added support for Communities pages.
+Available [here](https://github.com/LinogeFly/hide-unwanted-streams-on-twitch#version-history)

@@ -3,7 +3,7 @@
     "name": "Hide unwanted streams on Twitch",
     "short_name": "Hide streams",
     "description": "Blocks content that you don't want to see on twitch.tv, such as channels, games, videos etc.",
-    "version": "1.3.21",
+    "version": "1.3.23",
     "minimum_chrome_version": "18",
     "icons": {
         "16": "images/icon-hide-16.png",

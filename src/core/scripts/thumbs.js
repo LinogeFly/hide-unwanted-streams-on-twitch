@@ -142,7 +142,7 @@ husot.thumbs.StreamThumbsManager.prototype._getGameNameSelector = function () {
 }
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-tt_content=live_channel], [data-tt_content=popular_videos], [data-tt_content=recent_videos], [data-tt_content=recommended_videos]';
+    return '[data-tt_content=live_channel], [data-tt_content=language_stream], [data-tt_content=popular_videos], [data-tt_content=recent_videos], [data-tt_content=recommended_videos]';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getChannelNameSelector = function () {

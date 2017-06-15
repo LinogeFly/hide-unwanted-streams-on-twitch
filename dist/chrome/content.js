@@ -69,7 +69,7 @@ husot.domListener = (function () {
 
     function isThumbsAdded(mutations, selector) {
         return mutations.some(function (item) {
-            return $(item.addedNodes).find(selector).addBack(selector).filter(function () {
+            return $(item.addedNodes).find(selector).filter(function () {
                 // Check that thumbnail is hidden explicitly and not because an ancestor element is hidden
                 return $(this).css('display') !== 'none';
             }).length !== 0;
@@ -638,7 +638,7 @@ husot.thumbs.StreamThumbsManager.prototype._getGameNameSelector = function () {
 }
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-tt_medium=twitch_directory], [data-tt_medium=twitch_video_directory]';
+    return '[data-tt_content=live_channel], [data-tt_content=language_stream], [data-tt_content=popular_videos], [data-tt_content=recent_videos], [data-tt_content=recommended_videos]';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getChannelNameSelector = function () {
@@ -978,7 +978,7 @@ husot.thumbs.GameThumbsManager.prototype._getThumbSelector = function () {
 }
 
 husot.thumbs.GameThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-tt_medium=twitch_games_directory]';
+    return '[data-tt_content=popular_games], [data-tt_content=followed_game]';
 }
 
 husot.thumbs.GameThumbsManager.prototype._getGameNameSelector = function () {

@@ -35,6 +35,7 @@ husot.tests.runAll()
 Failing tests will throw errors into console.
 
 # Version history
+- 1.3.23 Fixed a bug when blocking was not working on language specific pages.
 - 1.3.22 Optimized CSS selectors for finding stream/video/game thumbs.
 - 1.3.21 Fixed an issue when video blocking got broken after recent Twitch update.
 - 1.3.20 Hot fix for blocking games/streams. Blocking for videos still doesn't work. Will be fixed soon.
@@ -63,7 +64,7 @@ Failing tests will throw errors into console.
 - 1.0.0 First release. Only Userscript platfom is supported.
 
 # Known issues
-- None, for now.
+- None, for now :)
 
 # Support
 If you find an issue, you want to give a feedback or have any comments - you can contact on Reddit [/u/LinogeFly](https://www.reddit.com/message/compose/?to=LinogeFly).
