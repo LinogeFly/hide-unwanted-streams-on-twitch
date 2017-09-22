@@ -626,7 +626,7 @@ husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsMa
 husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
 
 husot.thumbs.StreamThumbsManager.prototype._getContainerSelector = function () {
-    return '.js-directory .tower > .ember-view';
+    return '.js-directory .tower > .ember-view:not(.directory-ad)';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getThumbSelector = function () {

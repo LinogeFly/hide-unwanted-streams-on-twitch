@@ -39,4 +39,4 @@ Not all pages on [twitch.tv](http://www.twitch.tv/) are affected by this solutio
 - [Videos](http://www.twitch.tv/directory/videos)
 
 # Version history
-Available [here](https://github.com/LinogeFly/hide-unwanted-streams-on-twitch#version-history)
+Available [here](https://github.com/LinogeFly/hide-unwanted-streams-on-twitch#version-history).

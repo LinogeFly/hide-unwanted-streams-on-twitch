@@ -35,6 +35,7 @@ husot.tests.runAll()
 Failing tests will throw errors into console.
 
 # Version history
+- 1.3.24 Fixed a bug when ad element was messing up channel thumbs finding logic.
 - 1.3.23 Fixed a bug when blocking was not working on language specific pages.
 - 1.3.22 Optimized CSS selectors for finding stream/video/game thumbs.
 - 1.3.21 Fixed an issue when video blocking got broken after recent Twitch update.
