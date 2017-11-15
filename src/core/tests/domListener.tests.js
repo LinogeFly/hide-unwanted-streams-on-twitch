@@ -32,10 +32,6 @@ husot.tests.domListener.shouldAllowUrls = function () {
         'http://www.twitch.tv/directory/game/Minecraft/videos/week/',
         'http://www.twitch.tv/directory/game/League%20of%20Legends/videos/week',
         'http://www.twitch.tv/directory/game/League%20of%20Legends/videos/week/',
-        'http://www.twitch.tv/directory/random',
-        'http://www.twitch.tv/directory/random/',
-        'http://www.twitch.tv/directory/videos/week',
-        'http://www.twitch.tv/directory/videos/week/',
         'http://www.twitch.tv/communities/Speedrunning',
         'http://www.twitch.tv/communities/Speedrunning/'
     ];

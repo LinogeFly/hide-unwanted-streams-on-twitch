@@ -35,6 +35,7 @@ husot.tests.runAll()
 Failing tests will throw errors into console.
 
 # Version history
+- 1.3.25 Added new Twith UI support.
 - 1.3.24 Fixed a bug when ad element was messing up channel thumbs finding logic.
 - 1.3.23 Fixed a bug when blocking was not working on language specific pages.
 - 1.3.22 Optimized CSS selectors for finding stream/video/game thumbs.
@@ -65,7 +66,8 @@ Failing tests will throw errors into console.
 - 1.0.0 First release. Only Userscript platfom is supported.
 
 # Known issues
-- None, for now :)
+- You can click throught blocking overlay menu.
+- Remove description about blocking videos in User Guideline document. Because video blocking is not supported anymore.
 
 # Support
 If you find an issue, you want to give a feedback or have any comments - you can contact on Reddit [/u/LinogeFly](https://www.reddit.com/message/compose/?to=LinogeFly).

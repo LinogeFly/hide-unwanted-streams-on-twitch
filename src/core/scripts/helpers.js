@@ -8,3 +8,9 @@ if (!String.format) {
         });
     };
 };
+
+if (!String.trimSlash) {
+    String.prototype.trimSlash = function () {
+        return this.replace(/^\/|\/$/g, '');
+    };
+};
