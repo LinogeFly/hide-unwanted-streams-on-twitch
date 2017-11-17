@@ -4,6 +4,7 @@
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
 // @version      {{APP_VERSION}}
 // @author       LinogeFly
+// @license      MIT
 // @supportURL   https://www.reddit.com/message/compose/?to=LinogeFly
 // @include      http://*.twitch.tv/*
 // @include      https://*.twitch.tv/*
