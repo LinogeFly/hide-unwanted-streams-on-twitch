@@ -8,9 +8,9 @@
 // @supportURL   https://www.reddit.com/message/compose/?to=LinogeFly
 // @include      http://*.twitch.tv/*
 // @include      https://*.twitch.tv/*
-// @grant        GM_getValue
-// @grant        GM_setValue
-// @grant        GM_deleteValue
+// @grant        GM.getValue
+// @grant        GM.setValue
+// @grant        GM.deleteValue
 // @run-at       document-start
 // @require      https://code.jquery.com/jquery-1.11.2.min.js
 // @require      https://www.promisejs.org/polyfills/promise-6.1.0.min.js

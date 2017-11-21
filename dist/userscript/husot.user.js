@@ -2,15 +2,15 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on twitch.tv, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.25
+// @version      1.3.26
 // @author       LinogeFly
 // @license      MIT
 // @supportURL   https://www.reddit.com/message/compose/?to=LinogeFly
 // @include      http://*.twitch.tv/*
 // @include      https://*.twitch.tv/*
-// @grant        GM_getValue
-// @grant        GM_setValue
-// @grant        GM_deleteValue
+// @grant        GM.getValue
+// @grant        GM.setValue
+// @grant        GM.deleteValue
 // @run-at       document-start
 // @require      https://code.jquery.com/jquery-1.11.2.min.js
 // @require      https://www.promisejs.org/polyfills/promise-6.1.0.min.js
@@ -1136,15 +1136,23 @@ var husot = husot || {};
 husot.settings = husot.settings || {};
 
 husot.settings.setValue = function (key, value, callback) {
-    GM_setValue(key, value);
-
-    callback();
+    GM.setValue(key, value).then(function () {
+        callback();
+    }, function (reason) { // rejection
+        husot.log.error(reason);
+    });
 };
 
 husot.settings.getValue = function (key, defaultValue, callback) {
-    var value = GM_getValue(key, defaultValue);
+    GM.getValue(key).then(function (value) {
+        if (typeof value === 'undefined' || value === '') {
+            callback(defaultValue);
+        }
 
-    callback(value);
+        callback(value);
+    }, function (reason) { // rejection
+        husot.log.error(reason);
+    });
 };
 
 // Application start

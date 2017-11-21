@@ -35,6 +35,7 @@ husot.tests.runAll()
 Failing tests will throw errors into console.
 
 # Version history
+- 1.3.26 Added Firefox Quantum support for Userscript platform.
 - 1.3.25 Added new Twitch UI support.
 - 1.3.24 Fixed a bug when ad element was messing up channel thumbs finding logic.
 - 1.3.23 Fixed a bug when blocking was not working on language specific pages.
@@ -63,7 +64,7 @@ Failing tests will throw errors into console.
 - 1.3.0 Added support for blocking games.
 - 1.2.0 Added Google Chrome Extension platform.
 - 1.1.0 Added support for hiding videos in addition to live streams.
-- 1.0.0 First release. Only Userscript platfom is supported.
+- 1.0.0 First release. Only Userscript platform is supported.
 
 # Known issues
 - You can click throught blocking overlay menu.
