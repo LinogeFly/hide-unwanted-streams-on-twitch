@@ -163,7 +163,7 @@ husot.thumbs.StreamThumbsManager.prototype._getChannelName = function ($thumbCon
         // Default (should be the last one)
         {
             name: function() {
-                return $thumbContainer.find('[data-a-target="tw-thumbnail-card-link"]').attr('href').trimSlash();
+                return $thumbContainer.find('[data-a-target="live-channel-card-title-link"]').attr('href').trimSlash();
             }
         }
     ];
