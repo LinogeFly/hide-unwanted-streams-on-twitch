@@ -21,4 +21,3 @@ To unblock content that has been blocked use the [overlay menu](#overlay-menu) a
 Not all pages on [twitch.tv](http://www.twitch.tv/) are affected by this solution. For example, content on Home page will not be hidden for blocked channels and games. Here is the list of supported pages:
 - [Games](http://www.twitch.tv/directory)
 - [Channels](http://www.twitch.tv/directory/all)
-- [Videos](http://www.twitch.tv/directory/videos)
