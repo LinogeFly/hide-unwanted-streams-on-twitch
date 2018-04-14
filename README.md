@@ -35,6 +35,7 @@ husot.tests.runAll()
 Failing tests will throw errors into console.
 
 # Version history
+- 1.3.28 Fixed an issue when channels blocking stopped working.
 - 1.3.27 Fixed CSS selectors after Twitch update.
 - 1.3.26 Added Firefox Quantum support for Userscript platform.
 - 1.3.25 Added new Twitch UI support.

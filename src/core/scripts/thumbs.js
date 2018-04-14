@@ -116,7 +116,7 @@ husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsMa
 husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-target="directory-game__card_container"]';
+    return '[data-a-target="live-channel-card-title-link"]';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getContainerJQuery = function () {

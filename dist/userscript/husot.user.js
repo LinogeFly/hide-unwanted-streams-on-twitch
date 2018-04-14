@@ -2,7 +2,7 @@
 // @name         Hide unwanted streams on Twitch
 // @description  Blocks content that you don't want to see on twitch.tv, such as channels, games, videos etc.
 // @namespace    https://github.com/LinogeFly/hide-unwanted-streams-on-twitch
-// @version      1.3.27
+// @version      1.3.28
 // @author       LinogeFly
 // @license      MIT
 // @supportURL   https://www.reddit.com/message/compose/?to=LinogeFly
@@ -634,7 +634,7 @@ husot.thumbs.StreamThumbsManager.prototype = Object.create(husot.thumbs.ThumbsMa
 husot.thumbs.StreamThumbsManager.prototype.constructor = husot.thumbs.StreamThumbsManager;
 
 husot.thumbs.StreamThumbsManager.prototype.getDomListnerThumbSelector = function () {
-    return '[data-target="directory-game__card_container"]';
+    return '[data-a-target="live-channel-card-title-link"]';
 }
 
 husot.thumbs.StreamThumbsManager.prototype._getContainerJQuery = function () {
