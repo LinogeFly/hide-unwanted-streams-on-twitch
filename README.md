@@ -1,7 +1,7 @@
 # This project is not maintained anymore
 Hey guys!  
 I'm really sorry, but I'm not going to support this add-on anymore.  
-<img src="https://cdn.frankerfacez.com/emoticon/213310/4" width="32">
+<img src="docs/img/feelsbadman-64.png" width="32">
 
 # About
 This solution is for blocking unwanted content on [twitch.tv](http://www.twitch.tv/), such as streams, games, videos etc. Currently, the following platforms are supported:
